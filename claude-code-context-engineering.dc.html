@@ -17,11 +17,13 @@
 :root {
   --t-title: 88px; --t-sub: 44px; --t-body: 34px; --t-small: 28px; --t-mono: 24px; --t-num: 150px;
   --pad-x: 100px; --pad-top: 76px; --pad-bottom: 80px; --gap-title: 44px; --gap-item: 28px;
-  --paper: var(--color-bg); --ink: var(--color-text); --steel: var(--color-accent);
-  --deep: var(--color-accent-900); --mid: var(--color-accent-700);
-  --tint: var(--color-accent-400); --pale: var(--color-accent-200);
-  --sky: var(--color-accent-300); --sky-2: var(--color-accent-200); --sky-3: var(--color-accent-100);
-  --line: var(--color-neutral-300); --muted: var(--color-neutral-600); --dim: var(--color-neutral-700);
+  --paper: var(--color-bg, #f2f2f3); --ink: var(--color-text, #1d1f20);
+  --steel: var(--color-accent, #5980a6); --deep: var(--color-accent-900, #1d2d3d);
+  --mid: var(--color-accent-700, #416180); --tint: var(--color-accent-400, #749dc4);
+  --pale: var(--color-accent-200, #b5d9fd); --sky: var(--color-accent-300, #94bce3);
+  --sky-2: var(--color-accent-200, #b5d9fd); --sky-3: var(--color-accent-100, #d6ebff);
+  --line: var(--color-neutral-300, #b7b7ba); --muted: var(--color-neutral-600, #5d5d60);
+  --dim: var(--color-neutral-700, #424244);
   --hd: 'Barlow Condensed', sans-serif; --bd: Barlow, sans-serif; --mo: 'IBM Plex Mono', monospace;
 }
 body { margin: 0; background: #f2f2f3; }
@@ -33,33 +35,20 @@ a:hover { color: #2c455d; }
 
 <section data-label="Title" data-screen-label="01" data-speaker-notes="Set the frame: you all use Claude Code daily. Today is not about prompts, it is about what the model can see when it answers. Four chapters, roughly 35 minutes." style="background:var(--deep);color:var(--paper);font-family:var(--bd);display:grid;grid-template-columns:1fr 1fr" data-om-slide-id="08c3be69">
 <div style="display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-top) 80px var(--pad-bottom) var(--pad-x)">
-<span style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.16em;color:var(--sky)">ELEKS CORP · SEPT 2026</span>
+<span style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.16em;color:var(--sky)">ELEKS · SEPT 2026</span>
 <div>
 <h1 style="font-family:var(--hd);font-weight:600;font-size:124px;line-height:0.94;letter-spacing:-0.02em;margin:0">Claude Code</h1>
 <p style="font-family:var(--hd);font-size:60px;line-height:1.05;margin:16px 0 0;color:var(--sky)">context engineering for developers</p>
 </div>
-<span style="font-size:30px;color:var(--sky-3)">Andriy</span>
+<span style="font-size:30px;color:var(--sky-3)">Senior Software Engineer<br>Andriy Stankevych</span>
 </div>
-<div style="border-left:1px solid var(--mid);display:grid;grid-template-rows:repeat(4,1fr)">
-<div style="border-bottom:1px solid var(--mid);display:flex;align-items:center;gap:32px;padding:0 80px"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">01</span><span style="font-family:var(--hd);font-size:52px">How the model reads</span></div>
-<div style="border-bottom:1px solid var(--mid);display:flex;align-items:center;gap:32px;padding:0 80px"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">02</span><span style="font-family:var(--hd);font-size:52px">The context window</span></div>
-<div style="border-bottom:1px solid var(--mid);display:flex;align-items:center;gap:32px;padding:0 80px"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">03</span><span style="font-family:var(--hd);font-size:52px">The levers</span></div>
-<div style="display:flex;align-items:center;gap:32px;padding:0 80px"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">04</span><span style="font-family:var(--hd);font-size:52px">A day of work</span></div>
-</div>
+
 </section>
 
-<section data-label="Ch 01" data-screen-label="02" data-speaker-notes="Twenty minutes of mechanics before any feature. Everything later follows from these three slides." style="background:var(--steel);color:var(--paper);font-family:var(--bd);display:flex;align-items:flex-end;padding:var(--pad-x)" data-om-slide-id="103ae289">
-<div style="display:flex;align-items:baseline;gap:48px">
-<span style="font-family:var(--hd);font-size:200px;line-height:0.8;color:var(--deep)">01</span>
-<div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:104px;line-height:1;margin:0">How the Model Reads</h2>
-<p style="font-size:var(--t-body);margin:20px 0 0;max-width:900px">Three properties of an LLM that decide everything else in this deck.</p>
-</div>
-</div>
-</section>
 
-<section data-label="One pass" data-screen-label="03" data-speaker-notes="The model has no memory between turns. The CLI re-sends the whole conversation every time. What feels like memory is re-reading." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="378c7a53">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>01 · How the model reads</span><span>MECHANICS · 03</span></div>
+
+<section data-label="One pass" data-screen-label="02" data-speaker-notes="The model has no memory between turns. The CLI re-sends the whole conversation every time. What feels like memory is re-reading." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="378c7a53">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>01 · How the model reads</span><span>MECHANICS · 02</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">One Pass, No Memory</h2>
 <p style="font-size:var(--t-body);margin:24px 0 0;max-width:1300px;color:var(--dim)">The model is stateless. Every turn, the client re-sends the entire conversation and the model reads it from scratch, start to finish, once.</p>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:36px">
@@ -69,8 +58,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Flat list" data-screen-label="04" data-speaker-notes="Instructions, file contents, tool output and your question are the same substance to the model. Nothing is privileged because you meant it to be." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="57aed21e">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>01 · How the model reads</span><span>MECHANICS · 04</span></div>
+<section data-label="Flat list" data-screen-label="03" data-speaker-notes="Instructions, file contents, tool output and your question are the same substance to the model. Nothing is privileged because you meant it to be." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="57aed21e">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>01 · How the model reads</span><span>MECHANICS · 03</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Everything Is One Flat List</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;flex:1">
 <div style="display:flex;flex-direction:column;gap:18px">
@@ -88,8 +77,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Lost in the middle" data-screen-label="05" data-speaker-notes="Recall is strong at the start and the end of the window and weakest in the middle. This is measured behaviour across models, not a Claude quirk. Consequence: a fact buried in turn nine of a long session is the least reliable place to put it." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="7992c447">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>01 · How the model reads</span><span>MECHANICS · 05</span></div>
+<section data-label="Lost in the middle" data-screen-label="04" data-speaker-notes="Recall is strong at the start and the end of the window and weakest in the middle. This is measured behaviour across models, not a Claude quirk. Consequence: a fact buried in turn nine of a long session is the least reliable place to put it." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="7992c447">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>01 · How the model reads</span><span>MECHANICS · 04</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Lost in the Middle</h2>
 <div style="display:grid;grid-template-columns:1fr 520px;gap:80px;margin-top:40px;flex:1">
 <div style="display:flex;flex-direction:column">
@@ -107,18 +96,10 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Ch 02" data-screen-label="06" data-speaker-notes="Now the resource itself: what a window is made of and what it costs to fill." style="background:var(--steel);color:var(--paper);font-family:var(--bd);display:flex;align-items:flex-end;padding:var(--pad-x)" data-om-slide-id="a024ddfb">
-<div style="display:flex;align-items:baseline;gap:48px">
-<span style="font-family:var(--hd);font-size:200px;line-height:0.8;color:var(--deep)">02</span>
-<div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:104px;line-height:1;margin:0">The Context Window</h2>
-<p style="font-size:var(--t-body);margin:20px 0 0;max-width:900px">What the model can see at once, and what it costs to fill.</p>
-</div>
-</div>
-</section>
 
-<section data-label="Window fill" data-screen-label="07" data-speaker-notes="Ask the room to guess the proportions before revealing. Tool output usually surprises people: one unfiltered test run or a large grep can dominate the window." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="7a4b0b10">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>02 · The context window</span><span>MECHANICS · 07</span></div>
+
+<section data-label="Window fill" data-screen-label="05" data-speaker-notes="Ask the room to guess the proportions before revealing. Tool output usually surprises people: one unfiltered test run or a large grep can dominate the window." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="7a4b0b10">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>02 · The context window</span><span>MECHANICS · 05</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">What Fills the Window</h2>
 <p style="font-size:var(--t-body);margin:20px 0 0;max-width:1250px;color:var(--dim)">Tool output is the largest single consumer, and the one you control least directly.</p>
 <div style="display:flex;height:150px;margin-top:56px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)">
@@ -141,8 +122,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Quality vs fill" data-screen-label="08" data-speaker-notes="A window that fits is not the same as a window that works. Instruction-following degrades well before the hard limit, which is why the meter matters more than the error." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="e43b65f9">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>02 · The context window</span><span>MECHANICS · 08</span></div>
+<section data-label="Quality vs fill" data-screen-label="06" data-speaker-notes="A window that fits is not the same as a window that works. Instruction-following degrades well before the hard limit, which is why the meter matters more than the error." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="e43b65f9">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>02 · The context window</span><span>MECHANICS · 06</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Quality vs. Fill</h2>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px;background:var(--line)">
 <div style="background:var(--paper);padding:40px 36px"><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">UNDER 40%</div><div style="font-family:var(--hd);font-size:52px;margin-top:16px">Sharp</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:12px;line-height:1.35">follows rules, asks when unsure, edits narrowly</div></div>
@@ -152,8 +133,8 @@ a:hover { color: #2c455d; }
 <p style="font-size:var(--t-body);margin-top:auto;max-width:1300px;line-height:1.4">The failure is gradual and quiet. By the time the session hits its limit, the answers have been getting worse for a while.</p>
 </section>
 
-<section data-label="clear vs compact" data-screen-label="09" data-speaker-notes="Compaction summarises the session so work can continue; the summary is lossy and you rarely know what it dropped. Clear costs you everything but is honest about it." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="117cf60d">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>02 · The context window</span><span>MECHANICS · 09</span></div>
+<section data-label="clear vs compact" data-screen-label="07" data-speaker-notes="Compaction summarises the session so work can continue; the summary is lossy and you rarely know what it dropped. Clear costs you everything but is honest about it." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="117cf60d">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>02 · The context window</span><span>MECHANICS · 07</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">/clear and /compact</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);margin-top:52px;flex:1">
 <div style="background:var(--paper);padding:44px 40px;display:flex;flex-direction:column">
@@ -176,8 +157,8 @@ a:hover { color: #2c455d; }
 <p style="font-size:var(--t-small);color:var(--muted);margin:32px 0 0;font-family:var(--mo)">/context shows the meter before you have to choose.</p>
 </section>
 
-<section data-label="Five levers" data-screen-label="10" data-speaker-notes="This is the map for chapter three. Every feature we cover is one of these five moves on the window." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="26ed86d4">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>02 · The context window</span><span>MECHANICS · 10</span></div>
+<section data-label="Five levers" data-screen-label="08" data-speaker-notes="This is the map for chapter three. Every feature we cover is one of these five moves on the window." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="26ed86d4">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>02 · The context window</span><span>MECHANICS · 08</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Five Levers on the Window</h2>
 <div style="display:grid;grid-template-columns:1fr 360px;gap:80px;margin-top:48px;flex:1">
 <div style="display:flex;flex-direction:column;gap:2px;background:var(--line);align-self:start">
@@ -194,8 +175,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Reading the meter" data-screen-label="11" data-speaker-notes="A concrete habit, not a rule: check /context at natural boundaries. The point is to make the decision deliberately instead of at 95%." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="20846bcc">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>02 · The context window</span><span style="color:var(--mid)">PRACTICE · 11</span></div>
+<section data-label="Reading the meter" data-screen-label="09" data-speaker-notes="A concrete habit, not a rule: check /context at natural boundaries. The point is to make the decision deliberately instead of at 95%." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="20846bcc">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>02 · The context window</span><span style="color:var(--mid)">PRACTICE · 09</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Reading the Meter</h2>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:64px;margin-top:56px">
 <div style="border-top:3px solid var(--steel);padding-top:28px"><div style="font-family:var(--hd);font-size:64px;line-height:1">Before a task</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:16px;line-height:1.4">Fresh window, or you inherit whatever the last task left behind.</div></div>
@@ -205,18 +186,10 @@ a:hover { color: #2c455d; }
 <p style="font-size:var(--t-body);margin-top:auto;max-width:1300px;line-height:1.4">Write the decision down before you clear. If it only exists in the transcript, clearing deletes it.</p>
 </section>
 
-<section data-label="Ch 03" data-screen-label="12" data-speaker-notes="The longest chapter. Each feature answers one question: what enters the window, when, and at whose cost." style="background:var(--steel);color:var(--paper);font-family:var(--bd);display:flex;align-items:flex-end;padding:var(--pad-x)" data-om-slide-id="bd1f8b87">
-<div style="display:flex;align-items:baseline;gap:48px">
-<span style="font-family:var(--hd);font-size:200px;line-height:0.8;color:var(--deep)">03</span>
-<div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:104px;line-height:1;margin:0">The Levers</h2>
-<p style="font-size:var(--t-body);margin:20px 0 0;max-width:900px">Memory, rules, skills, commands, sub-agents, plan mode, hooks, permissions, MCP.</p>
-</div>
-</div>
-</section>
 
-<section data-label="CLAUDE.md order" data-screen-label="13" data-speaker-notes="Four sources merge into one block at session start; the closest file wins a conflict. Imports pull in more files at the same cost as writing them inline." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="661ce0d0">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 13</span></div>
+
+<section data-label="CLAUDE.md order" data-screen-label="10" data-speaker-notes="Four sources merge into one block at session start; the closest file wins a conflict. Imports pull in more files at the same cost as writing them inline." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="661ce0d0">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 10</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">CLAUDE.md Load Order</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;flex:1">
 <div style="display:flex;flex-direction:column;gap:16px">
@@ -232,8 +205,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Leave vs extract" data-screen-label="14" data-speaker-notes="The single most useful habit in the deck: CLAUDE.md is not a wiki. Anything conditional belongs somewhere that loads on demand." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="66821911">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 14</span></div>
+<section data-label="Leave vs extract" data-screen-label="11" data-speaker-notes="The single most useful habit in the deck: CLAUDE.md is not a wiki. Anything conditional belongs somewhere that loads on demand." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="66821911">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 11</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Leave vs. Extract</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);margin-top:48px;flex:1">
 <div style="background:var(--paper);padding:40px 44px 40px 0">
@@ -261,8 +234,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Monorepo" data-screen-label="15" data-speaker-notes="Nested files are how a monorepo stays affordable: the root loads at start, package-level files join only when the agent touches that package." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="d17633ce">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 15</span></div>
+<section data-label="Monorepo" data-screen-label="12" data-speaker-notes="Nested files are how a monorepo stays affordable: the root loads at start, package-level files join only when the agent touches that package." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="d17633ce">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 12</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Nested CLAUDE.md in a Monorepo</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;flex:1">
 <div style="font-family:var(--mo);font-size:30px;line-height:1.9;color:var(--dim)">
@@ -283,8 +256,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Path-scoped rules" data-screen-label="16" data-speaker-notes="Rules with a paths frontmatter attach to file patterns. A ton of instructions can sit in the repo while only the matching one enters the window." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="2a9e76dd">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 16</span></div>
+<section data-label="Path-scoped rules" data-screen-label="13" data-speaker-notes="Rules with a paths frontmatter attach to file patterns. A ton of instructions can sit in the repo while only the matching one enters the window." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="2a9e76dd">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 13</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Path-Scoped Rules</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:56px;margin-top:52px;flex:1">
 <div>
@@ -307,8 +280,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Skills disclosure" data-screen-label="17" data-speaker-notes="Progressive disclosure is the core idea. Three levels: the index is always present, the body arrives on trigger, the attachments only if the body asks for them." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="f553bda2">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 17</span></div>
+<section data-label="Skills disclosure" data-screen-label="14" data-speaker-notes="Progressive disclosure is the core idea. Three levels: the index is always present, the body arrives on trigger, the attachments only if the body asks for them." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="f553bda2">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 14</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Skills: Progressive Disclosure</h2>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);margin-top:52px;flex:1">
 <div style="background:var(--paper);padding:40px 40px 40px 0;display:flex;flex-direction:column">
@@ -333,8 +306,8 @@ a:hover { color: #2c455d; }
 <p style="font-size:var(--t-body);margin:36px 0 0;max-width:1400px;line-height:1.4">Twenty skills can be installed and cost almost nothing until one of them is the right skill.</p>
 </section>
 
-<section data-label="Skill anatomy" data-screen-label="18" data-speaker-notes="The description is the whole retrieval mechanism. Write it as the trigger condition, not as a title." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="f1fd3bc8">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 18</span></div>
+<section data-label="Skill anatomy" data-screen-label="15" data-speaker-notes="The description is the whole retrieval mechanism. Write it as the trigger condition, not as a title." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="f1fd3bc8">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 15</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Anatomy of a Skill</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;flex:1">
 <div style="border:1px solid var(--ink);padding:36px 40px;font-family:var(--mo);font-size:28px;line-height:1.75;color:var(--dim)">
@@ -359,8 +332,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Commands" data-screen-label="19" data-speaker-notes="Commands are prompts you stopped retyping. They are explicit — you invoke them — where skills are retrieved by the model." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="7d22058b">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 19</span></div>
+<section data-label="Commands" data-screen-label="16" data-speaker-notes="Commands are prompts you stopped retyping. They are explicit — you invoke them — where skills are retrieved by the model." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="7d22058b">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 16</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Slash Commands</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;flex:1">
 <div style="display:flex;flex-direction:column;justify-content:center;gap:var(--gap-item)">
@@ -375,8 +348,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Sub-agents" data-screen-label="20" data-speaker-notes="A sub-agent has its own window. It reads twenty files, and only a summary comes back to yours. The cost is that it cannot see your conversation." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="f52bff94">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 20</span></div>
+<section data-label="Sub-agents" data-screen-label="17" data-speaker-notes="A sub-agent has its own window. It reads twenty files, and only a summary comes back to yours. The cost is that it cannot see your conversation." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="f52bff94">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 17</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Sub-agents</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:120px;margin-top:56px;flex:1">
 <div style="display:flex;flex-direction:column">
@@ -395,8 +368,8 @@ a:hover { color: #2c455d; }
 <p style="font-size:var(--t-body);margin:40px 0 0;max-width:1400px;line-height:1.4">It starts blank: it knows its instructions and the task you hand it, and nothing about the last hour you spent.</p>
 </section>
 
-<section data-label="When sub-agents pay" data-screen-label="21" data-speaker-notes="Delegation is not free. Two round-trips of instruction can cost more than doing the read yourself." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="103ccb6d">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 21</span></div>
+<section data-label="When sub-agents pay" data-screen-label="18" data-speaker-notes="Delegation is not free. Two round-trips of instruction can cost more than doing the read yourself." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="103ccb6d">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 18</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">When a Sub-agent Pays Off</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);margin-top:52px;flex:1">
 <div style="background:var(--paper);padding:40px 44px 40px 0">
@@ -418,8 +391,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Plan mode" data-screen-label="22" data-speaker-notes="Plan mode is read-only: it can read and reason but not write. The sequence that matters is plan, then clear, then implement from the file." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="c16b530b">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 22</span></div>
+<section data-label="Plan mode" data-screen-label="19" data-speaker-notes="Plan mode is read-only: it can read and reason but not write. The sequence that matters is plan, then clear, then implement from the file." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="c16b530b">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 19</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Plan Mode</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;margin-top:56px;flex:1">
 <div style="display:flex;flex-direction:column">
@@ -440,8 +413,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Plan on disk" data-screen-label="23" data-speaker-notes="A plan in chat dies at the next compaction. A plan in a file survives clears, reviews, and tomorrow morning." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="79f9228a">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 23</span></div>
+<section data-label="Plan on disk" data-screen-label="20" data-speaker-notes="A plan in chat dies at the next compaction. A plan in a file survives clears, reviews, and tomorrow morning." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="79f9228a">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 20</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">The Plan on Disk</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;flex:1">
 <div style="display:flex;flex-direction:column;justify-content:center;gap:var(--gap-item)">
@@ -459,8 +432,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Hooks" data-screen-label="24" data-speaker-notes="Hooks are shell commands on lifecycle events. Anything you have written in CLAUDE.md three times and it still gets skipped belongs here instead." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="b05d3471">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 24</span></div>
+<section data-label="Hooks" data-screen-label="21" data-speaker-notes="Hooks are shell commands on lifecycle events. Anything you have written in CLAUDE.md three times and it still gets skipped belongs here instead." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="b05d3471">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 21</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Hooks</h2>
 <p style="font-size:var(--t-body);margin:24px 0 0;max-width:1300px;color:var(--dim)">Shell commands fired on lifecycle events. They run whether or not the model felt like it.</p>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);margin-top:52px">
@@ -475,8 +448,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Permissions" data-screen-label="25" data-speaker-notes="Deny rules are the one place where being blunt is correct. They apply regardless of what the model concluded." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="579d10fb">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 25</span></div>
+<section data-label="Permissions" data-screen-label="22" data-speaker-notes="Deny rules are the one place where being blunt is correct. They apply regardless of what the model concluded." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="579d10fb">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 22</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Permissions and Deny</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:52px;flex:1">
 <div style="display:flex;flex-direction:column;gap:20px">
@@ -491,8 +464,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="MCP" data-screen-label="26" data-speaker-notes="MCP is how the agent reaches systems outside the repo: trackers, databases, browsers, internal services. One protocol, many servers." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="8fcad46d">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 26</span></div>
+<section data-label="MCP" data-screen-label="23" data-speaker-notes="MCP is how the agent reaches systems outside the repo: trackers, databases, browsers, internal services. One protocol, many servers." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="8fcad46d">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 23</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">MCP Servers</h2>
 <p style="font-size:var(--t-body);margin:24px 0 0;max-width:1350px;color:var(--dim)">A standard protocol for handing the agent tools it did not ship with. The repo gets a <span style="font-family:var(--mo);font-size:32px">.mcp.json</span>; the agent gets new verbs.</p>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:56px">
@@ -504,8 +477,8 @@ a:hover { color: #2c455d; }
 <p style="font-size:var(--t-body);margin-top:auto;max-width:1400px;line-height:1.4">The value is removing the human copy-paste step between a system of record and the agent.</p>
 </section>
 
-<section data-label="MCP cost" data-screen-label="27" data-speaker-notes="Every connected server's tool definitions sit in the window from the first token, on every request, whether used or not. Connect per project, not globally." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="41a23e5f">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 27</span></div>
+<section data-label="MCP cost" data-screen-label="24" data-speaker-notes="Every connected server's tool definitions sit in the window from the first token, on every request, whether used or not. Connect per project, not globally." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="41a23e5f">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 24</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">What MCP Costs You</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:100px;margin-top:52px;flex:1">
 <div style="display:flex;flex-direction:column">
@@ -531,18 +504,10 @@ a:hover { color: #2c455d; }
 
 
 
-<section data-label="Ch 04" data-screen-label="28" data-speaker-notes="Last chapter: how these pieces sit in an ordinary working day." style="background:var(--steel);color:var(--paper);font-family:var(--bd);display:flex;align-items:flex-end;padding:var(--pad-x)">
-<div style="display:flex;align-items:baseline;gap:48px">
-<span style="font-family:var(--hd);font-size:200px;line-height:0.8;color:var(--deep)">04</span>
-<div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:104px;line-height:1;margin:0">A Day of Work</h2>
-<p style="font-size:var(--t-body);margin:20px 0 0;max-width:900px">Where the agent runs, and where a person still decides.</p>
-</div>
-</div>
-</section>
 
-<section data-label="SDLC" data-screen-label="29" data-speaker-notes="Nine phases, four human decisions, three loops back into code. The agent moves along the line; the gates are yours." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>04 · A day of work</span><span>MECHANICS · 29</span></div>
+
+<section data-label="SDLC" data-screen-label="25" data-speaker-notes="Nine phases, four human decisions, three loops back into code. The agent moves along the line; the gates are yours." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="ee3f3c35">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>04 · A day of work</span><span>MECHANICS · 25</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">SDLC with Human Gates</h2>
 <div style="margin-top:48px;flex:1;display:flex;flex-direction:column;justify-content:center">
 <div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--muted)">A PERSON DECIDES HERE</div>
@@ -572,8 +537,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Gate and artifact" data-screen-label="30" data-speaker-notes="Every phase ends in a file. That file is what the next phase reads instead of re-deriving the previous conversation." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>04 · A day of work</span><span>MECHANICS · 30</span></div>
+<section data-label="Gate and artifact" data-screen-label="26" data-speaker-notes="Every phase ends in a file. That file is what the next phase reads instead of re-deriving the previous conversation." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="7d39fd4c">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>04 · A day of work</span><span>MECHANICS · 26</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Gate, Artifact, Next Phase</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:100px;margin-top:52px;flex:1">
 <div style="display:flex;flex-direction:column;justify-content:center;gap:var(--gap-item)">
@@ -590,8 +555,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Cheaper and dearer" data-screen-label="31" data-speaker-notes="Typing got cheap. Judgment did not. The bottleneck moved to reading, deciding, and knowing what to measure." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>04 · A day of work</span><span>MECHANICS · 31</span></div>
+<section data-label="Cheaper and dearer" data-screen-label="27" data-speaker-notes="Typing got cheap. Judgment did not. The bottleneck moved to reading, deciding, and knowing what to measure." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="94e3f105">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>04 · A day of work</span><span>MECHANICS · 27</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">What Got Cheaper, What Got Dearer</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);margin-top:52px;flex:1">
 <div style="background:var(--paper);padding:40px 44px 40px 0">
@@ -619,8 +584,8 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Defaults" data-screen-label="32" data-speaker-notes="Close on something they can do tomorrow. Six defaults, in order of payoff. Then take questions." style="background:var(--deep);color:var(--paper);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="3f48e91a">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--sky)"><span>04 · A day of work</span><span>PRACTICE · 32</span></div>
+<section data-label="Defaults" data-screen-label="28" data-speaker-notes="Close on something they can do tomorrow. Six defaults, in order of payoff. Then take questions." style="background:var(--deep);color:var(--paper);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="3f48e91a">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--sky)"><span>04 · A day of work</span><span>PRACTICE · 28</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Defaults I Would Start From</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 100px;margin-top:52px;flex:1">
 <div style="display:flex;align-items:center;gap:28px;border-bottom:1px solid var(--mid)"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">01</span><span style="font-size:32px">CLAUDE.md under 200 lines, everything else extracted</span></div>
