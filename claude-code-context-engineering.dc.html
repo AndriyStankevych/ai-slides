@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style data-omelette-injected>html,body{background:transparent}</style><script data-omelette-injected>(()=>{{const n=new URLSearchParams(location.search).get("theme");if(n==="light"||n==="dark"){document.documentElement.dataset.theme=n}}{if(new URLSearchParams(location.search).get("_omthumb")==="1"){const n=(f)=>{const g=f.focus;if(!g)return;f.focus=function(h){g.call(this,{...h,preventScroll:true})}};n(HTMLElement.prototype);n(SVGElement.prototype);if(typeof MathMLElement!=="undefined"){n(MathMLElement.prototype)}const d=(f)=>{f.removeAttribute("autofocus");f.inert=true;if(!(f instanceof HTMLElement))f.removeAttribute("tabindex")};const p=(f)=>{if(f.hasAttribute("autofocus"))d(f);for(const g of f.querySelectorAll("[autofocus]")){d(g)}};p(document.documentElement);new MutationObserver((f)=>{for(const g of f){for(const h of g.addedNodes){if(h.nodeType===1)p(h)}}}).observe(document,{childList:true,subtree:true})}}{const n=()=>{try{if(document.querySelector('meta[name="color-scheme"]'))return;const d=getComputedStyle(document.documentElement).getPropertyValue("color-scheme").trim();if(d&&d!=="normal")return;const p=(y)=>{if(!y)return null;const m=getComputedStyle(y).backgroundColor.match(/^rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)(?:[,\s/]+([\d.]+%?))?\s*\)$/);if(!m)return null;const w=m[4]==null?1:parseFloat(m[4])/(m[4].endsWith("%")?100:1);if(w<0.99)return null;return[+m[1],+m[2],+m[3]]};const f=p(document.body)||p(document.documentElement);if(!f)return;const g=(y)=>{const m=y/255;return m<=0.04045?m/12.92:((m+0.055)/1.055)**2.4};const h=0.2126*g(f[0])+0.7152*g(f[1])+0.0722*g(f[2]);document.documentElement.style.setProperty("color-scheme",h<0.4?"dark":"light")}catch{}};if(document.readyState==="complete")n();else window.addEventListener("load",n)}var I=["https://claude.ai","https://preview.claude.ai","https://a684bd46-1c61-40d1-b697-c53998a6724a.claudeusercontent.com"];var B=true;var K=false;var C=()=>{};if(K===true){try{const n=setTimeout.bind(window);const d=1e4;const p=15;const f=1e4;const g=120000;const h=200;const y=(o)=>{try{let r;if(typeof o==="string")r=o;else if(o instanceof URL)r=o.href;else if(typeof Request!=="undefined"&&o instanceof Request)r=o.url;else return null;if(!r)return null;const l=document.baseURI;const i=new URL(r,l);if(i.protocol!=="http:"&&i.protocol!=="https:")return null;if(i.origin!==new URL(l).origin)return null;return i.origin+i.pathname}catch{return null}};const m=new Map;const w=(o)=>{let r=m.get(o);if(!r){if(m.size>=h){const l=m.keys().next().value;if(l!==undefined)m.delete(l)}r={fails:[],until:0,cooldown:f,hard:false};m.set(o,r)}return r};const R=(o)=>{const r=m.get(o);return r!==undefined&&r.until>Date.now()};const O=(o,r)=>{const l=Date.now();const i=w(o);if(r)i.hard=true;if(i.until>l)return;i.fails.push(l);while(i.fails.length>0&&i.fails[0]<=l-d)i.fails.shift();if(i.fails.length>=p){i.until=l+i.cooldown;if(i.hard)i.cooldown=Math.min(i.cooldown*2,g);i.fails.length=0;try{n(()=>{try{S(true)}catch{}},i.until-l+100)}catch{}console.warn("[omelette] asset circuit breaker: pausing requests to "+o+" for "+Math.round((i.until-l)/1000)+"s after "+p+" failures in "+d/1000+"s")}};const e=(o)=>{m.delete(o)};const t=100;const a=new WeakMap;const u=new Set;let s=null;const S=(o)=>{for(const r of Array.from(u)){try{const l=a.get(r);if(l===undefined){u.delete(r);continue}if(o){const i=y(l);if(i!==null&&R(i))continue}a.delete(r);u.delete(r);if(s!==null)s.call(r,l)}catch{}}};C=()=>{try{m.clear();S(false)}catch{}};document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")C()});const _=window.fetch;if(typeof _==="function"){const o=function(...r){let l=null;try{l=y(r[0])}catch{}if(l!==null&&R(l)){let c;try{if(r[1]&&r[1].signal!==undefined){c=r[1].signal||undefined}else if(typeof Request!=="undefined"&&r[0]instanceof Request){c=r[0].signal||undefined}}catch{c=undefined}return new Promise((k,b)=>{const E=()=>{try{return c.reason!==undefined?c.reason:new DOMException("The operation was aborted.","AbortError")}catch{return new DOMException("The operation was aborted.","AbortError")}};try{if(c&&c.aborted){b(E());return}}catch{}let T=false;const j=()=>{if(T)return;T=true;b(E())};try{if(c)c.addEventListener("abort",j,{once:true})}catch{}n(()=>{if(T)return;T=true;try{if(c)c.removeEventListener("abort",j)}catch{}let L;try{L=new Response(null,{status:429,statusText:"Too Many Requests",headers:{"Retry-After":"10"}})}catch{L={ok:false,status:429}}k(L)},250)})}const i=_.apply(window,r);if(l!==null){const c=l;i.then((k)=>{try{if(k.ok)e(c);else if(k.status===401||k.status===403||k.status===404||k.status===429){O(c,k.status!==404)}}catch{}},()=>{})}return i};window.fetch=o}const v=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,"src");if(v!==undefined&&v.set!==undefined&&v.get!==undefined){const o=v.set;s=o;Object.defineProperty(HTMLImageElement.prototype,"src",{configurable:true,enumerable:v.enumerable,get:v.get,set(r){const l=`${r}`;try{const i=y(l);if(i!==null&&R(i)){a.set(this,l);if(u.size<t)u.add(this);return}}catch{}try{a.delete(this);u.delete(this)}catch{}o.call(this,l)}})}try{const o=HTMLImageElement.prototype.setAttribute;HTMLImageElement.prototype.setAttribute=function(r,l){if(arguments.length<2){o.apply(this,arguments);return}if(typeof r==="string"&&r.toLowerCase()==="src"){const i=`${l}`;try{const c=y(i);if(c!==null&&R(c)){a.set(this,i);if(u.size<t)u.add(this);return}a.delete(this);u.delete(this)}catch{}o.call(this,r,i);return}o.call(this,r,l)}}catch{}window.addEventListener("error",(o)=>{try{const r=o.target;if(r instanceof HTMLImageElement){const l=y(r.currentSrc||r.src||"");if(l!==null)O(l,true)}}catch{}},true);window.addEventListener("load",(o)=>{try{const r=o.target;if(r instanceof HTMLImageElement){const l=y(r.currentSrc||r.src||"");if(l!==null)e(l);const i=a.get(r);if(i!==undefined){let c=false;try{c=new URL(i,document.baseURI).href===new URL(r.currentSrc||r.src||"",document.baseURI).href}catch{c=false}if(c){a.delete(r);u.delete(r)}}}}catch{}},true)}catch{}}var J=30000;var G=3000;document.addEventListener("DOMContentLoaded",()=>{const n=window.Babel;const d="om-src-id";if(n&&n.registerPlugin&&!(n.availablePlugins&&n.availablePlugins[d])){n.registerPlugin(d,({types:h})=>({visitor:{JSXOpeningElement(y,m){const w=y.node;if(w.name&&w.name.type==="JSXMemberExpression")return;for(let t=0;t<w.attributes.length;t++){const a=w.attributes[t];if(a.type==="JSXAttribute"&&a.name&&a.name.name==="data-om-id")return}const R=m.file&&m.file.opts&&m.file.opts.filename||"?";const O=w.loc&&w.loc.start;const e=`jsx:${R}:${w.start??0}:${O?O.line:0}:${O?O.column+1:0}`;w.attributes.push(h.jsxAttribute(h.jsxIdentifier("data-om-id"),h.stringLiteral(e)))}}}))}const p="om-text-extract";let f=false;if(B&&n&&n.registerPlugin&&!(n.availablePlugins&&n.availablePlugins[p])){const h=window.React;if(h&&h.useSyncExternalStore&&h.createElement){f=true;const y={};const m=new Set;let w=0;window.__omTextO=y;window.__omTextSet=(e)=>{for(const t in e){const a=e[t];if(a==null)delete y[t];else y[t]=a}w++;m.forEach((t)=>t())};const R=(e)=>{m.add(e);return()=>m.delete(e)};const O=()=>w;window.__OmT=function e(t){h.useSyncExternalStore(R,O,O);return h.createElement("span",{"data-om-text":t.i,className:"__om-t"},t.i in y?y[t.i]:t.children)};n.registerPlugin(p,({types:e})=>{const t={style:1,script:1,noscript:1,textarea:1,title:1,option:1,text:1,tspan:1,textPath:1};const a={placeholder:1,alt:1,title:1,label:1,"aria-label":1,"aria-description":1,"aria-placeholder":1};const u=(o,r)=>e.logicalExpression("??",e.memberExpression(e.logicalExpression("||",e.memberExpression(e.identifier("window"),e.identifier("__omTextO")),e.objectExpression([])),e.stringLiteral(o),true),r);const s=(o)=>o.file&&o.file.opts&&o.file.opts.filename||"?";const S=(o)=>o.file&&o.file.code||"";const _=(o,r)=>{const l=(c)=>c&&c.start!=null&&c.end!=null&&(c.type==="StringLiteral"||c.type==="TemplateLiteral"&&c.expressions.length===0)?[c.start,c.end]:null;const i=l(r);if(i)return i;if(r&&r.type==="Identifier"){const c=o.scope.getBinding(r.name);if(c&&c.constant&&c.path.node.type==="VariableDeclarator"){return l(c.path.node.init)}}return null};const v=(o,r,l)=>{const i=o.node;let c=false;const k=(E,T)=>{c=true;return e.jsxElement(e.jsxOpeningElement(e.jsxIdentifier("__OmT"),[e.jsxAttribute(e.jsxIdentifier("i"),e.stringLiteral(E))],false),e.jsxClosingElement(e.jsxIdentifier("__OmT")),[T],false)};const b=i.children.map((E)=>{if(E.type==="JSXText"){if(E.start==null||E.end==null)return E;const T=l.slice(E.start,E.end);const j=T.length-T.trimStart().length;const L=T.length-T.trimEnd().length;if(j+L>=T.length)return E;return k(`txt:${r}:${E.start+j}:${E.end-L}`,E)}if(E.type==="JSXExpressionContainer"){const T=_(o,E.expression);if(T)return k(`str:${r}:${T[0]}:${T[1]}`,E)}return E});if(c)i.children=b};return{visitor:{JSXOpeningElement(o,r){const l=o.node;const i=s(r);const c={};for(let k=0;k<l.attributes.length;k++){const b=l.attributes[k];if(b.type!=="JSXAttribute"||!b.name)continue;const E=b.name.name;if(!a[E])continue;if(!b.value||b.value.type!=="StringLiteral")continue;if(b.value.start==null||b.value.end==null)continue;const T=`txt:${i}:${b.value.start}:${b.value.end}`;c[E]=T;b.value=e.jsxExpressionContainer(u(T,e.stringLiteral(b.value.value)))}if(Object.keys(c).length){l.attributes.push(e.jsxAttribute(e.jsxIdentifier("data-om-text-attrs"),e.stringLiteral(JSON.stringify(c))))}},JSXElement(o,r){const l=o.node.openingElement;const i=l&&l.name&&l.name.name;if(i==="__OmT")return;if(typeof i==="string"&&t[i])return;v(o,s(r),S(r))},JSXFragment(o,r){v(o,s(r),S(r))}}}})}}const g=f?["transform-react-jsx-source",d,p]:["transform-react-jsx-source",d];document.querySelectorAll('script[type="text/babel"],script[type="text/jsx"]').forEach((h,y)=>{const m=h.getAttribute("data-plugins")||"";const w=g.filter((R)=>m.indexOf(R)<0);if(w.length){h.setAttribute("data-plugins",m?`${m},${w.join(",")}`:w.join(","))}if(!h.hasAttribute("data-filename")){h.setAttribute("data-filename",h.getAttribute("src")||`inline-${y}`)}})});var A=window.parent;var U="not editable here — open the project in the Claude Design editor to save";var W=()=>Promise.resolve({persisted:false,noHost:true,reason:U});var H=W;var M="data/storage.json";var z=()=>{try{const n=new URL(document.baseURI);const d=n.pathname.match(/\/projects\/([^/]+)\/serve\//);if(d)return d[1];return n.hostname.split(".")[0]||""}catch{return location.hostname.split(".")[0]||""}};var Z=()=>{try{const n=new URL(document.baseURI);const d=n.pathname.indexOf("/serve/");if(d>=0)return n.origin+n.pathname.slice(0,d+"/serve/".length)+M}catch{}return"./"+M};var x=null;var N=()=>{if(!x){x=fetch(Z(),{cache:"no-store"}).then((n)=>{if(n.ok)return n.text();return n.status===404?"":null}).catch(()=>null).then((n)=>{if(n===null){x=null;return null}const d=new Map;if(!n)return d;let p;try{p=JSON.parse(n)}catch{console.warn("[omelette.storage] "+M+" is not valid JSON; treating the store as unreadable so a save cannot overwrite the "+"hand-edited bytes. Fix the JSON (or delete the file) to re-enable persistence.");x=null;return null}if(p===null||typeof p!=="object"||Array.isArray(p)){console.warn("[omelette.storage] "+M+" doesn't hold a JSON object; treating the store as unreadable so a save cannot "+"overwrite the hand-edited bytes. Make the top level a JSON object to re-enable persistence.");x=null;return null}const f=p;if("data"in f){const g=f.data;if(g===null||typeof g!=="object"||Array.isArray(g)){console.warn("[omelette.storage] "+M+' has a "data" field that is not a JSON object; treating the store as unreadable so a '+'save cannot overwrite the hand-edited bytes. Make "data" a JSON object to re-enable persistence.');x=null;return null}const h=f._meta;const y=h!==null&&typeof h==="object"?h.project:undefined;if(typeof y==="string"&&y!==""&&y!==z())return d;for(const m of Object.keys(g))d.set(m,g[m]);return d}for(const g of Object.keys(f)){if(g!=="_meta")d.set(g,f[g])}return d})}return x};var F=(n)=>H(M,JSON.stringify({_meta:{project:z(),version:1},data:Object.fromEntries(n)},null,2));var D=Promise.resolve();var $=(n)=>{const d=D.then(n);D=d.then(()=>{return},()=>{return});return d};var V=/sk-(?:ant-)?[A-Za-z0-9_-]{16,}|AKIA[0-9A-Z]{16}|gh[pousr]_[A-Za-z0-9]{20,}|xox[a-z]-[A-Za-z0-9][A-Za-z0-9-]{9,}|AIza[0-9A-Za-z_-]{30,}|-----BEGIN [A-Z ]*PRIVATE KEY-----/;var Y=/password|passwd|secret|api[_-]?key|access[_-]?token|auth[_-]?token|credential/i;var Q=(n,d,p)=>{if(V.test(d)||Y.test(n)&&typeof p==="string"&&p.length>=8){console.warn('[omelette.storage] the value for "'+n+'" looks like a credential. The storage file is a plaintext project file — visible to '+"everyone with project access and copied when the project is duplicated. Do not store secrets here.")}};var q={persisted:false,reason:"could not load the existing store — not overwriting it"};var X={persisted:false,reason:"stored value changed since a failed read — re-read this key before saving"};var P=new Set;var ee={get:(n)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.get: key must be a string"))}return $(N).then((d)=>{if(d===null){P.add(n);return null}P.delete(n);if(!d.has(n))return null;const p=d.get(n);return p==null?null:JSON.parse(JSON.stringify(p))})},set:(n,d)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.set: key must be a string"))}let p;try{p=JSON.stringify(d)}catch(g){return Promise.reject(new TypeError("storage.set: value must be JSON-serializable ("+String(g)+")"))}if(p===undefined){return Promise.reject(new TypeError("storage.set: value must be JSON-serializable"))}Q(n,p,d);const f=JSON.parse(p);return $(()=>N().then((g)=>{if(g===null)return q;if(P.has(n)){if(g.has(n))return X;P.delete(n)}g.set(n,f);return F(g)}))},delete:(n)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.delete: key must be a string"))}return $(()=>N().then((d)=>{if(d===null)return q;if(P.has(n)){if(d.has(n))return X;P.delete(n)}d.delete(n);return F(d)}))},keys:()=>$(N).then((n)=>n===null?[]:Array.from(n.keys()))};window.omelette={writeFile:(n,d)=>H(n,d).then((p)=>{if(!p.persisted&&!p.noHost){throw new Error(p.reason||"write failed")}}),storage:ee};if(A&&A!==window){const n=(e,t)=>{try{A.postMessage({__omelette_log:true,type:e,data:t},"*")}catch{}};["log","warn","error"].forEach((e)=>{const t=console[e];console[e]=(...a)=>{const u=a.map((s)=>{try{return typeof s==="object"?JSON.stringify(s):String(s)}catch{try{return String(s)}catch{return"[unstringifiable]"}}}).join(" ");n(e,u);t.apply(console,a)}});window.addEventListener("error",(e)=>{const t=e.target;if(t&&t!==window&&t.tagName){const a=t.src||t.href||"";n("resource_error",`${t.tagName} failed to load: ${a}`)}else{n("error",`${e.message||"Unknown error"} at ${e.filename||"?"}:${e.lineno||0}:${e.colno||0}`)}},true);window.addEventListener("unhandledrejection",(e)=>{const t=e.reason;const a=t instanceof Error?`${t.message} ${t.stack}`:String(t);n("error",`Unhandled rejection: ${a}`)});window.addEventListener("click",(e)=>{if(e.defaultPrevented||e.button!==0)return;if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;const t=e.composedPath?e.composedPath():[];const a=["button","input","select","textarea","summary","label"];let u=null;for(const v of t){if(!(v instanceof Element))continue;if(v.localName==="a"){if(!(v instanceof HTMLAnchorElement))return;u=v;break}if(a.indexOf(v.localName)!==-1)return}if(!u)return;if(u.isContentEditable)return;const s=u.closest("[contenteditable]");if(s&&s.getAttribute("contenteditable")!=="false")return;const S=(u.getAttribute("target")||"_self").toLowerCase();if(S!=="_self"&&S!=="_top"&&S!=="_parent")return;let _;try{_=new URL(u.href)}catch{return}if(_.protocol!=="http:"&&_.protocol!=="https:")return;if(location.origin==="null")return;if(_.origin===location.origin)return;e.preventDefault();window.open(_.href,"_blank","noopener,noreferrer")});const d=()=>{try{A.postMessage({type:"omelette:height",height:document.documentElement.scrollHeight},"*")}catch{}};if(window.ResizeObserver)new ResizeObserver(d).observe(document.documentElement);const p=()=>{d();if(!document.querySelector('script[type="text/babel"],script[type="text/jsx"]'))return;const e=()=>document.getElementById("root")||document.querySelector("body > div[id]");const t=e()?.firstElementChild??null;let a=0;const u=()=>{const s=e();if(s&&s.firstElementChild!==t||++a>30){d();return}setTimeout(u,100)};setTimeout(u,100)};if(document.readyState==="complete")p();else window.addEventListener("load",p);const f={};let g=0;const h=(e)=>new Promise((t,a)=>{if(!I.length){a(new Error("claude.complete: no parent origin"));return}const u=`c${++g}`;const s=()=>setTimeout(()=>{delete f[u];a(new Error(`claude.complete: no data for ${J/1000}s`))},J);const S=s();f[u]={resolve:t,reject:a,text:"",t:S,arm:s};try{for(const _ of I){A.postMessage({__om_api:true,id:u,body:e},_)}}catch(_){clearTimeout(S);delete f[u];a(_)}});const y=8;const m=async(e,t)=>{if(!Array.isArray(e.messages)){throw new Error("claude.complete: tools require a messages array")}const a=e.messages.slice();const u={...e,tools:e.tools.map((_)=>{if(_===null||typeof _!=="object")return _;const v={};for(const o of Object.keys(_)){if(typeof _[o]!=="function")v[o]=_[o]}return v})};const s=u.tool_choice;const S=s!=null&&(s.type==="any"||s.type==="tool")?{...u,tool_choice:s.disable_parallel_tool_use!==undefined?{type:"auto",disable_parallel_tool_use:s.disable_parallel_tool_use}:{type:"auto"}}:u;for(let _=0;_<y;_++){const v=await h({..._===0?u:S,messages:a});const o=v.message;const r=o&&Array.isArray(o.content)?o.content:null;const l=r?r.filter((c)=>c?.type==="tool_use"):[];if(o?.stop_reason!=="tool_use"||l.length===0){return v.text}const i=[];for(const c of l){const k=t.get(c.name);if(!k){i.push({type:"tool_result",tool_use_id:c.id,content:`no handler for tool "${c.name}"`,is_error:true});continue}try{const b=await k(c.input);const E=typeof b==="string"?b:O(b)??"";i.push({type:"tool_result",tool_use_id:c.id,content:E})}catch(b){i.push({type:"tool_result",tool_use_id:c.id,content:String(b?.message??b??"tool handler failed"),is_error:true})}}a.push({role:"assistant",content:r},{role:"user",content:i})}throw new Error(`claude.complete: exceeded ${y} tool turns`)};window.claude={complete(e){const t=e;if(t!==null&&typeof t==="object"&&Array.isArray(t.tools)&&t.tools.some((a)=>a!==null&&typeof a==="object"&&typeof a.run==="function")){const a=new Map;for(const u of t.tools){if(u!==null&&typeof u==="object"&&typeof u.run==="function"){a.set(String(u.name),u.run)}}return m(t,a)}return h(e).then((a)=>a.text)}};const w={};let R=0;H=(e,t)=>new Promise((a)=>{if(!I.length){a({persisted:false,noHost:true,reason:U});return}const u=`f${++R}`;const s=setTimeout(()=>{delete w[u];a({persisted:false,noHost:true,reason:U})},G);w[u]={settle:a,t:s};try{for(const S of I){A.postMessage({__om_file:true,id:u,op:"write",path:e,content:t},S)}}catch{clearTimeout(s);delete w[u];a({persisted:false,noHost:true,reason:U})}});const O=(e)=>{try{return JSON.stringify(e)}catch{return JSON.stringify(String(e))}};window.addEventListener("message",(e)=>{if(I.indexOf(e.origin)<0)return;if(e.source!==A)return;const t=e.data;if(!t)return;if(t.type==="omelette-preview-refresh"){if(typeof t.token!=="string"||!/^[0-9a-f.-]+(\.(rc|pr-[0-9]+))?(\.[0-9]+\.[0-9a-f]{16})?$/.test(t.token))return;const s=Math.max(1,Math.floor((t.expiresAt||0)-Date.now()/1000));document.cookie="__Host-omelette-preview="+t.token+"; Path=/; Secure; SameSite=None; Partitioned; Max-Age="+s;C();return}if(t.__om_file_r){const s=w[t.id];if(!s)return;clearTimeout(s.t);delete w[t.id];s.settle(t.ok?{persisted:true}:{persisted:false,reason:t.error||"write failed"});return}if(t.__om_api_r){const s=f[t.id];if(!s)return;if(t.error!=null){clearTimeout(s.t);delete f[t.id];s.reject(new Error(t.error));return}if(t.chunk!=null){clearTimeout(s.t);s.t=s.arm();s.text+=t.chunk;return}if(t.done){clearTimeout(s.t);delete f[t.id];s.resolve({text:t.text!=null?t.text:s.text,message:t.message});return}return}if(!t.__om_eval)return;const a=t;const u=(s)=>{e.source.postMessage({...s,__om_eval_r:1,id:a.id},e.origin)};try{const s=(0,eval)(a.code);if(s&&typeof s.then==="function"){s.then((S)=>u({ok:1,v:O(S)}),(S)=>u({ok:0,e:String(S)}))}else{u({ok:1,v:O(s)})}}catch(s){u({ok:0,e:String(s)})}})}})();
+</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
@@ -47,10 +50,47 @@ a:hover { color: #2c455d; }
 
 
 
-<section data-label="One pass" data-screen-label="02" data-speaker-notes="The model has no memory between turns. The CLI re-sends the whole conversation every time. What feels like memory is re-reading." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="378c7a53">
+<section data-label="Frozen weights" data-screen-label="02" data-speaker-notes="Two kinds of knowledge. The weights were fixed at training time and never change while you work: general programming, language semantics, library APIs as they looked at the cutoff. Nothing about your repo is in there. Everything specific arrives as text you send, every single request. Multidimensional space." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="3024dc82">
 <div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>01 · How the model reads</span><span>MECHANICS · 02</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">One Pass, No Memory</h2>
-<p style="font-size:var(--t-body);margin:24px 0 0;max-width:1300px;color:var(--dim)">The model is stateless. Every turn, the client re-sends the entire conversation and the model reads it from scratch, start to finish, once.</p>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">LLM (Large Language Model)</h2>
+<p style="font-size:var(--t-body);margin:24px 0 0;max-width:1300px;color:var(--dim)">Two Kinds of Knowledge: the model brings what it was trained on. Everything about your codebase has to be sent to it as text.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);margin-top:48px;flex:1">
+<div style="background:var(--paper);padding:40px 44px;display:flex;flex-direction:column">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">TRAINED IN · FROZEN</div>
+<div style="font-size:var(--t-sub);font-family:var(--hd);margin-top:22px;line-height:1.1">the weights</div>
+<div style="display:flex;flex-direction:column;gap:20px;margin-top:28px;font-size:var(--t-small);line-height:1.35">
+<span>language semantics, algorithms, idioms</span>
+<span>library and framework APIs as of the training cutoff</span>
+<span>patterns from public code, in general, not in particular</span>
+</div>
+<div style="border-top:1px solid var(--line);margin-top:auto;padding-top:24px;font-size:var(--t-small);color:var(--dim);line-height:1.4">Does not change while you work. The model learns nothing from your session.</div>
+</div>
+<div style="background:var(--paper);padding:40px 44px;display:flex;flex-direction:column">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--mid)">SENT AT RUN TIME · PER REQUEST</div>
+<div style="font-size:var(--t-sub);font-family:var(--hd);margin-top:22px;line-height:1.1">the context</div>
+<div style="display:flex;flex-direction:column;gap:20px;margin-top:28px;font-size:var(--t-small);line-height:1.35">
+<span>your instructions and your question</span>
+<span>the files, diffs and tool output the CLI collected</span>
+<span>your conventions, your architecture, your names</span>
+</div>
+<div style="border-top:1px solid var(--line);margin-top:auto;padding-top:24px;font-size:var(--t-small);color:var(--dim);line-height:1.4">This is the only part you control, and the whole subject of this talk.</div>
+</div>
+</div>
+</section>
+
+<section data-label="One pass, one token" data-screen-label="03" data-speaker-notes="Inference is one operation repeated: read the whole context, predict the next token, append it, read again. There is no plan held outside the text, so what sits in the context determines the answer. And it is stateless — the CLI re-sends the whole conversation every turn. What feels like memory is re-reading." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="9e3ef57b">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>01 · How the model reads</span><span>MECHANICS · 03</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">One Pass, One Token at a Time</h2>
+<p style="font-size:var(--t-body);margin:24px 0 0;max-width:1400px;color:var(--dim)">At run time the model does one thing: read the context so far, predict the token most likely to come next, append it, and repeat. It keeps nothing between turns — the client re-sends the entire conversation and the model reads it from scratch, once.</p>
+<div style="display:flex;align-items:center;gap:14px;margin-top:44px;flex-wrap:wrap;font-family:var(--mo);font-size:var(--t-mono)">
+<div style="border:1px solid var(--line);padding:18px 24px;color:var(--dim)">context so far</div>
+<span style="color:var(--muted)">→</span>
+<div style="border:1px solid var(--ink);padding:18px 24px">predict</div>
+<span style="color:var(--muted)">→</span>
+<div style="border:1px solid var(--steel);background:var(--steel);color:#f2f2f3;padding:18px 24px">next token</div>
+<span style="color:var(--muted)">→</span>
+<div style="border:1px solid var(--line);padding:18px 24px;color:var(--dim)">appended, read again</div>
+</div>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:36px">
 <div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">TURN 1</div><div style="font-size:var(--t-small);margin-top:14px;line-height:1.35">prompt + tools sent, answer returned, nothing retained</div></div>
 <div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">TURN 2</div><div style="font-size:var(--t-small);margin-top:14px;line-height:1.35">turn 1 re-sent in full, plus everything the tools printed</div></div>
@@ -58,27 +98,35 @@ a:hover { color: #2c455d; }
 </div>
 </section>
 
-<section data-label="Flat list" data-screen-label="03" data-speaker-notes="Instructions, file contents, tool output and your question are the same substance to the model. Nothing is privileged because you meant it to be." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="57aed21e">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>01 · How the model reads</span><span>MECHANICS · 03</span></div>
+<section data-label="Flat list" data-screen-label="04" data-speaker-notes="Instructions, file contents, tool output and your question are the same substance to the model. Nothing is privileged because you meant it to be. Two of these lines are worth naming now, because they come back all deck. A skill is a folder with a SKILL.md — instructions Claude loads only when the task calls for it; what sits in the window all session is the listing of names and descriptions, and the body arrives only when the skill is invoked. An MCP server is a connection that adds tools: its definitions occupy the window from the first token, used or not. Memory is what Claude writes down for itself between sessions: the MEMORY.md index loads every session, the topic files behind it are read only when needed. A sub-agent is a specialist with its own context window, its own system prompt and its own tool access; what sits in your window is its description, which is what Claude routes on, and what comes back is its summary rather than its work." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="57aed21e">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>01 · How the model reads</span><span>MECHANICS · 04</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Everything Is One Flat List</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;flex:1">
-<div style="display:flex;flex-direction:column;gap:18px">
-<div style="border:1px solid var(--ink);padding:22px 28px;font-family:var(--mo);font-size:var(--t-mono)">system prompt</div>
-<div style="border:1px solid var(--ink);padding:22px 28px;font-family:var(--mo);font-size:var(--t-mono)">CLAUDE.md</div>
-<div style="border:1px solid var(--ink);padding:22px 28px;font-family:var(--mo);font-size:var(--t-mono)">tool definitions</div>
-<div style="border:1px solid var(--ink);padding:22px 28px;font-family:var(--mo);font-size:var(--t-mono)">file contents</div>
-<div style="border:1px solid var(--ink);padding:22px 28px;font-family:var(--mo);font-size:var(--t-mono)">tool output</div>
-<div style="border:1px solid var(--steel);background:var(--steel);color:#f2f2f3;padding:22px 28px;font-family:var(--mo);font-size:var(--t-mono)">your question</div>
+<div style="display:grid;grid-template-columns:1fr 1.15fr;gap:80px;margin-top:36px;flex:1">
+<div style="display:flex;flex-direction:column;gap:11px">
+<div style="border:1px solid var(--ink);padding:15px 26px;font-family:var(--mo);font-size:var(--t-mono)">system prompt</div>
+<div style="border:1px solid var(--ink);padding:15px 26px;font-family:var(--mo);font-size:var(--t-mono)">CLAUDE.md</div>
+<div style="border:1px solid var(--ink);padding:15px 26px;font-family:var(--mo);font-size:var(--t-mono)">MEMORY.md</div>
+<div style="border:1px solid var(--ink);padding:15px 26px;font-family:var(--mo);font-size:var(--t-mono)">tool and MCP server definitions</div>
+<div style="border:1px solid var(--ink);padding:15px 26px;font-family:var(--mo);font-size:var(--t-mono)">skill names and descriptions</div>
+<div style="border:1px solid var(--ink);padding:15px 26px;font-family:var(--mo);font-size:var(--t-mono)">sub-agent descriptions</div>
+<div style="border:1px solid var(--ink);padding:15px 26px;font-family:var(--mo);font-size:var(--t-mono)">file contents</div>
+<div style="border:1px solid var(--ink);padding:15px 26px;font-family:var(--mo);font-size:var(--t-mono)">tool output</div>
+<div style="border:1px solid var(--steel);background:var(--steel);color:#f2f2f3;padding:15px 26px;font-family:var(--mo);font-size:var(--t-mono)">your question</div>
 </div>
-<div style="display:flex;flex-direction:column;justify-content:center;gap:var(--gap-item)">
+<div style="display:flex;flex-direction:column;justify-content:center;gap:16px">
 <p style="font-size:var(--t-body);margin:0;line-height:1.4">There is no hierarchy in the window. A rule you wrote in CLAUDE.md and a stack trace a test printed carry the same weight when the model reads them.</p>
-<p style="font-size:var(--t-body);margin:0;line-height:1.4;color:var(--dim)">Attention is the only ranking, and it is driven by position and repetition, not by your intent.</p>
+<div style="border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:14px">
+<div><span style="font-family:var(--hd);font-size:30px">Skill</span><span style="font-size:var(--t-small);line-height:1.35"> — a folder with a <span style="font-family:var(--mo)">SKILL.md</span> of instructions for one procedure. Only the name and description sit in the window; the body loads when it is used.</span></div>
+<div><span style="font-family:var(--hd);font-size:30px">MCP server</span><span style="font-size:var(--t-small);line-height:1.35"> — a connected source of extra tools. Its tool definitions sit in the window from the first token, whether or not you call them.</span></div>
+<div><span style="font-family:var(--hd);font-size:30px">Memory</span><span style="font-size:var(--t-small);line-height:1.35"> — notes Claude writes for itself across sessions. The <span style="font-family:var(--mo)">MEMORY.md</span> index loads every session; its topic files are read on demand.</span></div>
+<div><span style="font-family:var(--hd);font-size:30px">Sub-agent</span><span style="font-size:var(--t-small);line-height:1.35"> — a specialist with its own context window, system prompt and tool access. Its description sits in your window; its work does not, only the summary it returns.</span></div>
+</div>
 </div>
 </div>
 </section>
 
-<section data-label="Lost in the middle" data-screen-label="04" data-speaker-notes="Recall is strong at the start and the end of the window and weakest in the middle. This is measured behaviour across models, not a Claude quirk. Consequence: a fact buried in turn nine of a long session is the least reliable place to put it." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="7992c447">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>01 · How the model reads</span><span>MECHANICS · 04</span></div>
+<section data-label="Lost in the middle" data-screen-label="05" data-speaker-notes="Recall is strong at the start and the end of the window and weakest in the middle. This is measured behaviour across models, not a Claude quirk. Three consequences worth acting on. First: position is a design decision. Standing rules belong in a file that loads at the top of the session; the task you actually want done belongs in your last message, not in turn nine. Second: length makes it worse. The middle of a long session is a bigger target than the middle of a short one, which is another argument for clearing between tasks. Third: restating beats hoping. If a constraint matters and the session has run long, say it again in the current message rather than pointing back at where you said it." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="7992c447">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>01 · How the model reads</span><span>MECHANICS · 05</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Lost in the Middle</h2>
 <div style="display:grid;grid-template-columns:1fr 520px;gap:80px;margin-top:40px;flex:1">
 <div style="display:flex;flex-direction:column">
@@ -89,138 +137,57 @@ a:hover { color: #2c455d; }
 <div style="display:grid;grid-template-columns:repeat(3,1fr);margin-top:20px;font-family:var(--mo);font-size:var(--t-mono);color:var(--muted)"><span>start</span><span style="text-align:center;color:var(--mid)">middle</span><span style="text-align:right">end</span></div>
 <div style="font-size:var(--t-small);color:var(--dim);margin-top:8px">recall of a single fact by its position in the window</div>
 </div>
-<div style="display:flex;flex-direction:column;justify-content:center;gap:var(--gap-item)">
+<div style="display:flex;flex-direction:column;justify-content:center;gap:22px">
 <p style="font-size:var(--t-body);margin:0;line-height:1.4">The beginning and the end of the window are read reliably. The middle is where a requirement quietly stops being applied.</p>
-<div style="border-top:1px solid var(--line);padding-top:24px;font-size:var(--t-small);color:var(--dim);line-height:1.4">Put standing rules in a file that loads at the top. Put the current task in your last message. Distrust the middle.</div>
+<div style="border-top:1px solid var(--line);padding-top:20px;display:flex;flex-direction:column;gap:12px;font-size:var(--t-small);line-height:1.35">
+<span><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">TOP</span> &nbsp;standing rules, in a file that loads with the session</span>
+<span><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">BOTTOM</span> &nbsp;the task you want done, in your last message</span>
+<span><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">MIDDLE</span> &nbsp;everything you are hoping it still remembers</span>
 </div>
 </div>
-</section>
-
-
-
-<section data-label="Window fill" data-screen-label="05" data-speaker-notes="Ask the room to guess the proportions before revealing. Tool output usually surprises people: one unfiltered test run or a large grep can dominate the window." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="7a4b0b10">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>02 · The context window</span><span>MECHANICS · 05</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">What Fills the Window</h2>
-<p style="font-size:var(--t-body);margin:20px 0 0;max-width:1250px;color:var(--dim)">Tool output is the largest single consumer, and the one you control least directly.</p>
-<div style="display:flex;height:150px;margin-top:56px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)">
-<div style="width:14%;background:var(--deep)"></div>
-<div style="width:22%;background:var(--mid)"></div>
-<div style="width:18%;background:var(--tint)"></div>
-<div style="width:16%;background:var(--pale)"></div>
-<div style="width:30%"></div>
 </div>
-<div style="display:grid;grid-template-columns:14% 22% 18% 16% 30%;margin-top:20px;font-family:var(--mo);font-size:var(--t-mono);color:var(--muted)">
-<span>system</span>
-<span>tool output</span>
-<span>files read</span>
-<span>dialogue</span>
-<span style="color:var(--mid)">free</span>
-</div>
-<div style="display:flex;align-items:baseline;gap:28px;margin-top:auto">
-<span style="font-family:var(--hd);font-size:var(--t-num);line-height:0.85;color:var(--mid)">70%</span>
-<span style="font-size:32px;color:var(--dim);max-width:700px">of a working session's window is spent before you ask your second question</span>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:20px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">LENGTH WIDENS IT</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">the middle of a long session is a far bigger target than the middle of a short one</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">RESTATE, DO NOT REFER</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">say the constraint again in the current message rather than pointing back at where you said it</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">NOT A CLAUDE QUIRK</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">measured across models: recall by position, not by how much you meant it</div></div>
 </div>
 </section>
 
-<section data-label="Quality vs fill" data-screen-label="06" data-speaker-notes="A window that fits is not the same as a window that works. Instruction-following degrades well before the hard limit, which is why the meter matters more than the error." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="e43b65f9">
+
+
+<section data-label="Quality vs fill" data-screen-label="06" data-speaker-notes="A window that fits is not the same as a window that works. Instruction-following degrades well before the hard limit, which is why the meter matters more than the error. Three commands are the whole toolkit here: /context to see where you are, /compact to trade detail for continuity, /clear to start clean. Compaction is lossy and you rarely know what it dropped; clear costs everything but is honest about it." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="e43b65f9">
 <div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>02 · The context window</span><span>MECHANICS · 06</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Quality vs. Fill</h2>
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px;background:var(--line)">
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px;background:var(--line)">
 <div style="background:var(--paper);padding:40px 36px"><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">UNDER 40%</div><div style="font-family:var(--hd);font-size:52px;margin-top:16px">Sharp</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:12px;line-height:1.35">follows rules, asks when unsure, edits narrowly</div></div>
 <div style="background:var(--paper);padding:40px 36px"><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">40 – 70%</div><div style="font-family:var(--hd);font-size:52px;margin-top:16px">Drifting</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:12px;line-height:1.35">forgets a convention, re-reads files it already read</div></div>
 <div style="background:var(--paper);padding:40px 36px"><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">OVER 70%</div><div style="font-family:var(--hd);font-size:52px;margin-top:16px">Sloppy</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:12px;line-height:1.35">contradicts earlier decisions, invents paths, loops</div></div>
 </div>
-<p style="font-size:var(--t-body);margin-top:auto;max-width:1300px;line-height:1.4">The failure is gradual and quiet. By the time the session hits its limit, the answers have been getting worse for a while.</p>
-</section>
-
-<section data-label="clear vs compact" data-screen-label="07" data-speaker-notes="Compaction summarises the session so work can continue; the summary is lossy and you rarely know what it dropped. Clear costs you everything but is honest about it." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="117cf60d">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>02 · The context window</span><span>MECHANICS · 07</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">/clear and /compact</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);margin-top:52px;flex:1">
-<div style="background:var(--paper);padding:44px 40px;display:flex;flex-direction:column">
-<div style="font-family:var(--mo);font-size:36px;color:var(--mid)">/clear</div>
-<div style="font-size:var(--t-body);margin-top:20px;line-height:1.4">Window back to zero. New topic, no residue.</div>
-<div style="margin-top:auto;display:flex;flex-direction:column;gap:14px;font-size:var(--t-small);color:var(--dim)">
-<span>keeps: files on disk, CLAUDE.md, your plan file</span>
-<span>loses: every decision that lived only in chat</span>
-</div>
-</div>
-<div style="background:var(--paper);padding:44px 40px;display:flex;flex-direction:column">
-<div style="font-family:var(--mo);font-size:36px;color:var(--mid)">/compact</div>
-<div style="font-size:var(--t-body);margin-top:20px;line-height:1.4">The session replaced by a summary of itself.</div>
-<div style="margin-top:auto;display:flex;flex-direction:column;gap:14px;font-size:var(--t-small);color:var(--dim)">
-<span>keeps: the thread of what you were doing</span>
-<span>loses: detail, silently and unpredictably</span>
-</div>
-</div>
-</div>
-<p style="font-size:var(--t-small);color:var(--muted);margin:32px 0 0;font-family:var(--mo)">/context shows the meter before you have to choose.</p>
-</section>
-
-<section data-label="Five levers" data-screen-label="08" data-speaker-notes="This is the map for chapter three. Every feature we cover is one of these five moves on the window." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="26ed86d4">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>02 · The context window</span><span>MECHANICS · 08</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Five Levers on the Window</h2>
-<div style="display:grid;grid-template-columns:1fr 360px;gap:80px;margin-top:48px;flex:1">
-<div style="display:flex;flex-direction:column;gap:2px;background:var(--line);align-self:start">
-<div style="background:var(--paper);display:flex;align-items:baseline;gap:28px;padding:22px 0"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">01</span><span style="font-family:var(--mo);font-size:32px;width:280px">/clear</span><span style="font-size:var(--t-small);color:var(--dim)">new topic gets a new window</span></div>
-<div style="background:var(--paper);display:flex;align-items:baseline;gap:28px;padding:22px 0"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">02</span><span style="font-family:var(--mo);font-size:32px;width:280px">/compact</span><span style="font-size:var(--t-small);color:var(--dim)">a summary instead of the lecture</span></div>
-<div style="background:var(--paper);display:flex;align-items:baseline;gap:28px;padding:22px 0"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">03</span><span style="font-family:var(--mo);font-size:32px;width:280px">plan mode</span><span style="font-size:var(--t-small);color:var(--dim)">read-only: it reads and reasons, writes nothing</span></div>
-<div style="background:var(--paper);display:flex;align-items:baseline;gap:28px;padding:22px 0"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">04</span><span style="font-family:var(--mo);font-size:32px;width:280px">sub-agents</span><span style="font-size:var(--t-small);color:var(--dim)">the noise burns in someone else's window</span></div>
-<div style="background:var(--paper);display:flex;align-items:baseline;gap:28px;padding:22px 0"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">05</span><span style="font-family:var(--mo);font-size:32px;width:280px">plan on disk</span><span style="font-size:var(--t-small);color:var(--dim)">files the agent re-reads instead of remembering</span></div>
-</div>
-<div style="border:1px solid var(--ink);display:flex;flex-direction:column;justify-content:flex-end">
-<div style="height:42%;background:var(--pale)"></div>
-<div style="padding:28px;border-top:1px solid var(--ink)"><div style="font-family:var(--hd);font-size:76px;line-height:1;color:var(--mid)">42%</div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--muted);margin-top:8px">WORKING WINDOW</div></div>
-</div>
+<p style="font-size:var(--t-body);margin:36px 0 0;max-width:1400px;line-height:1.4">The failure is gradual and quiet. By the time the session hits its limit, the answers have been getting worse for a while.</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);margin-top:auto">
+<div style="background:var(--paper);padding:30px 34px"><div style="font-family:var(--mo);font-size:36px;color:var(--mid)">/context</div><div style="font-size:var(--t-small);margin-top:14px;line-height:1.35">Read the meter.</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:10px;line-height:1.35">what is filling the window right now, and how much is left</div></div>
+<div style="background:var(--paper);padding:30px 34px"><div style="font-family:var(--mo);font-size:36px;color:var(--mid)">/compact</div><div style="font-size:var(--t-small);margin-top:14px;line-height:1.35">Replace the session with a summary.</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:10px;line-height:1.35">keeps the thread of the work, loses detail silently</div></div>
+<div style="background:var(--paper);padding:30px 34px"><div style="font-family:var(--mo);font-size:36px;color:var(--mid)">/clear</div><div style="font-size:var(--t-small);margin-top:14px;line-height:1.35">Window back to zero.</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:10px;line-height:1.35">new topic, no residue; files and CLAUDE.md survive</div></div>
 </div>
 </section>
 
-<section data-label="Reading the meter" data-screen-label="09" data-speaker-notes="A concrete habit, not a rule: check /context at natural boundaries. The point is to make the decision deliberately instead of at 95%." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="20846bcc">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>02 · The context window</span><span style="color:var(--mid)">PRACTICE · 09</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Reading the Meter</h2>
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:64px;margin-top:56px">
-<div style="border-top:3px solid var(--steel);padding-top:28px"><div style="font-family:var(--hd);font-size:64px;line-height:1">Before a task</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:16px;line-height:1.4">Fresh window, or you inherit whatever the last task left behind.</div></div>
-<div style="border-top:3px solid var(--steel);padding-top:28px"><div style="font-family:var(--hd);font-size:64px;line-height:1">After a big read</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:16px;line-height:1.4">A wide search or a full test log can cost more than the last hour of dialogue.</div></div>
-<div style="border-top:3px solid var(--steel);padding-top:28px"><div style="font-family:var(--hd);font-size:64px;line-height:1">Before a plan</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:16px;line-height:1.4">Planning is the step that most needs room to reason.</div></div>
-</div>
-<p style="font-size:var(--t-body);margin-top:auto;max-width:1300px;line-height:1.4">Write the decision down before you clear. If it only exists in the transcript, clearing deletes it.</p>
-</section>
-
-
-
-<section data-label="CLAUDE.md order" data-screen-label="10" data-speaker-notes="Four sources merge into one block at session start; the closest file wins a conflict. Imports pull in more files at the same cost as writing them inline." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="661ce0d0">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 10</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">CLAUDE.md Load Order</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;flex:1">
-<div style="display:flex;flex-direction:column;gap:16px">
-<div style="border:1px solid var(--line);padding:20px 26px"><div style="font-family:var(--mo);font-size:30px">managed policy</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:6px">set by the organisation</div></div>
-<div style="border:1px solid var(--line);padding:20px 26px"><div style="font-family:var(--mo);font-size:30px">~/.claude/CLAUDE.md</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:6px">your persona, every project</div></div>
-<div style="border:1px solid var(--ink);padding:20px 26px"><div style="font-family:var(--mo);font-size:30px">./CLAUDE.md</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:6px">the team's file, in git — almost everything lives here</div></div>
-<div style="border:1px solid var(--line);padding:20px 26px"><div style="font-family:var(--mo);font-size:30px">./CLAUDE.local.md</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:6px">personal, gitignored</div></div>
-</div>
-<div style="display:flex;flex-direction:column;justify-content:center;gap:var(--gap-item)">
-<p style="font-size:var(--t-body);margin:0;line-height:1.4">All four are concatenated into the window at session start. The nearest file wins when two disagree.</p>
-<div style="border-top:1px solid var(--line);padding-top:24px;font-size:var(--t-small);color:var(--dim);line-height:1.45"><span style="font-family:var(--mo)">@docs/api.md</span> imports another file into the same block. It is convenient and it is not free — an import costs exactly what pasting the file would.</div>
-</div>
-</div>
-</section>
-
-<section data-label="Leave vs extract" data-screen-label="11" data-speaker-notes="The single most useful habit in the deck: CLAUDE.md is not a wiki. Anything conditional belongs somewhere that loads on demand." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="66821911">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 11</span></div>
+<section data-label="Leave vs extract" data-screen-label="07" data-speaker-notes="The single most useful habit in the deck: CLAUDE.md is not a wiki. It is loaded in full at the start of every session, so every line is a recurring cost. Keep the facts that apply always, and move anything conditional somewhere that loads on demand — a multi-step procedure becomes a skill, a rule for one part of the repo becomes a path-scoped rule. Write it when you would otherwise re-explain: Claude makes the same mistake twice, a review catches something it should have known, you type the same correction you typed last session, or a new teammate would need the same context. Be concrete enough to verify — use 2-space indentation, not format code properly. And keep it consistent: if two files contradict each other, Claude may pick either one. Target under 200 lines; run /init to generate a starting file and /doctor to propose trims." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="66821911">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 07</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Leave vs. Extract</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);margin-top:48px;flex:1">
-<div style="background:var(--paper);padding:40px 44px 40px 0">
+<p style="font-size:var(--t-body);margin:20px 0 0;max-width:1400px;color:var(--dim)">The file is loaded in full at the start of every session, so every line is a recurring cost. Keep the facts that always apply; move the conditional ones somewhere that loads on demand.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);margin-top:30px;flex:1">
+<div style="background:var(--paper);padding:32px 44px 32px 0">
 <div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">LEAVE · EVERY SESSION</div>
-<div style="display:flex;flex-direction:column;gap:20px;margin-top:28px;font-size:var(--t-small);line-height:1.35">
+<div style="display:flex;flex-direction:column;gap:16px;margin-top:22px;font-size:var(--t-small);line-height:1.35">
 <span>role and boundaries: what this repo is, what not to touch</span>
 <span>the four commands: build, test, lint, run</span>
 <span>naming and conventions the team actually enforces</span>
 <span>where the truth lives: spec.md, adr/, docs/</span>
 </div>
 </div>
-<div style="background:var(--paper);padding:40px 0 40px 44px">
+<div style="background:var(--paper);padding:32px 0 32px 44px">
 <div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">EXTRACT · LOADED ON DEMAND</div>
-<div style="display:flex;flex-direction:column;gap:20px;margin-top:28px;font-size:var(--t-small);line-height:1.35">
+<div style="display:flex;flex-direction:column;gap:16px;margin-top:22px;font-size:var(--t-small);line-height:1.35">
 <span><span style="font-family:var(--mo)">skills/</span> — multi-step procedures, pulled in when needed</span>
 <span><span style="font-family:var(--mo)">.claude/rules/</span> — rules for one part of the repo</span>
 <span><span style="font-family:var(--mo)">hooks</span> — anything that must happen every time, enforced</span>
@@ -228,17 +195,18 @@ a:hover { color: #2c455d; }
 </div>
 </div>
 </div>
-<div style="display:flex;align-items:center;gap:40px;margin-top:36px">
-<div style="flex:1;height:10px;background:var(--line);position:relative"><div style="position:absolute;inset:0;width:38%;background:var(--steel)"></div></div>
-<span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--muted)">TARGET UNDER 200 LINES</span>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:26px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">WRITE IT THE SECOND TIME</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">the same mistake twice, the same correction retyped, or something a new teammate would need</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">CONCRETE ENOUGH TO CHECK</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">"use 2-space indentation", not "format code properly"; two rules that contradict get picked between arbitrarily</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">UNDER 200 LINES</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">longer files cost more and are followed less; <span style="font-family:var(--mo)">/init</span> starts one, <span style="font-family:var(--mo)">/doctor</span> proposes trims</div></div>
 </div>
 </section>
 
-<section data-label="Monorepo" data-screen-label="12" data-speaker-notes="Nested files are how a monorepo stays affordable: the root loads at start, package-level files join only when the agent touches that package." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="d17633ce">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 12</span></div>
+<section data-label="Monorepo" data-screen-label="08" data-speaker-notes="Nested files are how a monorepo stays affordable. Claude Code loads CLAUDE.md from your working directory and every directory above it, concatenated from the filesystem root down, so the file closest to where you launched is read last. Files in subdirectories below you are not loaded at launch: they join the window the first time Claude reads a file in that directory. Nested .claude/rules and nested skills behave the same way. And when other teams’ files get picked up in a large monorepo, claudeMdExcludes skips them by path or glob — put it in .claude/settings.local.json so the exclusion stays on your machine." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="d17633ce">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 08</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Nested CLAUDE.md in a Monorepo</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;flex:1">
-<div style="font-family:var(--mo);font-size:30px;line-height:1.9;color:var(--dim)">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:36px;flex:1">
+<div style="font-family:var(--mo);font-size:30px;line-height:1.75;color:var(--dim)">
 <div style="color:var(--ink)">monorepo/</div>
 <div>├── <span style="color:var(--mid)">CLAUDE.md</span> <span style="font-size:var(--t-mono);color:var(--muted)">— at start</span></div>
 <div>└── packages/</div>
@@ -254,12 +222,17 @@ a:hover { color: #2c455d; }
 <div style="border-top:1px solid var(--line);padding-top:24px;font-size:var(--t-small);color:var(--dim);line-height:1.45">The practical effect: context grows in proportion to what the task actually touches, instead of to the size of the repository.</div>
 </div>
 </div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:26px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">UPWARD AT LAUNCH</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">every directory above your working directory is loaded and concatenated; the closest file is read last</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">DOWNWARD ON DEMAND</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">nested rules and skills follow the same rule: they arrive when Claude touches the directory</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">SKIP THE NEIGHBOURS</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35"><span style="font-family:var(--mo)">claudeMdExcludes</span> drops other teams’ files by glob; keep it in <span style="font-family:var(--mo)">settings.local.json</span></div></div>
+</div>
 </section>
 
-<section data-label="Path-scoped rules" data-screen-label="13" data-speaker-notes="Rules with a paths frontmatter attach to file patterns. A ton of instructions can sit in the repo while only the matching one enters the window." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="2a9e76dd">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 13</span></div>
+<section data-label="Path-scoped rules" data-screen-label="09" data-speaker-notes="Rules are markdown files in .claude/rules/, discovered recursively, one topic per file. A rule with a paths list in its frontmatter attaches to file patterns and only enters the window when Claude actually reads a matching file — not on every tool call. A rule without paths loads at launch, with the same priority as .claude/CLAUDE.md. Personal rules in ~/.claude/rules/ apply to every project and load before project rules, which means project rules win. So a large library of instructions can sit in the repo while only the matching one costs you context. Use glob patterns: double-star for any directory, brace expansion for several extensions at once." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="2a9e76dd">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 09</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Path-Scoped Rules</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:56px;margin-top:52px;flex:1">
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:56px;margin-top:36px;flex:1">
 <div>
 <div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--muted)">TOUCHED FILE</div>
 <div style="border:1px solid var(--ink);padding:24px 26px;margin-top:20px;font-family:var(--mo);font-size:30px">src/api/orders.ts</div>
@@ -275,83 +248,26 @@ a:hover { color: #2c455d; }
 <div>
 <div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--muted)">IN THE WINDOW</div>
 <div style="border:1px solid var(--ink);padding:24px 26px;margin-top:20px;font-family:var(--mo);font-size:30px">api-errors.md</div>
-<p style="font-size:var(--t-small);color:var(--dim);margin-top:28px;line-height:1.45">One rule matched, two stayed on disk. The library can grow without the window growing with it.</p>
+<p style="font-size:var(--t-small);color:var(--dim);margin-top:24px;line-height:1.45">One rule matched, two stayed on disk. The library can grow without the window growing with it.</p>
+<div style="border:1px solid var(--line);padding:18px 22px;margin-top:22px;font-family:var(--mo);font-size:24px;line-height:1.55;white-space:pre">---
+paths:
+  - "src/**/*.{ts,tsx}"
+---</div>
 </div>
 </div>
-</section>
-
-<section data-label="Skills disclosure" data-screen-label="14" data-speaker-notes="Progressive disclosure is the core idea. Three levels: the index is always present, the body arrives on trigger, the attachments only if the body asks for them." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="f553bda2">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 14</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Skills: Progressive Disclosure</h2>
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);margin-top:52px;flex:1">
-<div style="background:var(--paper);padding:40px 40px 40px 0;display:flex;flex-direction:column">
-<div style="font-family:var(--hd);font-size:64px;line-height:1;color:var(--mid)">Level 1</div>
-<div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--muted);margin-top:12px">ALWAYS LOADED</div>
-<div style="font-size:var(--t-small);margin-top:24px;line-height:1.4">Name and one-line description of every installed skill. Tens of tokens each.</div>
-<div style="margin-top:auto;height:12px;background:var(--pale);width:12%"></div>
-</div>
-<div style="background:var(--paper);padding:40px;display:flex;flex-direction:column">
-<div style="font-family:var(--hd);font-size:64px;line-height:1;color:var(--mid)">Level 2</div>
-<div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--muted);margin-top:12px">ON TRIGGER</div>
-<div style="font-size:var(--t-small);margin-top:24px;line-height:1.4">The body of SKILL.md enters the window when the description matches what you asked for.</div>
-<div style="margin-top:auto;height:12px;background:var(--tint);width:45%"></div>
-</div>
-<div style="background:var(--paper);padding:40px 0 40px 40px;display:flex;flex-direction:column">
-<div style="font-family:var(--hd);font-size:64px;line-height:1;color:var(--mid)">Level 3</div>
-<div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--muted);margin-top:12px">IF THE SKILL ASKS</div>
-<div style="font-size:var(--t-small);margin-top:24px;line-height:1.4">Reference files, templates and scripts the skill links to, read only when it needs them.</div>
-<div style="margin-top:auto;height:12px;background:var(--mid);width:100%"></div>
-</div>
-</div>
-<p style="font-size:var(--t-body);margin:36px 0 0;max-width:1400px;line-height:1.4">Twenty skills can be installed and cost almost nothing until one of them is the right skill.</p>
-</section>
-
-<section data-label="Skill anatomy" data-screen-label="15" data-speaker-notes="The description is the whole retrieval mechanism. Write it as the trigger condition, not as a title." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="f1fd3bc8">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 15</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Anatomy of a Skill</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;flex:1">
-<div style="border:1px solid var(--ink);padding:36px 40px;font-family:var(--mo);font-size:28px;line-height:1.75;color:var(--dim)">
-<div style="color:var(--muted)">.claude/skills/release/SKILL.md</div>
-<div style="height:20px"></div>
-<div style="color:var(--muted)">---</div>
-<div><span style="color:var(--mid)">name:</span> release</div>
-<div><span style="color:var(--mid)">description:</span> cut a release —</div>
-<div>&nbsp;&nbsp;version bump, changelog, tag.</div>
-<div>&nbsp;&nbsp;Use when asked to ship or</div>
-<div>&nbsp;&nbsp;publish a version.</div>
-<div style="color:var(--muted)">---</div>
-<div style="height:20px"></div>
-<div style="color:var(--ink)">## Steps</div>
-<div>1. Read CHANGELOG.md …</div>
-</div>
-<div style="display:flex;flex-direction:column;justify-content:center;gap:32px">
-<div><div style="font-family:var(--hd);font-size:52px;line-height:1">Write the description as a trigger</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:14px;line-height:1.4">It is the only part the model always sees. "Use when…" beats a noun phrase every time.</div></div>
-<div><div style="font-family:var(--hd);font-size:52px;line-height:1">One procedure per skill</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:14px;line-height:1.4">A skill that does four unrelated things triggers on all four and helps with none.</div></div>
-<div><div style="font-family:var(--hd);font-size:52px;line-height:1">Push detail down a level</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:14px;line-height:1.4">Long checklists and templates go in linked files, not in the body.</div></div>
-</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:26px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">MATCHED, NOT POLLED</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">a path-scoped rule enters the window when Claude reads a matching file, not on every tool call</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">NO PATHS, ALWAYS ON</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">a rule without a <span style="font-family:var(--mo)">paths</span> field loads at launch, same priority as <span style="font-family:var(--mo)">.claude/CLAUDE.md</span></div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">YOURS LOAD FIRST</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35"><span style="font-family:var(--mo)">~/.claude/rules/</span> applies everywhere and is read before project rules, so the project wins</div></div>
 </div>
 </section>
 
-<section data-label="Commands" data-screen-label="16" data-speaker-notes="Commands are prompts you stopped retyping. They are explicit — you invoke them — where skills are retrieved by the model." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="7d22058b">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 16</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Slash Commands</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;flex:1">
-<div style="display:flex;flex-direction:column;justify-content:center;gap:var(--gap-item)">
-<p style="font-size:var(--t-body);margin:0;line-height:1.4">A markdown file in <span style="font-family:var(--mo)">.claude/commands/</span> becomes a slash command. Its text is your prompt, with arguments substituted in.</p>
-<p style="font-size:var(--t-body);margin:0;line-height:1.4;color:var(--dim)">You choose when it runs. That is the whole difference from a skill.</p>
-</div>
-<div style="display:flex;flex-direction:column;gap:2px;background:var(--line)">
-<div style="background:var(--paper);padding:26px 0"><div style="font-family:var(--mo);font-size:32px;color:var(--mid)">/review</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:8px">the review checklist you keep pasting</div></div>
-<div style="background:var(--paper);padding:26px 0"><div style="font-family:var(--mo);font-size:32px;color:var(--mid)">/fix-ci</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:8px">read the failing job, propose the smallest patch</div></div>
-<div style="background:var(--paper);padding:26px 0"><div style="font-family:var(--mo);font-size:32px;color:var(--mid)">/spec &lt;ticket&gt;</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:8px">arguments make one command serve many tickets</div></div>
-</div>
-</div>
-</section>
 
-<section data-label="Sub-agents" data-screen-label="17" data-speaker-notes="A sub-agent has its own window. It reads twenty files, and only a summary comes back to yours. The cost is that it cannot see your conversation." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="f52bff94">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 17</span></div>
+
+<section data-label="Sub-agents" data-screen-label="10" data-speaker-notes="Each sub-agent runs in its own context window with its own system prompt, its own tool access and independent permissions. It does the side work — the search results, the logs, the file contents you will never reference again — in that window, and returns only the summary. What it does not get is your conversation history, the skills you already invoked or the files Claude already read. It does get every level of the CLAUDE.md hierarchy and a git status snapshot; the built-in Explore and Plan agents skip both to stay fast. The main conversation's auto memory is never loaded into it." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="f52bff94">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 10</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Sub-agents</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:120px;margin-top:56px;flex:1">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:120px;margin-top:40px;flex:1">
 <div style="display:flex;flex-direction:column">
 <div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--muted)">YOUR WINDOW</div>
 <div style="border:1px solid var(--ink);flex:1;margin-top:20px;display:flex;flex-direction:column;justify-content:flex-end">
@@ -365,239 +281,324 @@ a:hover { color: #2c455d; }
 </div>
 </div>
 </div>
-<p style="font-size:var(--t-body);margin:40px 0 0;max-width:1400px;line-height:1.4">It starts blank: it knows its instructions and the task you hand it, and nothing about the last hour you spent.</p>
+<p style="font-size:var(--t-body);margin:32px 0 0;max-width:1500px;line-height:1.4">It starts fresh: its own system prompt, the delegation message Claude writes, and your CLAUDE.md files. Not your conversation history, not the files already read, not the main conversation's auto memory.</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:26px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">THREE COME BUILT IN</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35"><span style="font-family:var(--mo)">Explore</span> read-only search, <span style="font-family:var(--mo)">Plan</span> research in plan mode, <span style="font-family:var(--mo)">general-purpose</span> for multi-step work</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">ITS OWN EVERYTHING</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">own model, own tool list, own permissions — a reviewer can be denied Write and Edit outright</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">RUNS BESIDE YOU</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">it works in the background while you keep going, and its result arrives as a message when it finishes</div></div>
+</div>
 </section>
 
-<section data-label="When sub-agents pay" data-screen-label="18" data-speaker-notes="Delegation is not free. Two round-trips of instruction can cost more than doing the read yourself." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="103ccb6d">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 18</span></div>
+<section data-label="Defining a sub-agent" data-screen-label="11" data-speaker-notes="A sub-agent is a markdown file with YAML frontmatter: the frontmatter configures it, the body is its system prompt. Only name and description are required — and the description is what Claude routes on, so write it as the condition for delegating, and keep it short, because every description sits in the main window. Where the file lives decides who gets it: .claude/agents/ for the project, checked into version control; ~/.claude/agents/ for you, in every project. tools is an allowlist, disallowedTools a denylist; model can be sonnet, opus, haiku or inherit; memory gives it a directory that survives across conversations. Claude Code watches both directories, so an edit takes effect within a few seconds without a restart. Before writing your own, remember the built-ins: Explore is read-only search, Plan is research during plan mode, general-purpose does multi-step work with every tool." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="332cd066">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 11</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Defining One Is a Markdown File</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:44px;flex:1">
+<div style="display:flex;flex-direction:column;gap:22px">
+<div style="border:1px solid var(--ink);padding:26px 30px;font-family:var(--mo);font-size:25px;line-height:1.6;white-space:pre-wrap">---
+name: code-reviewer
+description: Reviews code for quality
+  and best practices. Use after edits.
+tools: Read, Glob, Grep
+model: sonnet
+---
+
+You are a code reviewer. Analyze the
+code and give specific, actionable
+feedback.</div>
+<div style="font-size:var(--t-small);color:var(--dim);line-height:1.4">Frontmatter configures it, the body is its system prompt. Only <span style="font-family:var(--mo)">name</span> and <span style="font-family:var(--mo)">description</span> are required.</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:26px">
+<div>
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">WHERE IT LIVES</div>
+<div style="display:flex;flex-direction:column;gap:14px;margin-top:18px;font-size:var(--t-small);line-height:1.35">
+<span><span style="font-family:var(--mo);font-size:25px">.claude/agents/</span> — this project, checked into version control for the team</span>
+<span><span style="font-family:var(--mo);font-size:25px">~/.claude/agents/</span> — you, in every project on your machine</span>
+</div>
+</div>
+<div style="border-top:1px solid var(--line);padding-top:24px">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">THE FIELDS WORTH KNOWING</div>
+<div style="display:flex;flex-direction:column;gap:12px;margin-top:18px;font-size:var(--t-small);line-height:1.35">
+<span><span style="font-family:var(--mo)">tools</span> allowlist, <span style="font-family:var(--mo)">disallowedTools</span> denylist — drop Write and Edit to keep it read-only</span>
+<span><span style="font-family:var(--mo)">model</span> — <span style="font-family:var(--mo)">haiku</span>, <span style="font-family:var(--mo)">sonnet</span>, <span style="font-family:var(--mo)">opus</span> or <span style="font-family:var(--mo)">inherit</span>; route cheap work to a cheap model</span>
+<span><span style="font-family:var(--mo)">skills</span> preloads content, <span style="font-family:var(--mo)">memory</span> gives it a directory that survives sessions</span>
+</div>
+</div>
+<div style="border-top:1px solid var(--line);padding-top:24px;font-size:var(--t-small);color:var(--dim);line-height:1.4">The description is the routing mechanism and it sits in your window all session. Write it as the condition for delegating, and keep it short.</div>
+</div>
+</div>
+</section>
+
+<section data-label="When sub-agents pay" data-screen-label="12" data-speaker-notes="Delegation is not free. A sub-agent that is not a fork starts fresh and has to gather context, so two round-trips of instruction can cost more than doing the read yourself. Use one when the task produces verbose output you do not need, when you want to enforce tool restrictions, or when the work is self-contained and can come back as a summary. Stay in the main conversation when the task needs back-and-forth, when several phases share context, or when the change is small. And remember the results themselves cost: many agents each returning a detailed report fills the window you were protecting. When the only problem is that a fresh agent would need too much background, fork with /subtask instead — it inherits the whole conversation and returns only its result." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="103ccb6d">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 12</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">When a Sub-agent Pays Off</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);margin-top:52px;flex:1">
-<div style="background:var(--paper);padding:40px 44px 40px 0">
+<p style="font-size:var(--t-body);margin:20px 0 0;max-width:1400px;color:var(--dim)">Delegate when the work is self-contained and the output is verbose. Keep it in the main conversation when the context is already there.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);margin-top:26px;flex:1">
+<div style="background:var(--paper);padding:30px 44px 30px 0">
 <div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">WORTH IT</div>
-<div style="display:flex;flex-direction:column;gap:22px;margin-top:28px;font-size:var(--t-small);line-height:1.35">
+<div style="display:flex;flex-direction:column;gap:16px;margin-top:22px;font-size:var(--t-small);line-height:1.35">
 <span>wide search where the answer is short: "which module owns this table?"</span>
+<span>output you will never reference again — a test run reported as failures only</span>
 <span>a survey of an unfamiliar area before you commit to a plan</span>
-<span>a mechanical pass over many files with one clear rule</span>
+<span>independent investigations you can run in parallel, one agent each</span>
+<span>work you want fenced: a read-only agent that cannot Write or Edit</span>
 </div>
 </div>
-<div style="background:var(--paper);padding:40px 0 40px 44px">
+<div style="background:var(--paper);padding:30px 0 30px 44px">
 <div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">NOT WORTH IT</div>
-<div style="display:flex;flex-direction:column;gap:22px;margin-top:28px;font-size:var(--t-small);line-height:1.35">
+<div style="display:flex;flex-direction:column;gap:16px;margin-top:22px;font-size:var(--t-small);line-height:1.35">
 <span>work that depends on decisions you made in this conversation</span>
 <span>anything you will have to re-explain in full to delegate</span>
+<span>tasks needing back-and-forth: it cannot ask you a question mid-run</span>
+<span>a quick, targeted change — a fresh agent has to gather context first</span>
 <span>edits where you want to watch each diff as it lands</span>
 </div>
 </div>
 </div>
-</section>
-
-<section data-label="Plan mode" data-screen-label="19" data-speaker-notes="Plan mode is read-only: it can read and reason but not write. The sequence that matters is plan, then clear, then implement from the file." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="c16b530b">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 19</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Plan Mode</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;margin-top:56px;flex:1">
-<div style="display:flex;flex-direction:column">
-<div style="font-family:var(--mo);font-size:32px;color:var(--mid)">plan</div>
-<div style="font-size:var(--t-small);color:var(--dim);margin-top:12px;line-height:1.4">read-only. It explores, asks, and proposes. No file changes are possible.</div>
-<div style="border:1px solid var(--ink);flex:1;margin-top:28px;display:flex;flex-direction:column;justify-content:flex-end"><div style="height:72%;background:var(--tint)"></div></div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:24px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">SUMMARY, NOT TRANSCRIPT</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">ask for the shape of the answer you want back; the rest stays in its window</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">RESULTS STILL COST</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">many agents each returning a detailed report will fill your window anyway</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">FORK WHEN CONTEXT MATTERS</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35"><span style="font-family:var(--mo)">/subtask</span> inherits the conversation, so you skip the re-explaining</div></div>
 </div>
-<div style="display:flex;flex-direction:column">
-<div style="font-family:var(--mo);font-size:32px;color:var(--mid)">plan to disk, then /clear</div>
-<div style="font-size:var(--t-small);color:var(--dim);margin-top:12px;line-height:1.4">The exploration was expensive. The plan is the only part worth keeping.</div>
-<div style="border:1px solid var(--ink);flex:1;margin-top:28px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:28px"><span style="font-family:var(--mo);font-size:var(--t-mono);border:1px solid var(--steel);padding:12px 20px">plan.md</span></div>
+</section><section data-label="Memory" data-screen-label="13" data-speaker-notes="Auto memory lets Claude accumulate knowledge across sessions without you writing anything. As it works it saves four kinds of note for itself — user, feedback, project, reference — and records the kind in the file's frontmatter. It skips anything it can derive from the codebase, and it does not save something every session; it decides what would be useful in a future conversation. Each project gets a directory at ~/.claude/projects/&lt;project&gt;/memory/, derived from the git repository, so worktrees and subdirectories of the same repo share it. MEMORY.md is the index: the first 200 lines or 25KB load at the start of every conversation, and topic files are read on demand. It is on by default — toggle it in /memory, set autoMemoryEnabled to false in a project's settings, or set CLAUDE_CODE_DISABLE_AUTO_MEMORY=1. The files are plain markdown you can edit or delete." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="85952351">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 13</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Auto Memory Takes Its Own Notes</h2>
+<p style="font-size:var(--t-body);margin:24px 0 0;max-width:1400px;color:var(--dim)">Claude accumulates knowledge across sessions without you writing anything. It saves four kinds of note for itself, and skips anything it can derive from the codebase.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:28px;flex:1">
+<div style="display:flex;flex-direction:column;gap:2px;background:var(--line);align-self:flex-start;width:100%">
+<div style="background:var(--paper);padding:18px 26px;display:flex;gap:26px;align-items:baseline"><span style="font-family:var(--mo);font-size:26px;color:var(--steel);min-width:130px">user</span><span style="font-size:var(--t-small);line-height:1.35">your role, expertise and working preferences</span></div>
+<div style="background:var(--paper);padding:18px 26px;display:flex;gap:26px;align-items:baseline"><span style="font-family:var(--mo);font-size:26px;color:var(--steel);min-width:130px">feedback</span><span style="font-size:var(--t-small);line-height:1.35">corrections you give Claude, approaches you confirm</span></div>
+<div style="background:var(--paper);padding:18px 26px;display:flex;gap:26px;align-items:baseline"><span style="font-family:var(--mo);font-size:26px;color:var(--steel);min-width:130px">project</span><span style="font-size:var(--t-small);line-height:1.35">ongoing work, deadlines and decisions not in the code</span></div>
+<div style="background:var(--paper);padding:18px 26px;display:flex;gap:26px;align-items:baseline"><span style="font-family:var(--mo);font-size:26px;color:var(--steel);min-width:130px">reference</span><span style="font-size:var(--t-small);line-height:1.35">where to find information outside the project</span></div>
 </div>
-<div style="display:flex;flex-direction:column">
-<div style="font-family:var(--mo);font-size:32px;color:var(--mid)">implement</div>
-<div style="font-size:var(--t-small);color:var(--dim);margin-top:12px;line-height:1.4">A fresh window that holds the plan and the files it names — nothing else.</div>
-<div style="border:1px solid var(--ink);flex:1;margin-top:28px;display:flex;flex-direction:column;justify-content:flex-end"><div style="height:22%;background:var(--pale)"></div></div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">WHERE IT LIVES</div>
+<div style="font-family:var(--mo);font-size:26px;line-height:1.7">~/.claude/projects/&lt;project&gt;/memory/<br>├── MEMORY.md<br>├── user_role.md<br>└── feedback_testing.md</div>
+<div style="font-size:var(--t-small);line-height:1.4">The path is derived from the git repository, so every worktree of the same repo shares one directory. <span style="font-family:var(--mo)">MEMORY.md</span> is the index: the first 200 lines or 25KB load at the start of every conversation. Topic files are read on demand.</div>
 </div>
 </div>
-</section>
-
-<section data-label="Plan on disk" data-screen-label="20" data-speaker-notes="A plan in chat dies at the next compaction. A plan in a file survives clears, reviews, and tomorrow morning." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="79f9228a">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 20</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">The Plan on Disk</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;flex:1">
-<div style="display:flex;flex-direction:column;justify-content:center;gap:var(--gap-item)">
-<p style="font-size:var(--t-body);margin:0;line-height:1.4">Write the plan as a task list in the repo. The agent re-reads it at the top of each session and marks progress in it.</p>
-<p style="font-size:var(--t-body);margin:0;line-height:1.4;color:var(--dim)">You get a reviewable artifact, and the window gets a checkpoint it can reload instead of remember.</p>
-</div>
-<div style="border:1px solid var(--ink);padding:36px 40px;font-family:var(--mo);font-size:30px;line-height:2;color:var(--dim)">
-<div style="color:var(--muted)">tasks/checkout-refactor.md</div>
-<div style="height:16px"></div>
-<div><span style="color:var(--steel)">[x]</span> extract price rules from cart.tsx</div>
-<div><span style="color:var(--steel)">[x]</span> unit tests for the rules module</div>
-<div><span style="color:var(--mid)">[ ]</span> swap cart.tsx to the new module</div>
-<div><span style="color:var(--mid)">[ ]</span> delete the old branch in checkout.ts</div>
-</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:24px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">ON BY DEFAULT</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">toggle it in <span style="font-family:var(--mo)">/memory</span>, or set <span style="font-family:var(--mo)">autoMemoryEnabled: false</span> for one project</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">MACHINE-LOCAL</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">not shared across machines or cloud environments, and kept out of the transcript sweep</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">YOURS TO EDIT</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">plain markdown; open the folder from <span style="font-family:var(--mo)">/memory</span> to read, change or delete any of it</div></div>
 </div>
 </section>
 
-<section data-label="Hooks" data-screen-label="21" data-speaker-notes="Hooks are shell commands on lifecycle events. Anything you have written in CLAUDE.md three times and it still gets skipped belongs here instead." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="b05d3471">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 21</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Hooks</h2>
-<p style="font-size:var(--t-body);margin:24px 0 0;max-width:1300px;color:var(--dim)">Shell commands fired on lifecycle events. They run whether or not the model felt like it.</p>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);margin-top:52px">
-<div style="background:var(--paper);padding:34px 30px 34px 0"><div style="font-family:var(--mo);font-size:28px;color:var(--mid)">SessionStart</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:14px;line-height:1.35">inject the branch, the ticket, today's state</div></div>
-<div style="background:var(--paper);padding:34px 30px"><div style="font-family:var(--mo);font-size:28px;color:var(--mid)">PreToolUse</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:14px;line-height:1.35">inspect, and refuse, before the tool runs</div></div>
-<div style="background:var(--paper);padding:34px 30px"><div style="font-family:var(--mo);font-size:28px;color:var(--mid)">PostToolUse</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:14px;line-height:1.35">format and lint every file the agent writes</div></div>
-<div style="background:var(--paper);padding:34px 0 34px 30px"><div style="font-family:var(--mo);font-size:28px;color:var(--mid)">Stop</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:14px;line-height:1.35">run the tests before the turn is called done</div></div>
+<section data-label="Sub-agent memory" data-screen-label="14" data-speaker-notes="A sub-agent starts fresh every time, and the main conversation's auto memory is not loaded into it. The memory frontmatter field gives it a persistent directory of its own that survives across conversations, so it builds up codebase patterns, debugging insights and architectural decisions instead of rediscovering them. Three scopes: user for learnings that apply across all projects, project for knowledge shared through version control, local for project knowledge kept out of the repo. Project is the recommended default. It is part of auto memory — turn auto memory off and the field has no effect. When it is on, the sub-agent's system prompt carries the memory instructions and the first 200 lines or 25KB of its MEMORY.md, and Read, Write and Edit are enabled automatically so it can manage the files. Ask it to consult memory before the work and save what it learned after, or put that instruction in the agent file itself." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 14</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Sub-agents Can Keep Their Own</h2>
+<p style="font-size:var(--t-body);margin:20px 0 0;max-width:1400px;color:var(--dim)">A sub-agent starts fresh every time and never sees the main conversation's auto memory. One frontmatter field gives it a directory that survives across conversations.</p>
+<div style="display:flex;gap:60px;margin-top:28px;flex:1">
+<div style="border:1px solid var(--ink);padding:26px 30px;font-family:var(--mo);font-size:26px;line-height:1.7;white-space:pre;align-self:flex-start">---
+name: code-reviewer
+description: Reviews code for quality
+<span style="color:var(--steel)">memory: project</span>
+---</div>
+<div style="display:flex;flex-direction:column;gap:2px;background:var(--line);flex:1;align-self:flex-start">
+<div style="background:var(--paper);padding:18px 26px;display:flex;gap:26px;align-items:baseline"><span style="font-family:var(--mo);font-size:26px;color:var(--steel);min-width:110px">user</span><span style="font-size:var(--t-small);line-height:1.35"><span style="font-family:var(--mo)">~/.claude/agent-memory/&lt;agent&gt;/</span> — learnings that apply across all projects</span></div>
+<div style="background:var(--paper);padding:18px 26px;display:flex;gap:26px;align-items:baseline"><span style="font-family:var(--mo);font-size:26px;color:var(--steel);min-width:110px">project</span><span style="font-size:var(--t-small);line-height:1.35"><span style="font-family:var(--mo)">.claude/agent-memory/&lt;agent&gt;/</span> — project knowledge, shared through version control</span></div>
+<div style="background:var(--paper);padding:18px 26px;display:flex;gap:26px;align-items:baseline"><span style="font-family:var(--mo);font-size:26px;color:var(--steel);min-width:110px">local</span><span style="font-size:var(--t-small);line-height:1.35"><span style="font-family:var(--mo)">.claude/agent-memory-local/&lt;agent&gt;/</span> — project knowledge kept out of the repo</span></div>
 </div>
-<div style="display:flex;align-items:baseline;gap:32px;margin-top:auto;border-top:1px solid var(--ink);padding-top:32px">
-<span style="font-family:var(--hd);font-size:64px;line-height:1;color:var(--mid)">A rule in a file is a request.</span>
-<span style="font-size:var(--t-body);color:var(--dim)">A hook is a guarantee, and it costs no context.</span>
 </div>
-</section>
-
-<section data-label="Permissions" data-screen-label="22" data-speaker-notes="Deny rules are the one place where being blunt is correct. They apply regardless of what the model concluded." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="579d10fb">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 22</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Permissions and Deny</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:52px;flex:1">
-<div style="display:flex;flex-direction:column;gap:20px">
-<div style="border-left:0;border-top:1px solid var(--line);padding-top:20px"><div style="font-family:var(--mo);font-size:30px">allow</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:8px">the tools and commands that never need a prompt</div></div>
-<div style="border-top:1px solid var(--line);padding-top:20px"><div style="font-family:var(--mo);font-size:30px">ask</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:8px">the default: you approve each time</div></div>
-<div style="border-top:1px solid var(--steel);padding-top:20px"><div style="font-family:var(--mo);font-size:30px;color:var(--mid)">deny</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:8px">blocked at the tool layer, not negotiable in prose</div></div>
-</div>
-<div style="display:flex;flex-direction:column;justify-content:center;gap:var(--gap-item)">
-<p style="font-size:var(--t-body);margin:0;line-height:1.4">Secrets, production credentials, migrations against a live database, force-pushes: these are deny entries, not paragraphs in CLAUDE.md.</p>
-<div style="border-top:1px solid var(--line);padding-top:24px;font-size:var(--t-small);color:var(--dim);line-height:1.45">Every rule you move from prose to configuration is a rule that cannot be forgotten in the middle of a long window.</div>
-</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:24px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">PROJECT BY DEFAULT</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">the recommended scope: the sub-agent's knowledge is shareable with the team</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">PART OF AUTO MEMORY</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">turn auto memory off and the field has no effect; on, it brings Read, Write and Edit with it</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">ASK IT TO CURATE</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">tell it to consult memory before the work and save what it learned after</div></div>
 </div>
 </section>
 
-<section data-label="MCP" data-screen-label="23" data-speaker-notes="MCP is how the agent reaches systems outside the repo: trackers, databases, browsers, internal services. One protocol, many servers." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="8fcad46d">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 23</span></div>
+<section data-label="MCP" data-screen-label="15" data-speaker-notes="MCP is how the agent reaches systems outside the repo: trackers, databases, browsers, internal services. One protocol, many servers, and a server written once works in any MCP client. Three scopes decide who gets it. Local is the default and stays private to you in this project. Project lives in a .mcp.json committed at the repo root, so everyone on the team gets the same servers — and Claude asks for approval before running a project server someone else added. User scope makes it available across all your projects. Servers connect three ways: a local stdio process, or remote over SSE or HTTP, with OAuth handled through the /mcp command. Manage them with claude mcp add and list, and reference server-exposed resources in a prompt with an at-sign. Everything a server exposes is a tool definition in your window, which is the next slide." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="8fcad46d">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 15</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">MCP Servers</h2>
 <p style="font-size:var(--t-body);margin:24px 0 0;max-width:1350px;color:var(--dim)">A standard protocol for handing the agent tools it did not ship with. The repo gets a <span style="font-family:var(--mo);font-size:32px">.mcp.json</span>; the agent gets new verbs.</p>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:56px">
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:40px">
 <div style="border:1px solid var(--ink);padding:32px 28px"><div style="font-family:var(--mo);font-size:30px">issue tracker</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:12px">read the ticket instead of you pasting it</div></div>
 <div style="border:1px solid var(--ink);padding:32px 28px"><div style="font-family:var(--mo);font-size:30px">database</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:12px">inspect a real schema, not a guess</div></div>
 <div style="border:1px solid var(--ink);padding:32px 28px"><div style="font-family:var(--mo);font-size:30px">browser</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:12px">drive the app it just changed</div></div>
 <div style="border:1px solid var(--ink);padding:32px 28px"><div style="font-family:var(--mo);font-size:30px">internal service</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:12px">your own API, exposed once for everyone</div></div>
 </div>
-<p style="font-size:var(--t-body);margin-top:auto;max-width:1400px;line-height:1.4">The value is removing the human copy-paste step between a system of record and the agent.</p>
+<p style="font-size:var(--t-body);margin:32px 0 0;max-width:1400px;line-height:1.4">The value is removing the human copy-paste step between a system of record and the agent.</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);margin-top:auto">
+<div style="background:var(--paper);padding:24px 26px 0 0"><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">LOCAL · THE DEFAULT</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">private to you, in this project only — where an experiment belongs</div></div>
+<div style="background:var(--paper);padding:24px 26px 0"><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">PROJECT · COMMITTED</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35"><span style="font-family:var(--mo)">.mcp.json</span> at the repo root gives the team the same servers; Claude asks before running one</div></div>
+<div style="background:var(--paper);padding:24px 26px 0"><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">USER · EVERYWHERE</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">available in all your projects; <span style="font-family:var(--mo)">stdio</span>, <span style="font-family:var(--mo)">SSE</span> or <span style="font-family:var(--mo)">HTTP</span>, OAuth through <span style="font-family:var(--mo)">/mcp</span></div></div>
+</div>
 </section>
 
-<section data-label="MCP cost" data-screen-label="24" data-speaker-notes="Every connected server's tool definitions sit in the window from the first token, on every request, whether used or not. Connect per project, not globally." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="41a23e5f">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 24</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">What MCP Costs You</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:100px;margin-top:52px;flex:1">
-<div style="display:flex;flex-direction:column">
+<section data-label="MCP cost vs CLI" data-screen-label="16" data-speaker-notes="Every connected server publishes all of its tool definitions, with schemas and descriptions, and they sit in the window from the first token on every request, used or not. Twelve servers is a meaningful slice of the window gone before you type anything. So the real question is not whether MCP works, it is whether a tool needs to be resident. A CLI called through Bash costs nothing until it runs, its output is text you can filter before it lands, but the agent has to know the command and its flags. An MCP server pays that residency cost in exchange for structured results, auth handled once, and discoverability. Default to the CLI where a good one exists — gh, docker, psql, kubectl, az. Reach for MCP when there is no CLI, when auth is awkward, or when you need structured results back. And connect servers per project rather than globally: a tool you might need someday is charged today." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="41a23e5f">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 16</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">What It Costs, and When to Pay</h2>
+<p style="font-size:var(--t-body);margin:20px 0 0;max-width:1500px;color:var(--dim)">Each server publishes every tool it has, with schemas and descriptions. All of it loads up front, on every request, used or not.</p>
+<div style="display:grid;grid-template-columns:0.72fr 1fr 1fr;gap:2px;background:var(--line);margin-top:26px;flex:1">
+<div style="background:var(--paper);padding:30px 44px 30px 0;display:flex;flex-direction:column">
 <div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--muted)">WINDOW AT SESSION START</div>
-<div style="display:flex;gap:20px;margin-top:28px;flex:1;align-items:stretch">
-<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:16px"><div style="width:100%;height:22%;background:var(--pale)"></div><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--muted)">2 servers</span></div>
-<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:16px"><div style="width:100%;height:52%;background:var(--tint)"></div><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--muted)">6 servers</span></div>
-<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:16px"><div style="width:100%;height:88%;background:var(--mid)"></div><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--muted)">12 servers</span></div>
+<div style="display:flex;gap:18px;margin-top:26px;flex:1;align-items:stretch">
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:14px"><div style="width:100%;height:22%;background:var(--pale)"></div><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--muted)">2</span></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:14px"><div style="width:100%;height:52%;background:var(--tint)"></div><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--muted)">6</span></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:14px"><div style="width:100%;height:88%;background:var(--mid)"></div><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--muted)">12</span></div>
+</div>
+<div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--muted);margin-top:16px">SERVERS CONNECTED</div>
+</div>
+<div style="background:var(--paper);padding:30px 44px;display:flex;flex-direction:column">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">CLI THROUGH BASH</div>
+<div style="display:flex;flex-direction:column;gap:18px;margin-top:26px;font-size:var(--t-small);line-height:1.35">
+<span>costs nothing in the window until it is actually run</span>
+<span>output is text, and you can filter it before it lands</span>
+<span>the agent has to know the command and its flags</span>
+</div>
+<div style="border-top:1px solid var(--line);margin-top:auto;padding-top:22px;font-size:var(--t-small);color:var(--dim);line-height:1.4">Default where a good CLI exists: <span style="font-family:var(--mo)">gh</span>, <span style="font-family:var(--mo)">docker</span>, <span style="font-family:var(--mo)">psql</span>, <span style="font-family:var(--mo)">kubectl</span>, <span style="font-family:var(--mo)">az</span>.</div>
+</div>
+<div style="background:var(--paper);padding:30px 0 30px 44px;display:flex;flex-direction:column">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--mid)">MCP SERVER</div>
+<div style="display:flex;flex-direction:column;gap:18px;margin-top:26px;font-size:var(--t-small);line-height:1.35">
+<span>tool definitions sit in the window from the first token</span>
+<span>results come back structured, and auth is handled once</span>
+<span>discoverable — the agent is told what it can call</span>
+</div>
+<div style="border-top:1px solid var(--line);margin-top:auto;padding-top:22px;font-size:var(--t-small);color:var(--dim);line-height:1.4">Worth the residency when there is no CLI, or when auth or structured results matter.</div>
 </div>
 </div>
-<div style="display:flex;flex-direction:column;justify-content:center;gap:var(--gap-item)">
-<p style="font-size:var(--t-body);margin:0;line-height:1.4">Each server publishes every tool it has, with schemas and descriptions. All of it loads up front, on every request, used or not.</p>
-<div style="border-top:1px solid var(--line);padding-top:24px;font-size:var(--t-small);color:var(--dim);line-height:1.45">Connect servers per project rather than globally, and disconnect the ones this repo never calls. A tool you might need someday is charged today.</div>
+</section>
+
+<section data-label="Commands" data-screen-label="17" data-speaker-notes="Commands are prompts you stopped retyping. They are explicit — you invoke them — where skills are retrieved by the model. A file in .claude/commands/ is shared with the repo; the same file in ~/.claude/commands/ is yours across every project. Inside, dollar-ARGUMENTS takes everything the user typed, or dollar-1 and dollar-2 for positional ones. Two things make a command more than a snippet: a line starting with an exclamation mark runs a bash command and puts its output in the prompt, so the command can gather state before it thinks, and an at-sign pulls a file in by path. Frontmatter sets allowed-tools, model, and the description that shows in the menu. Subdirectories namespace them, and commands are listed in the menu — so a team can discover what exists instead of asking." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="7d22058b">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 17</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Slash Commands</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:28px;flex:1">
+<div style="display:flex;flex-direction:column;justify-content:center;gap:20px">
+<p style="font-size:var(--t-body);margin:0;line-height:1.4">A markdown file in <span style="font-family:var(--mo)">.claude/commands/</span> becomes a slash command. Its text is your prompt, with arguments substituted in.</p>
+<p style="font-size:var(--t-body);margin:0;line-height:1.4;color:var(--dim)">You choose when it runs. That is the whole difference from a skill.</p>
+<div style="border:1px solid var(--ink);padding:18px 24px;font-family:var(--mo);font-size:24px;line-height:1.5;white-space:pre">Diff: !`git diff main...HEAD`
+Standards: @docs/review.md
+Review $ARGUMENTS against them.</div>
 </div>
+<div style="display:flex;flex-direction:column;gap:2px;background:var(--line);align-self:flex-start">
+<div style="background:var(--paper);padding:26px 0"><div style="font-family:var(--mo);font-size:32px;color:var(--mid)">/review</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:8px">the review checklist you keep pasting</div></div>
+<div style="background:var(--paper);padding:26px 0"><div style="font-family:var(--mo);font-size:32px;color:var(--mid)">/fix-ci</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:8px">read the failing job, propose the smallest patch</div></div>
+<div style="background:var(--paper);padding:26px 0"><div style="font-family:var(--mo);font-size:32px;color:var(--mid)">/spec &lt;ticket&gt;</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:8px">arguments make one command serve many tickets</div></div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:20px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">IT CAN GATHER FIRST</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">a <span style="font-family:var(--mo)">!</span> line runs bash and drops the output into the prompt; <span style="font-family:var(--mo)">@path</span> pulls a file in</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">YOURS OR THE REPO'S</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35"><span style="font-family:var(--mo)">.claude/commands/</span> ships with the project, <span style="font-family:var(--mo)">~/.claude/commands/</span> follows you everywhere</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">DISCOVERABLE BY DESIGN</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">frontmatter sets the description in the menu, so the team finds what exists instead of asking</div></div>
+</div>
+</section>
+
+<section data-label="Hooks" data-screen-label="18" data-speaker-notes="Hooks are shell commands on lifecycle events, configured in settings.json and matched to specific tools — PostToolUse on Edit and Write only, for instance. Anything you have written in CLAUDE.md three times and it still gets skipped belongs here instead. Each hook receives JSON on stdin — the session, the tool name, its input, and for PostToolUse the response — and answers with an exit code. Zero passes. Exit code 2 is the interesting one: it blocks, and stderr is fed back to Claude so it can correct itself. Anything else is a non-blocking warning. For finer control a hook can return JSON with a decision and a reason. Hooks run with your full credentials and a sixty-second default timeout, so review what you add. There are more events than these four — UserPromptSubmit, SubagentStop, PreCompact, SessionEnd — and /hooks lists what is registered." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="b05d3471">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 18</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Hooks</h2>
+<p style="font-size:var(--t-body);margin:24px 0 0;max-width:1300px;color:var(--dim)">Shell commands fired on lifecycle events. They run whether or not the model felt like it.</p>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);margin-top:36px">
+<div style="background:var(--paper);padding:28px 30px 28px 0"><div style="font-family:var(--mo);font-size:28px;color:var(--mid)">SessionStart</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:14px;line-height:1.35">inject the branch, the ticket, today's state</div></div>
+<div style="background:var(--paper);padding:28px 30px"><div style="font-family:var(--mo);font-size:28px;color:var(--mid)">PreToolUse</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:14px;line-height:1.35">inspect, and refuse, before the tool runs</div></div>
+<div style="background:var(--paper);padding:28px 30px"><div style="font-family:var(--mo);font-size:28px;color:var(--mid)">PostToolUse</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:14px;line-height:1.35">format and lint every file the agent writes</div></div>
+<div style="background:var(--paper);padding:28px 0 28px 30px"><div style="font-family:var(--mo);font-size:28px;color:var(--mid)">Stop</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:14px;line-height:1.35">run the tests before the turn is called done</div></div>
+</div>
+<div style="display:flex;align-items:baseline;gap:32px;margin-top:32px">
+<span style="font-family:var(--hd);font-size:56px;line-height:1;color:var(--mid)">A rule in a file is a request.</span>
+<span style="font-size:var(--t-body);color:var(--dim)">A hook is a guarantee, and it costs no context.</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:24px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">MATCHED TO A TOOL</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">configured in <span style="font-family:var(--mo)">settings.json</span> against a matcher, so a formatter fires on <span style="font-family:var(--mo)">Edit</span> and <span style="font-family:var(--mo)">Write</span> only</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">EXIT 2 BLOCKS</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">JSON on stdin, exit code back: 0 passes, 2 blocks and feeds <span style="font-family:var(--mo)">stderr</span> to Claude to correct</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">YOUR CREDENTIALS</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">hooks run as you, 60-second default timeout — review what you add; <span style="font-family:var(--mo)">/hooks</span> lists them</div></div>
 </div>
 </section>
 
 
 
-
-
-
-
-
-
-
-
-<section data-label="SDLC" data-screen-label="25" data-speaker-notes="Nine phases, four human decisions, three loops back into code. The agent moves along the line; the gates are yours." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="ee3f3c35">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>04 · A day of work</span><span>MECHANICS · 25</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">SDLC with Human Gates</h2>
-<div style="margin-top:48px;flex:1;display:flex;flex-direction:column;justify-content:center">
-<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--muted)">A PERSON DECIDES HERE</div>
-<div style="display:grid;grid-template-columns:repeat(9,1fr);gap:16px;margin-top:20px">
-<div></div>
-<div style="border:1px solid var(--steel);padding:16px 12px;font-size:var(--t-small);text-align:center;color:var(--mid)">scope</div>
-<div style="border:1px solid var(--steel);padding:16px 12px;font-size:var(--t-small);text-align:center;color:var(--mid)">architecture</div>
-<div></div>
-<div></div>
-<div style="border:1px solid var(--steel);padding:16px 12px;font-size:var(--t-small);text-align:center;color:var(--mid)">review</div>
-<div></div>
-<div style="border:1px solid var(--steel);padding:16px 12px;font-size:var(--t-small);text-align:center;color:var(--mid)">deploy</div>
-<div></div>
+<section data-label="Skill anatomy" data-screen-label="19" data-speaker-notes="A skill is a directory with a SKILL.md: name and description in the frontmatter, the procedure in the body. The description is the whole retrieval mechanism, because it is the only part the model always sees — write it as the trigger condition, in the third person, naming the concrete terms someone would actually use. Name has to be lowercase letters, numbers and hyphens, up to 64 characters; the two fields together stay under 1024. Keep the body under about 500 lines and push checklists, templates and scripts into linked files the skill reads when it needs them. Frontmatter can also carry allowed-tools to restrict what the skill may do. Personal skills live in ~/.claude/skills, project skills in .claude/skills — and on a name clash the personal one wins, which is the opposite of sub-agents. /doctor validates them." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="f1fd3bc8">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 19</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Anatomy of a Skill</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:32px;flex:1">
+<div style="border:1px solid var(--ink);padding:30px 36px;font-family:var(--mo);font-size:26px;line-height:1.65;color:var(--dim);align-self:flex-start">
+<div style="color:var(--muted)">.claude/skills/release/SKILL.md</div>
+<div style="height:20px"></div>
+<div style="color:var(--muted)">---</div>
+<div><span style="color:var(--mid)">name:</span> release</div>
+<div><span style="color:var(--mid)">description:</span> cut a release —</div>
+<div>&nbsp;&nbsp;version bump, changelog, tag.</div>
+<div>&nbsp;&nbsp;Use when asked to ship or</div>
+<div>&nbsp;&nbsp;publish a version.</div>
+<div style="color:var(--muted)">---</div>
+<div style="height:20px"></div>
+<div style="color:var(--ink)">## Steps</div>
+<div>1. Read CHANGELOG.md …</div>
 </div>
-<div style="display:grid;grid-template-columns:repeat(9,1fr);gap:16px;margin-top:28px">
-<div style="border:1px solid var(--ink);padding:22px 12px;text-align:center"><div style="font-family:var(--mo);font-size:20px;color:var(--muted)">01</div><div style="font-size:var(--t-small);margin-top:8px">research</div></div>
-<div style="border:1px solid var(--ink);padding:22px 12px;text-align:center"><div style="font-family:var(--mo);font-size:20px;color:var(--muted)">02</div><div style="font-size:var(--t-small);margin-top:8px">requirements</div></div>
-<div style="border:1px solid var(--ink);padding:22px 12px;text-align:center"><div style="font-family:var(--mo);font-size:20px;color:var(--muted)">03</div><div style="font-size:var(--t-small);margin-top:8px">architecture</div></div>
-<div style="border:1px solid var(--ink);padding:22px 12px;text-align:center"><div style="font-family:var(--mo);font-size:20px;color:var(--muted)">04</div><div style="font-size:var(--t-small);margin-top:8px">implementation</div></div>
-<div style="border:1px solid var(--ink);padding:22px 12px;text-align:center"><div style="font-family:var(--mo);font-size:20px;color:var(--muted)">05</div><div style="font-size:var(--t-small);margin-top:8px">code review</div></div>
-<div style="border:1px solid var(--ink);padding:22px 12px;text-align:center"><div style="font-family:var(--mo);font-size:20px;color:var(--muted)">06</div><div style="font-size:var(--t-small);margin-top:8px">testing</div></div>
-<div style="border:1px solid var(--ink);padding:22px 12px;text-align:center"><div style="font-family:var(--mo);font-size:20px;color:var(--muted)">07</div><div style="font-size:var(--t-small);margin-top:8px">merge</div></div>
-<div style="border:1px solid var(--ink);padding:22px 12px;text-align:center"><div style="font-family:var(--mo);font-size:20px;color:var(--muted)">08</div><div style="font-size:var(--t-small);margin-top:8px">stabilisation</div></div>
-<div style="border:1px solid var(--ink);padding:22px 12px;text-align:center"><div style="font-family:var(--mo);font-size:20px;color:var(--muted)">09</div><div style="font-size:var(--t-small);margin-top:8px">documentation</div></div>
+<div style="display:flex;flex-direction:column;justify-content:center;gap:26px">
+<div><div style="font-family:var(--hd);font-size:48px;line-height:1">Write the description as a trigger</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:14px;line-height:1.4">It is the only part the model always sees. "Use when…" beats a noun phrase every time.</div></div>
+<div><div style="font-family:var(--hd);font-size:48px;line-height:1">One procedure per skill</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:14px;line-height:1.4">A skill that does four unrelated things triggers on all four and helps with none.</div></div>
+<div><div style="font-family:var(--hd);font-size:48px;line-height:1">Push detail down a level</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:14px;line-height:1.4">Long checklists and templates go in linked files, not in the body.</div></div>
 </div>
-<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--muted);margin-top:32px">LOOPS BACK INTO CODE · FROM REVIEW · FROM TESTING · FROM STABILISATION</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:22px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">THIRD PERSON, CONCRETE</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">name the terms someone would actually use; that wording is what the match runs against</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">BUDGETS ARE REAL</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">name and description under 1024 characters together; keep the body under roughly 500 lines</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">PERSONAL WINS</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35"><span style="font-family:var(--mo)">~/.claude/skills</span> shadows <span style="font-family:var(--mo)">.claude/skills</span> on a name clash — the opposite of sub-agents</div></div>
+</div>
+</section><section data-label="Skills disclosure" data-screen-label="20" data-speaker-notes="Progressive disclosure is the core idea, and it is what makes skills affordable. Three levels. Level one is the index: name and description of every installed skill, tens of tokens each, present all session. Level two is the body of SKILL.md, which enters the window when the description matches what you asked for. Level three is everything the skill links to — reference files, templates, scripts — read only if the body asks for them. And a script the skill runs is cheaper still: its code never enters the window at all, only its output. So twenty installed skills cost almost nothing until one of them is the right skill. This is the same shape as everything else in the deck: keep the index resident, keep the detail retrievable." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="f553bda2">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 20</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Skills: Progressive Disclosure</h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);margin-top:40px;flex:1">
+<div style="background:var(--paper);padding:40px 40px 40px 0;display:flex;flex-direction:column">
+<div style="font-family:var(--hd);font-size:64px;line-height:1;color:var(--mid)">Level 1</div>
+<div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--muted);margin-top:12px">ALWAYS LOADED</div>
+<div style="font-size:var(--t-small);margin-top:24px;line-height:1.4">Name and one-line description of every installed skill. Tens of tokens each, present all session.</div>
+<div style="margin-top:auto;height:12px;background:var(--pale);width:12%"></div>
+</div>
+<div style="background:var(--paper);padding:40px;display:flex;flex-direction:column">
+<div style="font-family:var(--hd);font-size:64px;line-height:1;color:var(--mid)">Level 2</div>
+<div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--muted);margin-top:12px">ON TRIGGER</div>
+<div style="font-size:var(--t-small);margin-top:24px;line-height:1.4">The body of SKILL.md enters the window when the description matches what you asked for.</div>
+<div style="margin-top:auto;height:12px;background:var(--tint);width:45%"></div>
+</div>
+<div style="background:var(--paper);padding:40px 0 40px 40px;display:flex;flex-direction:column">
+<div style="font-family:var(--hd);font-size:64px;line-height:1;color:var(--mid)">Level 3</div>
+<div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--muted);margin-top:12px">IF THE SKILL ASKS</div>
+<div style="font-size:var(--t-small);margin-top:24px;line-height:1.4">Reference files and templates the skill links to, read only when it needs them. A script it runs costs nothing but its output.</div>
+<div style="margin-top:auto;height:12px;background:var(--mid);width:100%"></div>
+</div>
+</div>
+<p style="font-size:var(--t-body);margin:30px 0 0;max-width:1500px;line-height:1.4">Twenty skills can be installed and cost almost nothing until one of them is the right skill. Keep the index resident, keep the detail retrievable.</p>
+</section>
+
+<section data-label="Where it all lives" data-screen-label="21" data-speaker-notes="One board for the whole setup. CLAUDE.md files are not resolved by precedence at all — every file found from the filesystem root down to your working directory is concatenated, so a project file appears after a user file and is read last. Nothing overrides; if two files contradict each other, Claude may pick one arbitrarily, so prune the conflicts yourself. The session’s own auto memory is machine-local, one directory per repository. A sub-agent with memory: project is different — it writes to .claude/agent-memory/ inside the repo, so that knowledge is committed and shared with the team; memory: local keeps it out of version control, and memory: user keeps it with you across all projects. Sub-agents resolve by priority — managed settings, then the --agents flag, then the project directory, then yours, then plugins; within nested project directories the definition closest to the working directory wins. Skills go the other way, and this is the one people get wrong: enterprise beats personal, and personal beats project, so a personal skill silently shadows the repo skill of the same name." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 21</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Where It Lives, and Who Wins</h2>
+<div style="display:grid;grid-template-columns:210px 1fr 1fr 1.15fr;gap:2px;background:var(--line);margin-top:42px">
+<div style="background:var(--paper)"></div>
+<div style="background:var(--paper);padding:0 20px 14px;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--muted)">YOURS · EVERY PROJECT</div>
+<div style="background:var(--paper);padding:0 20px 14px;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--muted)">THE REPO · SHARED</div>
+<div style="background:var(--paper);padding:0 20px 14px;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--muted)">ON A NAME CLASH</div>
+<div style="background:var(--paper);padding:13px 16px 13px 0;font-family:var(--hd);font-size:30px;line-height:1.1">CLAUDE.md</div>
+<div style="background:var(--paper);padding:13px 16px;font-size:var(--t-small);line-height:1.3"><span style="font-family:var(--mo);font-size:24px">~/.claude/CLAUDE.md</span></div>
+<div style="background:var(--paper);padding:13px 16px;font-size:var(--t-small);line-height:1.3"><span style="font-family:var(--mo);font-size:24px">./CLAUDE.md</span> or <span style="font-family:var(--mo);font-size:24px">./.claude/CLAUDE.md</span><br><span style="font-family:var(--mo);font-size:24px">./CLAUDE.local.md</span>, <span style="font-family:var(--mo);font-size:24px">.claude/rules/</span></div>
+<div style="background:var(--paper);padding:13px 16px;font-size:var(--t-small);line-height:1.3">Nobody. Every file from the root down is concatenated, closest read last. Contradictions get resolved arbitrarily.</div>
+<div style="background:var(--paper);padding:13px 16px 13px 0;font-family:var(--hd);font-size:30px;line-height:1.1">Auto memory</div>
+<div style="background:var(--paper);padding:13px 16px;font-size:var(--t-small);line-height:1.3"><span style="font-family:var(--mo);font-size:24px">~/.claude/projects/&lt;project&gt;/memory/</span><br><span style="font-family:var(--mo);font-size:24px">~/.claude/agent-memory/&lt;agent&gt;/</span></div>
+<div style="background:var(--paper);padding:13px 16px;font-size:var(--t-small);line-height:1.3">Session memory has none. A sub-agent does: <span style="font-family:var(--mo)">.claude/agent-memory/&lt;agent&gt;/</span>, committed and shared; <span style="font-family:var(--mo)">agent-memory-local/</span> to keep it out.</div>
+<div style="background:var(--paper);padding:13px 16px;font-size:var(--t-small);line-height:1.3">No clash to resolve. One directory per repository for the session, one per agent name for sub-agents.</div>
+<div style="background:var(--paper);padding:13px 16px 13px 0;font-family:var(--hd);font-size:30px;line-height:1.1">Sub-agents</div>
+<div style="background:var(--paper);padding:13px 16px;font-size:var(--t-small);line-height:1.3"><span style="font-family:var(--mo);font-size:24px">~/.claude/agents/</span></div>
+<div style="background:var(--paper);padding:13px 16px;font-size:var(--t-small);line-height:1.3"><span style="font-family:var(--mo);font-size:24px">.claude/agents/</span></div>
+<div style="background:var(--paper);padding:13px 16px;font-size:var(--t-small);line-height:1.3">Managed → <span style="font-family:var(--mo)">--agents</span> → project → yours → plugin. Nested: closest to the working directory wins.</div>
+<div style="background:var(--paper);padding:13px 16px 13px 0;font-family:var(--hd);font-size:30px;line-height:1.1">Skills</div>
+<div style="background:var(--paper);padding:13px 16px;font-size:var(--t-small);line-height:1.3"><span style="font-family:var(--mo);font-size:24px">~/.claude/skills/&lt;name&gt;/SKILL.md</span></div>
+<div style="background:var(--paper);padding:13px 16px;font-size:var(--t-small);line-height:1.3"><span style="font-family:var(--mo);font-size:24px">.claude/skills/&lt;name&gt;/SKILL.md</span></div>
+<div style="background:var(--paper);padding:13px 16px;font-size:var(--t-small);line-height:1.3">The other way round: enterprise over personal, personal over project. A personal skill shadows the repo one.</div>
 </div>
 </section>
 
-<section data-label="Gate and artifact" data-screen-label="26" data-speaker-notes="Every phase ends in a file. That file is what the next phase reads instead of re-deriving the previous conversation." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="7d39fd4c">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>04 · A day of work</span><span>MECHANICS · 26</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Gate, Artifact, Next Phase</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:100px;margin-top:52px;flex:1">
-<div style="display:flex;flex-direction:column;justify-content:center;gap:var(--gap-item)">
-<p style="font-size:var(--t-body);margin:0;line-height:1.4">A phase ends when it produces a file a person can read. The gate is a human saying yes to that file.</p>
-<p style="font-size:var(--t-body);margin:0;line-height:1.4;color:var(--dim)">The artifact is also the context handover: the next session starts from the document, not from the transcript.</p>
+<section data-label="Summary" data-screen-label="22" data-speaker-notes="Pull the three parts back together. The model brings frozen weights and predicts one token at a time over whatever is in the window, so the window is the entire state of the work — and a wrong file in it is worse than no file. Quality falls long before the window is full, which is why /context matters more than the error message. And every feature we covered is a way of deciding what occupies that window: CLAUDE.md and rules for what is always true, memory for what Claude learns, sub-agents and forks for work whose output you do not need, MCP or a CLI depending on whether a tool must be resident, commands, hooks and skills for the procedures. Take questions." style="background:var(--deep);color:var(--paper);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="3f48e91a">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--sky)"><span>04 · A day of work</span><span>PRACTICE · 22</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">What to Take Away</h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:70px;margin-top:44px;flex:1">
+<div style="display:flex;flex-direction:column"><div style="display:flex;gap:18px;align-items:baseline"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">01</span><span style="font-family:var(--hd);font-size:40px;line-height:1.05">How the model reads</span></div><div style="display:flex;flex-direction:column;gap:16px;margin-top:24px;font-size:var(--t-small);line-height:1.35;color:var(--paper)"><span>The weights are frozen. Everything about your repo arrives as text, every request.</span><span>One pass, one token: the context is the whole state, and it is re-sent every turn.</span><span>A wrong file in the window is worse than no file, because it will be used.</span></div></div>
+<div style="display:flex;flex-direction:column"><div style="display:flex;gap:18px;align-items:baseline"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">02</span><span style="font-family:var(--hd);font-size:40px;line-height:1.05">The context window</span></div><div style="display:flex;flex-direction:column;gap:16px;margin-top:24px;font-size:var(--t-small);line-height:1.35;color:var(--paper)"><span>Quality falls long before the window is full — drift starts around half.</span><span><span style="font-family:var(--mo)">/context</span> to see it, <span style="font-family:var(--mo)">/compact</span> to trade detail for continuity, <span style="font-family:var(--mo)">/clear</span> to start honest.</span><span>Reading the meter beats waiting for the error.</span></div></div>
+<div style="display:flex;flex-direction:column"><div style="display:flex;gap:18px;align-items:baseline"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">03</span><span style="font-family:var(--hd);font-size:40px;line-height:1.05">The levers</span></div><div style="display:flex;flex-direction:column;gap:16px;margin-top:24px;font-size:var(--t-small);line-height:1.35;color:var(--paper)"><span><span style="font-family:var(--mo)">CLAUDE.md</span> for what is always true, rules and skills for what is only sometimes.</span><span>Memory writes down what you would otherwise repeat; sub-agents keep noise out of your window.</span><span>A CLI costs nothing until it runs; an MCP server costs from the first token.</span></div></div>
 </div>
-<div style="display:flex;flex-direction:column;gap:2px;background:var(--line);align-self:start">
-<div style="background:var(--paper);display:flex;justify-content:space-between;align-items:baseline;padding:24px 0"><span style="font-size:var(--t-small)">requirements</span><span style="font-family:var(--mo);font-size:28px;color:var(--mid)">spec.md</span></div>
-<div style="background:var(--paper);display:flex;justify-content:space-between;align-items:baseline;padding:24px 0"><span style="font-size:var(--t-small)">architecture</span><span style="font-family:var(--mo);font-size:28px;color:var(--mid)">adr/ + sad.md</span></div>
-<div style="background:var(--paper);display:flex;justify-content:space-between;align-items:baseline;padding:24px 0"><span style="font-size:var(--t-small)">planning</span><span style="font-family:var(--mo);font-size:28px;color:var(--mid)">tasks/*.md</span></div>
-<div style="background:var(--paper);display:flex;justify-content:space-between;align-items:baseline;padding:24px 0"><span style="font-size:var(--t-small)">implementation</span><span style="font-family:var(--mo);font-size:28px;color:var(--mid)">src/ + tests/</span></div>
-<div style="background:var(--paper);display:flex;justify-content:space-between;align-items:baseline;padding:24px 0"><span style="font-size:var(--t-small)">release</span><span style="font-family:var(--mo);font-size:28px;color:var(--mid)">CHANGELOG.md</span></div>
-</div>
-</div>
-</section>
-
-<section data-label="Cheaper and dearer" data-screen-label="27" data-speaker-notes="Typing got cheap. Judgment did not. The bottleneck moved to reading, deciding, and knowing what to measure." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="94e3f105">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>04 · A day of work</span><span>MECHANICS · 27</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">What Got Cheaper, What Got Dearer</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);margin-top:52px;flex:1">
-<div style="background:var(--paper);padding:40px 44px 40px 0">
-<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">CHEAPER</div>
-<div style="display:flex;flex-direction:column;gap:20px;margin-top:28px;font-size:var(--t-small);line-height:1.35">
-<span>writing the code once a plan exists</span>
-<span>test coverage for code that already works</span>
-<span>porting between languages and frameworks</span>
-<span>the glue: adapters, mappers, fixtures</span>
-</div>
-</div>
-<div style="background:var(--paper);padding:40px 0 40px 44px">
-<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">DEARER</div>
-<div style="display:flex;flex-direction:column;gap:20px;margin-top:28px;font-size:var(--t-small);line-height:1.35">
-<span>deciding which problem is worth solving</span>
-<span>naming the measurable criterion the work aims at</span>
-<span>program design: what is inside, what is deferred</span>
-<span>finding the real bottleneck before optimising</span>
-</div>
-</div>
-</div>
-<div style="display:grid;grid-template-columns:200px 1fr;gap:20px 32px;align-items:center;margin-top:40px;font-size:var(--t-small);color:var(--dim)">
-<span>writing</span><div style="height:12px;background:var(--line);position:relative"><div style="position:absolute;inset:0;width:22%;background:var(--pale)"></div></div>
-<span>reading and trusting</span><div style="height:12px;background:var(--line);position:relative"><div style="position:absolute;inset:0;width:82%;background:var(--mid)"></div></div>
-</div>
-</section>
-
-<section data-label="Defaults" data-screen-label="28" data-speaker-notes="Close on something they can do tomorrow. Six defaults, in order of payoff. Then take questions." style="background:var(--deep);color:var(--paper);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="3f48e91a">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--sky)"><span>04 · A day of work</span><span>PRACTICE · 28</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Defaults I Would Start From</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 100px;margin-top:52px;flex:1">
-<div style="display:flex;align-items:center;gap:28px;border-bottom:1px solid var(--mid)"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">01</span><span style="font-size:32px">CLAUDE.md under 200 lines, everything else extracted</span></div>
-<div style="display:flex;align-items:center;gap:28px;border-bottom:1px solid var(--mid)"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">02</span><span style="font-size:32px">plan mode for anything touching more than two files</span></div>
-<div style="display:flex;align-items:center;gap:28px;border-bottom:1px solid var(--mid)"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">03</span><span style="font-size:32px">plan to disk, /clear, then implement</span></div>
-<div style="display:flex;align-items:center;gap:28px;border-bottom:1px solid var(--mid)"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">04</span><span style="font-size:32px">format, lint and test as hooks, never as reminders</span></div>
-<div style="display:flex;align-items:center;gap:28px"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">05</span><span style="font-size:32px">MCP servers per project, and only the ones in use</span></div>
-<div style="display:flex;align-items:center;gap:28px"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">06</span><span style="font-size:32px">one sub-agent for wide reads, not for decisions</span></div>
-</div>
-<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:40px">
+<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:36px;border-top:1px solid var(--mid);padding-top:28px">
 <span style="font-family:var(--hd);font-size:60px;color:var(--sky)">Questions</span>
-<span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--sky)">ANDRIY · ELEKS CORP</span>
+<span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--sky)">ELEKS</span>
 </div>
 </section>
 
