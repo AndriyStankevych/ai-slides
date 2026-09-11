@@ -33,10 +33,11 @@ body { margin: 0; background: #f2f2f3; }
 a { color: #416180; }
 a:hover { color: #2c455d; }
 </style>
+<script src="./image-slot.js"></script>
 </helmet>
 <x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%" data-uneditable="">
 
-<section data-label="Title" data-screen-label="01" data-speaker-notes="Set the frame: you all use Claude Code daily. Today is not about prompts, it is about what the model can see when it answers. Four chapters, roughly 35 minutes." style="background:var(--deep);color:var(--paper);font-family:var(--bd);display:grid;grid-template-columns:1fr 1fr" data-om-slide-id="08c3be69">
+<section data-label="Title" data-screen-label="01" data-speaker-notes="Set the frame: you all use Claude Code daily. Today is not about prompts, it is about what the model can see when it answers. Four chapters, roughly 35 minutes." style="background:var(--deep);color:var(--paper);font-family:var(--bd);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)" data-om-slide-id="08c3be69">
 <div style="display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-top) 80px var(--pad-bottom) var(--pad-x)">
 <span style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.16em;color:var(--sky)">ELEKS · SEPT 2026</span>
 <div>
@@ -45,7 +46,11 @@ a:hover { color: #2c455d; }
 </div>
 <span style="font-size:30px;color:var(--sky-3)">Senior Software Engineer<br>Andriy Stankevych</span>
 </div>
-
+<div style="min-width:0;display:flex;align-items:center;justify-content:center;padding:var(--pad-top) var(--pad-x) var(--pad-bottom) 0">
+<div style="position:relative;width:100%;height:100%">
+<image-slot id="title-swiss-knife" shape="rect" fit="contain" src="uploads/pasted-1789132865676-0.png" placeholder="Drop an image of an advanced Swiss army knife"></image-slot>
+</div>
+</div>
 </section>
 
 
@@ -156,7 +161,7 @@ a:hover { color: #2c455d; }
 
 
 <section data-label="Quality vs fill" data-screen-label="06" data-speaker-notes="A window that fits is not the same as a window that works. Instruction-following degrades well before the hard limit, which is why the meter matters more than the error. Three commands are the whole toolkit here: /context to see where you are, /compact to trade detail for continuity, /clear to start clean. Compaction is lossy and you rarely know what it dropped; clear costs everything but is honest about it." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="e43b65f9">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>02 · The context window</span><span>MECHANICS · 06</span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>02 · The context window</span><span>MECHANICS · 06-</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Quality vs. Fill</h2>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px;background:var(--line)">
 <div style="background:var(--paper);padding:40px 36px"><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">UNDER 40%</div><div style="font-family:var(--hd);font-size:52px;margin-top:16px">Sharp</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:12px;line-height:1.35">follows rules, asks when unsure, edits narrowly</div></div>
@@ -173,7 +178,7 @@ a:hover { color: #2c455d; }
 
 <section data-label="Leave vs extract" data-screen-label="07" data-speaker-notes="The single most useful habit in the deck: CLAUDE.md is not a wiki. It is loaded in full at the start of every session, so every line is a recurring cost. Keep the facts that apply always, and move anything conditional somewhere that loads on demand — a multi-step procedure becomes a skill, a rule for one part of the repo becomes a path-scoped rule. Write it when you would otherwise re-explain: Claude makes the same mistake twice, a review catches something it should have known, you type the same correction you typed last session, or a new teammate would need the same context. Be concrete enough to verify — use 2-space indentation, not format code properly. And keep it consistent: if two files contradict each other, Claude may pick either one. Target under 200 lines; run /init to generate a starting file and /doctor to propose trims." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="66821911">
 <div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 07</span></div>
-<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Leave vs. Extract</h2>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">CLAUDE.md - Leave vs. Extract</h2>
 <p style="font-size:var(--t-body);margin:20px 0 0;max-width:1400px;color:var(--dim)">The file is loaded in full at the start of every session, so every line is a recurring cost. Keep the facts that always apply; move the conditional ones somewhere that loads on demand.</p>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);margin-top:30px;flex:1">
 <div style="background:var(--paper);padding:32px 44px 32px 0">
@@ -203,7 +208,7 @@ a:hover { color: #2c455d; }
 </section>
 
 <section data-label="Monorepo" data-screen-label="08" data-speaker-notes="Nested files are how a monorepo stays affordable. Claude Code loads CLAUDE.md from your working directory and every directory above it, concatenated from the filesystem root down, so the file closest to where you launched is read last. Files in subdirectories below you are not loaded at launch: they join the window the first time Claude reads a file in that directory. Nested .claude/rules and nested skills behave the same way. And when other teams’ files get picked up in a large monorepo, claudeMdExcludes skips them by path or glob — put it in .claude/settings.local.json so the exclusion stays on your machine." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="d17633ce">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 08</span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 08-<br></span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Nested CLAUDE.md in a Monorepo</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:36px;flex:1">
 <div style="font-family:var(--mo);font-size:30px;line-height:1.75;color:var(--dim)">
@@ -230,7 +235,7 @@ a:hover { color: #2c455d; }
 </section>
 
 <section data-label="Path-scoped rules" data-screen-label="09" data-speaker-notes="Rules are markdown files in .claude/rules/, discovered recursively, one topic per file. A rule with a paths list in its frontmatter attaches to file patterns and only enters the window when Claude actually reads a matching file — not on every tool call. A rule without paths loads at launch, with the same priority as .claude/CLAUDE.md. Personal rules in ~/.claude/rules/ apply to every project and load before project rules, which means project rules win. So a large library of instructions can sit in the repo while only the matching one costs you context. Use glob patterns: double-star for any directory, brace expansion for several extensions at once." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="2a9e76dd">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 09</span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 09-</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Path-Scoped Rules</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:56px;margin-top:36px;flex:1">
 <div>
@@ -329,7 +334,7 @@ feedback.</div>
 </section>
 
 <section data-label="When sub-agents pay" data-screen-label="12" data-speaker-notes="Delegation is not free. A sub-agent that is not a fork starts fresh and has to gather context, so two round-trips of instruction can cost more than doing the read yourself. Use one when the task produces verbose output you do not need, when you want to enforce tool restrictions, or when the work is self-contained and can come back as a summary. Stay in the main conversation when the task needs back-and-forth, when several phases share context, or when the change is small. And remember the results themselves cost: many agents each returning a detailed report fills the window you were protecting. When the only problem is that a fresh agent would need too much background, fork with /subtask instead — it inherits the whole conversation and returns only its result." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="103ccb6d">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 12</span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 12-<br></span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">When a Sub-agent Pays Off</h2>
 <p style="font-size:var(--t-body);margin:20px 0 0;max-width:1400px;color:var(--dim)">Delegate when the work is self-contained and the output is verbose. Keep it in the main conversation when the context is already there.</p>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);margin-top:26px;flex:1">
@@ -384,7 +389,7 @@ feedback.</div>
 </section>
 
 <section data-label="Sub-agent memory" data-screen-label="14" data-speaker-notes="A sub-agent starts fresh every time, and the main conversation's auto memory is not loaded into it. The memory frontmatter field gives it a persistent directory of its own that survives across conversations, so it builds up codebase patterns, debugging insights and architectural decisions instead of rediscovering them. Three scopes: user for learnings that apply across all projects, project for knowledge shared through version control, local for project knowledge kept out of the repo. Project is the recommended default. It is part of auto memory — turn auto memory off and the field has no effect. When it is on, the sub-agent's system prompt carries the memory instructions and the first 200 lines or 25KB of its MEMORY.md, and Read, Write and Edit are enabled automatically so it can manage the files. Ask it to consult memory before the work and save what it learned after, or put that instruction in the agent file itself." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 14</span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">MECHANICS · 14-</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Sub-agents Can Keep Their Own</h2>
 <p style="font-size:var(--t-body);margin:20px 0 0;max-width:1400px;color:var(--dim)">A sub-agent starts fresh every time and never sees the main conversation's auto memory. One frontmatter field gives it a directory that survives across conversations.</p>
 <div style="display:flex;gap:60px;margin-top:28px;flex:1">
@@ -425,7 +430,7 @@ description: Reviews code for quality
 </section>
 
 <section data-label="MCP cost vs CLI" data-screen-label="16" data-speaker-notes="Every connected server publishes all of its tool definitions, with schemas and descriptions, and they sit in the window from the first token on every request, used or not. Twelve servers is a meaningful slice of the window gone before you type anything. So the real question is not whether MCP works, it is whether a tool needs to be resident. A CLI called through Bash costs nothing until it runs, its output is text you can filter before it lands, but the agent has to know the command and its flags. An MCP server pays that residency cost in exchange for structured results, auth handled once, and discoverability. Default to the CLI where a good one exists — gh, docker, psql, kubectl, az. Reach for MCP when there is no CLI, when auth is awkward, or when you need structured results back. And connect servers per project rather than globally: a tool you might need someday is charged today." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="41a23e5f">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 16</span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span style="color:var(--mid)">PRACTICE · 16-</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">What It Costs, and When to Pay</h2>
 <p style="font-size:var(--t-body);margin:20px 0 0;max-width:1500px;color:var(--dim)">Each server publishes every tool it has, with schemas and descriptions. All of it loads up front, on every request, used or not.</p>
 <div style="display:grid;grid-template-columns:0.72fr 1fr 1fr;gap:2px;background:var(--line);margin-top:26px;flex:1">
@@ -460,7 +465,7 @@ description: Reviews code for quality
 </section>
 
 <section data-label="Commands" data-screen-label="17" data-speaker-notes="Commands are prompts you stopped retyping. They are explicit — you invoke them — where skills are retrieved by the model. A file in .claude/commands/ is shared with the repo; the same file in ~/.claude/commands/ is yours across every project. Inside, dollar-ARGUMENTS takes everything the user typed, or dollar-1 and dollar-2 for positional ones. Two things make a command more than a snippet: a line starting with an exclamation mark runs a bash command and puts its output in the prompt, so the command can gather state before it thinks, and an at-sign pulls a file in by path. Frontmatter sets allowed-tools, model, and the description that shows in the menu. Subdirectories namespace them, and commands are listed in the menu — so a team can discover what exists instead of asking." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="7d22058b">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 17</span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 17-</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Slash Commands</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:28px;flex:1">
 <div style="display:flex;flex-direction:column;justify-content:center;gap:20px">
@@ -484,7 +489,7 @@ Review $ARGUMENTS against them.</div>
 </section>
 
 <section data-label="Hooks" data-screen-label="18" data-speaker-notes="Hooks are shell commands on lifecycle events, configured in settings.json and matched to specific tools — PostToolUse on Edit and Write only, for instance. Anything you have written in CLAUDE.md three times and it still gets skipped belongs here instead. Each hook receives JSON on stdin — the session, the tool name, its input, and for PostToolUse the response — and answers with an exit code. Zero passes. Exit code 2 is the interesting one: it blocks, and stderr is fed back to Claude so it can correct itself. Anything else is a non-blocking warning. For finer control a hook can return JSON with a decision and a reason. Hooks run with your full credentials and a sixty-second default timeout, so review what you add. There are more events than these four — UserPromptSubmit, SubagentStop, PreCompact, SessionEnd — and /hooks lists what is registered." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="b05d3471">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 18</span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 18-</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Hooks</h2>
 <p style="font-size:var(--t-body);margin:24px 0 0;max-width:1300px;color:var(--dim)">Shell commands fired on lifecycle events. They run whether or not the model felt like it.</p>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);margin-top:36px">
@@ -536,7 +541,7 @@ Review $ARGUMENTS against them.</div>
 <div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">PERSONAL WINS</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35"><span style="font-family:var(--mo)">~/.claude/skills</span> shadows <span style="font-family:var(--mo)">.claude/skills</span> on a name clash — the opposite of sub-agents</div></div>
 </div>
 </section><section data-label="Skills disclosure" data-screen-label="20" data-speaker-notes="Progressive disclosure is the core idea, and it is what makes skills affordable. Three levels. Level one is the index: name and description of every installed skill, tens of tokens each, present all session. Level two is the body of SKILL.md, which enters the window when the description matches what you asked for. Level three is everything the skill links to — reference files, templates, scripts — read only if the body asks for them. And a script the skill runs is cheaper still: its code never enters the window at all, only its output. So twenty installed skills cost almost nothing until one of them is the right skill. This is the same shape as everything else in the deck: keep the index resident, keep the detail retrievable." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="f553bda2">
-<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 20</span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>03 · The levers</span><span>MECHANICS · 20-</span></div>
 <h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Skills: Progressive Disclosure</h2>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);margin-top:40px;flex:1">
 <div style="background:var(--paper);padding:40px 40px 40px 0;display:flex;flex-direction:column">
@@ -596,7 +601,20 @@ Review $ARGUMENTS against them.</div>
 <div style="display:flex;flex-direction:column"><div style="display:flex;gap:18px;align-items:baseline"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">02</span><span style="font-family:var(--hd);font-size:40px;line-height:1.05">The context window</span></div><div style="display:flex;flex-direction:column;gap:16px;margin-top:24px;font-size:var(--t-small);line-height:1.35;color:var(--paper)"><span>Quality falls long before the window is full — drift starts around half.</span><span><span style="font-family:var(--mo)">/context</span> to see it, <span style="font-family:var(--mo)">/compact</span> to trade detail for continuity, <span style="font-family:var(--mo)">/clear</span> to start honest.</span><span>Reading the meter beats waiting for the error.</span></div></div>
 <div style="display:flex;flex-direction:column"><div style="display:flex;gap:18px;align-items:baseline"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">03</span><span style="font-family:var(--hd);font-size:40px;line-height:1.05">The levers</span></div><div style="display:flex;flex-direction:column;gap:16px;margin-top:24px;font-size:var(--t-small);line-height:1.35;color:var(--paper)"><span><span style="font-family:var(--mo)">CLAUDE.md</span> for what is always true, rules and skills for what is only sometimes.</span><span>Memory writes down what you would otherwise repeat; sub-agents keep noise out of your window.</span><span>A CLI costs nothing until it runs; an MCP server costs from the first token.</span></div></div>
 </div>
-<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:36px;border-top:1px solid var(--mid);padding-top:28px">
+<div style="display:flex;gap:36px;align-items:flex-start;margin-top:32px;border-top:1px solid var(--mid);padding-top:26px">
+<span style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--tint);white-space:nowrap;padding-top:6px">Home work</span>
+<div style="display:flex;flex-direction:column;gap:12px">
+<span style="font-size:var(--t-small);line-height:1.35;color:var(--paper)">Review your codebase and create every type of Claude lever that will help in your day-to-day tasks.</span>
+<div style="display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mo);font-size:var(--t-mono);color:var(--sky)">
+<span style="border:1px solid var(--mid);padding:6px 14px">CLAUDE.md</span>
+<span style="border:1px solid var(--mid);padding:6px 14px">rule</span>
+<span style="border:1px solid var(--mid);padding:6px 14px">skill</span>
+<span style="border:1px solid var(--mid);padding:6px 14px">hook</span>
+<span style="border:1px solid var(--mid);padding:6px 14px">sub-agent</span>
+</div>
+</div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:28px;border-top:1px solid var(--mid);padding-top:24px">
 <span style="font-family:var(--hd);font-size:60px;color:var(--sky)">Questions</span>
 <span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--sky)">ELEKS</span>
 </div>
