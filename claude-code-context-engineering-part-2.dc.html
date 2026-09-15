@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/industry-cfaaa376-d4c9-437d-b156-85c58b4f71fc/styles.css">
+<script src="_ds/industry-cfaaa376-d4c9-437d-b156-85c58b4f71fc/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600&amp;family=Barlow:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+:root {
+  --t-title: 88px; --t-sub: 44px; --t-body: 34px; --t-small: 28px; --t-mono: 24px; --t-num: 150px;
+  --pad-x: 100px; --pad-top: 70px; --pad-bottom: 60px; --gap-title: 44px; --gap-item: 28px;
+  --paper: var(--color-bg, #f2f2f3); --ink: var(--color-text, #1d1f20);
+  --steel: var(--color-accent, #5980a6); --deep: var(--color-accent-900, #1d2d3d);
+  --mid: var(--color-accent-700, #416180); --tint: var(--color-accent-400, #749dc4);
+  --pale: var(--color-accent-200, #b5d9fd); --sky: var(--color-accent-300, #94bce3);
+  --sky-2: var(--color-accent-200, #b5d9fd); --sky-3: var(--color-accent-100, #d6ebff);
+  --line: var(--color-neutral-300, #b7b7ba); --muted: var(--color-neutral-600, #5d5d60);
+  --dim: var(--color-neutral-700, #424244);
+  --hd: 'Barlow Condensed', sans-serif; --bd: Barlow, sans-serif; --mo: 'IBM Plex Mono', monospace;
+}
+body { margin: 0; background: #f2f2f3; }
+a { color: #416180; }
+a:hover { color: #2c455d; }
+</style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%" data-uneditable="">
+
+<section data-label="Title" data-screen-label="01" data-speaker-notes="Part two. Part one was about what the model can see and how to decide what occupies the window. This session is the rest of the toolkit: the things that change what Claude can read, what it is allowed to do, and how a setup gets shared. Eleven topics, roughly the order on this slide, no chapters — each one is one or two slides and they stand alone, so stop me where it matters to you." style="background:var(--deep);color:var(--paper);font-family:var(--bd);display:grid;grid-template-columns:1.05fr 1fr" data-om-slide-id="42cc6ede">
+<div style="display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-top) 70px var(--pad-bottom) var(--pad-x)">
+<span style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.16em;color:var(--sky)">ELEKS · SEPT 2026 · PART TWO</span>
+<div>
+<h1 style="font-family:var(--hd);font-weight:600;font-size:124px;line-height:0.94;letter-spacing:-0.02em;margin:0">Claude Code</h1>
+<p style="font-family:var(--hd);font-size:60px;line-height:1.05;margin:16px 0 0;color:var(--sky)">the rest of the toolkit</p>
+</div>
+<span style="font-size:30px;color:var(--sky-3)">Senior Software Engineer<br>Andriy Stankevych</span>
+</div>
+
+</section>
+
+<section data-label="Skills: frontmatter" data-screen-label="02" data-speaker-notes="Part one covered the shape of a skill and progressive disclosure. These are the frontmatter fields that change what a skill actually does, and most people never use them. allowed-tools restricts the skill to the tools the procedure needs, and pre-approves them, so a skill can be both narrower and less interrupting than the session around it. model names the model for that turn — cheap work on a cheap model — and note the cost: naming a model other than the session's is a model switch, so that turn rebuilds your cache. context: fork runs the skill in a subagent that inherits the conversation and returns only its result, which is how a verbose procedure stops filling your window. disable-model-invocation makes the skill user-only: it stays a slash command and Claude will not reach for it on its own, which is what you want for anything that ships or deletes. Two discovery notes: a skill in a directory you added with --add-dir loads with live reload, so you can edit and re-run inside one session; and you can /add-dir a subdirectory of the project you are already in to pick up its skills mid-session." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="44bafdfc">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>Skills, deeper</span><span>MECHANICS · 02</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">The Frontmatter You Are Not Using</h2>
+<div style="display:grid;grid-template-columns:0.95fr 1.15fr;gap:70px;margin-top:22px;flex:1">
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="border:1px solid var(--ink);padding:24px 30px;font-family:var(--mo);font-size:25px;line-height:1.45;white-space:pre;color:var(--dim)"><span style="color:var(--muted)">---</span>
+<span style="color:var(--mid)">name:</span> release
+<span style="color:var(--mid)">description:</span> cut a release. Use
+  when asked to ship a version.
+<span style="color:var(--mid)">allowed-tools:</span> Read, Bash(git tag *)
+<span style="color:var(--mid)">model:</span> haiku
+<span style="color:var(--mid)">context:</span> fork
+<span style="color:var(--mid)">disable-model-invocation:</span> true
+<span style="color:var(--muted)">---</span></div>
+<div style="font-size:var(--t-small);color:var(--dim);line-height:1.4">Only <span style="font-family:var(--mo)">name</span> and <span style="font-family:var(--mo)">description</span> are required.</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px;background:var(--line);align-self:flex-start;width:100%">
+<div style="background:var(--paper);padding:14px 26px 14px 0"><div style="font-family:var(--mo);font-size:27px;color:var(--mid)">allowed-tools</div><div style="font-size:var(--t-small);margin-top:6px;line-height:1.3">the tools the procedure needs, pre-approved — narrower than the session around it</div></div>
+<div style="background:var(--paper);padding:14px 26px 14px 0"><div style="font-family:var(--mo);font-size:27px;color:var(--mid)">model</div><div style="font-size:var(--t-small);margin-top:6px;line-height:1.3">cheap work on a cheap model for that turn — but naming a different one is a model switch, so the cache rebuilds</div></div>
+<div style="background:var(--paper);padding:14px 26px 14px 0"><div style="font-family:var(--mo);font-size:27px;color:var(--mid)">context: fork</div><div style="font-size:var(--t-small);margin-top:6px;line-height:1.3">runs in a subagent that inherits the conversation and returns only its result</div></div>
+<div style="background:var(--paper);padding:14px 26px 14px 0"><div style="font-family:var(--mo);font-size:27px;color:var(--mid)">disable-model-invocation</div><div style="font-size:var(--t-small);margin-top:6px;line-height:1.3">user-only: it stays a slash command and Claude will not reach for it on its own</div></div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:16px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">LIVE RELOAD WHILE YOU WRITE</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">skills in an <span style="font-family:var(--mo)">--add-dir</span> directory reload on edit — iterate inside one session</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">PICK UP A SUBTREE MID-SESSION</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35"><span style="font-family:var(--mo)">/add-dir packages/api</span> loads its skills without restarting</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">INVOKING IS CACHE-SAFE</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">the body arrives as a message, so nothing earlier in the window changes</div></div>
+</div>
+</section><section data-label="Skills: off the window" data-screen-label="03" data-speaker-notes="One idea, applied four ways: the window should hold the answer, not the working. A script the skill runs is the cheapest thing in the whole toolkit — the code never enters the window at all, only what it prints. So a validation routine or a data transform belongs in a script the skill calls, not in prose the model has to follow step by step. Reference files are the same trick one level up: the body says read checklist.md when you get to the review step, and the checklist costs nothing until that step happens. A fork moves the noise into another window entirely. And allowed-tools is the fence: a skill that only reads cannot be talked into writing. Put together, this is how twenty installed skills stay affordable — and it is the same shape as the rest of the deck. Keep the index resident, keep the detail retrievable, keep the transcript out." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="f4805ce5">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>Skills, deeper</span><span style="color:var(--mid)">MECHANICS^ · 03</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Push the Work Off the Window</h2>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--line);margin-top:40px;flex:1">
+<div style="background:var(--paper);padding:36px 44px 36px 0;display:flex;flex-direction:column">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">A SCRIPT IT RUNS</div>
+<div style="font-family:var(--hd);font-size:52px;line-height:1.05;margin-top:16px">The code never arrives</div>
+<div style="font-size:var(--t-small);margin-top:16px;line-height:1.4;color:var(--dim)">Only its output does. A validation routine or a data transform in <span style="font-family:var(--mo)">scripts/</span> costs nothing but the lines it prints — and it runs the same way every time.</div>
+</div>
+<div style="background:var(--paper);padding:36px 0 36px 44px;display:flex;flex-direction:column">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">A FILE IT LINKS</div>
+<div style="font-family:var(--hd);font-size:52px;line-height:1.05;margin-top:16px">Detail on demand</div>
+<div style="font-size:var(--t-small);margin-top:16px;line-height:1.4;color:var(--dim)">"Read <span style="font-family:var(--mo)">checklist.md</span> at the review step." The checklist stays on disk until that step happens, and the body stays short enough to follow.</div>
+</div>
+<div style="background:var(--paper);padding:36px 44px 0 0;display:flex;flex-direction:column">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">A FORK IT RUNS IN</div>
+<div style="font-family:var(--hd);font-size:52px;line-height:1.05;margin-top:16px">Noise in another window</div>
+<div style="font-size:var(--t-small);margin-top:16px;line-height:1.4;color:var(--dim)"><span style="font-family:var(--mo)">context: fork</span> inherits the conversation, does the thirty reads elsewhere, and hands back the result.</div>
+</div>
+<div style="background:var(--paper);padding:36px 0 0 44px;display:flex;flex-direction:column">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">A FENCE AROUND IT</div>
+<div style="font-family:var(--hd);font-size:52px;line-height:1.05;margin-top:16px">Narrow on purpose</div>
+<div style="font-size:var(--t-small);margin-top:16px;line-height:1.4;color:var(--dim)"><span style="font-family:var(--mo)">allowed-tools</span> with no <span style="font-family:var(--mo)">Edit</span> and no <span style="font-family:var(--mo)">Write</span> means a reviewing skill cannot be talked into rewriting.</div>
+</div>
+</div>
+<p style="font-size:var(--t-body);margin:34px 0 0;max-width:1500px;line-height:1.4">Same shape as everything else: the index stays resident, the detail stays retrievable, and the transcript stays out.</p>
+</section>
+
+<section data-label="Permissions: order" data-screen-label="04" data-speaker-notes="Permissions are the one layer in the deck that is enforced by the client rather than requested of the model. A line in CLAUDE.md shapes what Claude tries; a rule here decides what Claude Code allows. Rules are Tool or Tool with a specifier, and they are evaluated in a fixed order: deny, then ask, then allow, first match wins. Specificity is irrelevant, which is the part people get wrong — a broad deny on Bash az star blocks a narrower allow on az account show, so a deny rule can never carry exceptions. Same between ask and allow. Two shapes of deny, with very different effects: a bare tool name removes the tool from Claude's context entirely, it never sees the tool exists, and that also rebuilds your cache; a scoped deny leaves the tool and blocks matching calls. On wildcards: the star stands in for whatever text sits in its place, so dotnet build star is a family and dotnet star is every dotnet subcommand including nuget push and tool run. And for compound commands every subcommand must match an allow independently, while deny and ask match if any subcommand matches, including inside a subshell. Last: a Bash rule matches the command text Claude usually writes. It is not a boundary around the program — slash usr slash bin slash az and sh -c walk straight past it. For enforcement use the sandbox or a PreToolUse hook." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="ba6d82fd">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>Permissions</span><span>MECHANICS · 04</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Deny, Then Ask, Then Allow</h2>
+<div style="display:flex;align-items:center;gap:14px;margin-top:34px;font-family:var(--mo);font-size:var(--t-mono)">
+<div style="border:1px solid var(--steel);background:var(--steel);color:#f2f2f3;padding:16px 26px">deny</div>
+<span style="color:var(--muted)">→</span>
+<div style="border:1px solid var(--ink);padding:16px 26px">ask</div>
+<span style="color:var(--muted)">→</span>
+<div style="border:1px solid var(--line);padding:16px 26px;color:var(--dim)">allow</div>
+<span style="font-size:var(--t-small);font-family:var(--bd);color:var(--dim);margin-left:20px">first match wins — specificity does not enter into it</span>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:70px;margin-top:28px;flex:1">
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="border:1px solid var(--ink);padding:24px 28px;font-family:var(--mo);font-size:24px;line-height:1.6;white-space:pre">"deny":  ["Bash(az *)"]
+"allow": ["Bash(az account show)"]</div>
+<div style="font-size:var(--t-small);line-height:1.4;color:var(--dim)">The allow never fires — and the same holds between ask and allow.</div>
+<div style="border-top:1px solid var(--line);padding-top:22px;display:flex;flex-direction:column;gap:14px;font-size:var(--t-small);line-height:1.35">
+<span><span style="font-family:var(--mo);color:var(--mid)">Bash</span> &nbsp;bare name in deny removes the tool from context — Claude never sees it</span>
+<span><span style="font-family:var(--mo);color:var(--mid)">Bash(dotnet nuget *)</span> &nbsp;scoped deny leaves the tool and blocks the matching calls</span>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:18px">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">WHERE THE STAR GOES</div>
+<div style="display:flex;flex-direction:column;gap:2px;background:var(--line)">
+<div style="background:var(--paper);padding:14px 0;display:flex;gap:26px"><span style="font-family:var(--mo);font-size:24px;min-width:300px">Bash(dotnet build *)</span><span style="font-size:var(--t-small)">only <span style="font-family:var(--mo)">dotnet build</span>, bare included</span></div>
+<div style="background:var(--paper);padding:14px 0;display:flex;gap:26px"><span style="font-family:var(--mo);font-size:24px;min-width:300px">Bash(dotnet *)</span><span style="font-size:var(--t-small)">every subcommand, <span style="font-family:var(--mo)">nuget push</span> too</span></div>
+<div style="background:var(--paper);padding:14px 0;display:flex;gap:26px"><span style="font-family:var(--mo);font-size:24px;min-width:300px">Bash(az *)</span><span style="font-size:var(--t-small)">the space matters — <span style="font-family:var(--mo)">Bash(az*)</span> catches <span style="font-family:var(--mo)">azcopy</span></span></div>
+</div>
+<div style="border-top:1px solid var(--line);padding-top:20px;font-size:var(--t-small);color:var(--dim);line-height:1.4">Compound commands: every subcommand must match an allow on its own. Deny and ask fire if any subcommand matches, subshells included.</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:16px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">ENFORCED, NOT REQUESTED</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">applied by Claude Code, not by the model — unlike anything in <span style="font-family:var(--mo)">CLAUDE.md</span></div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">DENY WINS FROM ANY SCOPE</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">a user deny blocks a project allow; no flag overrides a managed deny</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">NOT A SECURITY BOUNDARY</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35"><span style="font-family:var(--mo)">Bash(az *)</span> stops <span style="font-family:var(--mo)">az group delete</span>, not <span style="font-family:var(--mo)">/usr/bin/az</span> or <span style="font-family:var(--mo)">sh -c</span></div></div>
+</div>
+</section>
+
+<section data-label="Permissions: day one" data-screen-label="05" data-speaker-notes="What I would write on day one, in a file the team shares. Deny reads of the appsettings files and the secrets directory — a Read deny also blocks Edit and Write on the same path, and it keeps the file out of the window whether or not Claude was going to behave. Ask on the commands whose blast radius is other people: a NuGet push, an EF database update, a hard reset. Deny the destructive Azure CLI verbs outright, because a rule that tries to constrain which resource group an az delete targets is fragile. On modes: default is the one that prompts, acceptEdits takes the edits and still gates commands, plan is read-only exploration, auto lets a classifier approve in your place, dontAsk auto-denies anything not pre-approved which is the honest CI mode, and bypassPermissions skips the checks and belongs only in a container. Two organisational notes. Managed settings sit above everything including command line flags, and that is where disableBypassPermissionsMode goes. And project allow rules only take effect after you accept the workspace trust dialog — deny and ask apply immediately, because they only restrict." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="9a6e3efa">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>Permissions</span><span style="color:var(--mid)">PRACTICE^ · 05</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">What to Deny on Day One</h2>
+<div style="display:grid;grid-template-columns:1.05fr 1fr;gap:70px;margin-top:18px;flex:1">
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="border:1px solid var(--ink);padding:26px 30px;font-family:var(--mo);font-size:24px;line-height:1.55;white-space:pre">{
+  "permissions": {
+    "deny": [
+      "Read(appsettings.*.json)",
+      "Read(./secrets/**)",
+      "Bash(az * delete *)"
+    ],
+    "ask": ["Bash(dotnet nuget push *)"],
+    "allow": ["Bash(dotnet build *)"]
+  }
+}</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">THE MODE UNDERNEATH THE RULES</div>
+<div style="display:flex;flex-direction:column;gap:2px;background:var(--line)">
+<div style="background:var(--paper);padding:10px 0;display:flex;gap:24px;align-items:baseline"><span style="font-family:var(--mo);font-size:24px;color:var(--mid);min-width:250px">default</span><span style="font-size:var(--t-small);line-height:1.3">prompts on first use of each tool</span></div>
+<div style="background:var(--paper);padding:10px 0;display:flex;gap:24px;align-items:baseline"><span style="font-family:var(--mo);font-size:24px;color:var(--mid);min-width:250px">acceptEdits</span><span style="font-size:var(--t-small);line-height:1.3">takes file edits, still gates commands</span></div>
+<div style="background:var(--paper);padding:10px 0;display:flex;gap:24px;align-items:baseline"><span style="font-family:var(--mo);font-size:24px;color:var(--mid);min-width:250px">plan</span><span style="font-size:var(--t-small);line-height:1.3">reads and explores, does not edit source</span></div>
+<div style="background:var(--paper);padding:10px 0;display:flex;gap:24px;align-items:baseline"><span style="font-family:var(--mo);font-size:24px;color:var(--mid);min-width:250px">auto</span><span style="font-size:var(--t-small);line-height:1.3">a classifier approves in your place</span></div>
+<div style="background:var(--paper);padding:10px 0;display:flex;gap:24px;align-items:baseline"><span style="font-family:var(--mo);font-size:24px;color:var(--mid);min-width:250px">dontAsk</span><span style="font-size:var(--t-small);line-height:1.3">denies anything not pre-approved — the CI mode</span></div>
+<div style="background:var(--paper);padding:10px 0;display:flex;gap:24px;align-items:baseline"><span style="font-family:var(--mo);font-size:24px;color:var(--mid);min-width:250px">bypassPermissions</span><span style="font-size:var(--t-small);line-height:1.3">skips the checks — containers only</span></div>
+</div>
+<div style="border-top:1px solid var(--line);padding-top:18px;font-size:var(--t-small);color:var(--dim);line-height:1.35">A <span style="font-family:var(--mo)">Read</span> deny also blocks <span style="font-family:var(--mo)">Edit</span> and <span style="font-family:var(--mo)">Write</span> on that path.</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:16px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">ALLOW NEEDS TRUST</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">a project's allow rules wait for the workspace trust dialog; deny and ask apply at once</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">MANAGED SITS ON TOP</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">IT pins rules no flag overrides — <span style="font-family:var(--mo)">disableBypassPermissionsMode</span> removes the escape hatch</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">PAIR IT WITH THE SANDBOX</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">rules read the command text; the sandbox fences files and network at the OS</div></div>
+</div>
+</section><section data-label="LSP for C#" data-screen-label="06" data-speaker-notes="LSP is the protocol your editor already uses for go-to-definition. One server per language, one client per editor, JSON-RPC between them. For us that server is a C# one: it loads the solution, builds the Roslyn compilation, and answers the way the compiler would rather than the way a text search does. That difference is the whole point. Ask grep where Charge is defined in a C# solution and you get every line containing the word — the definition, the interface, forty call sites, a comment, an xUnit fixture, plus whatever is sitting in obj and bin — and Claude then reads files to work out which one matters. Ask the C# language server and you get the one definition, with the file and the line. Same question, one answer instead of forty candidates, and the difference lands in your window: fewer speculative file reads is fewer tokens. Wiring it up is two steps and people skip the first. Install the server binary yourself — dotnet tool install -g csharp-ls — and make sure your shell finds it. Then enable the code intelligence plugin, which is what hands Claude the LSP tool. The binary is deliberately not bundled, because language servers ship on their own schedule. If there is no ready-made plugin, a four-line .lsp.json declares it: the language id, the command, its args, and the extensions to watch. If csharp-ls is not on PATH the plugin system warns you, and that warning is almost always the whole bug. Two more things: the server loads the solution on first request, so the first question on a large solution is slow and everything after it is fast; and this is real code intelligence, not a context trick, so it also returns diagnostics on the C# Claude just wrote, before you run dotnet build." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="b7a7c4ca">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>LSP · a language server for C#</span><span>06</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:24px 0 0">Symbols, Not Substrings</h2>
+<p style="font-size:var(--t-body);margin:14px 0 0;max-width:1700px;color:var(--dim)">A C# language server answers from the Roslyn compilation, the way the compiler would.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);margin-top:20px;flex:1">
+<div style="background:var(--paper);padding:18px 44px 18px 0;display:flex;flex-direction:column">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--muted)">GREP · TEXT SEARCH</div>
+<div style="font-family:var(--mo);font-size:26px;margin-top:18px;color:var(--dim)">"where is Charge() defined?"</div>
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:20px;font-size:var(--t-small);line-height:1.3">
+<span>41 lines that contain the word</span>
+<span>the interface, the class, the call sites, an xUnit fixture, and whatever is left in <span style="font-family:var(--mo)">obj/</span></span>
+<span>Claude opens <span style="font-family:var(--mo)">.cs</span> files to work out which one you meant</span>
+</div>
+</div>
+<div style="background:var(--paper);padding:18px 0 18px 44px;display:flex;flex-direction:column">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--mid)">CSHARP-LS · STRUCTURE</div>
+<div style="font-family:var(--mo);font-size:26px;margin-top:18px;color:var(--dim)">"where is Charge() defined?"</div>
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:20px;font-size:var(--t-small);line-height:1.3">
+<span><span style="font-family:var(--mo);color:var(--mid)">Billing/ChargeService.cs:118</span></span>
+<span>one answer, because the server resolved the symbol</span>
+<span>the same holds for references, symbols and diagnostics</span>
+</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:70px;margin-top:18px;flex:1">
+<div style="display: flex; flex-direction: column; gap: 22px; width: 814px; height: 112px">
+<div style="display:flex;gap:22px;align-items:flex-start">
+<span style="font-family:var(--hd);font-size:52px;line-height:0.9;color:var(--tint)">1</span>
+<div>
+<div style="font-family:var(--hd);font-size:40px;line-height:1.05">Install the server</div>
+<div style="font-family:var(--mo);font-size:25px;line-height:1.5;margin-top:10px;color:var(--dim)">dotnet tool install -g csharp-ls</div>
+</div>
+</div>
+
+</div><div style="display:flex;gap:22px;align-items:flex-start">
+<span style="font-family:var(--hd);font-size:52px;line-height:0.9;color:var(--tint)">2</span>
+<div>
+<div style="font-family:var(--hd);font-size:40px;line-height:1.05">Enable the plugin</div>
+<div style="font-size:var(--t-small);line-height:1.35;margin-top:10px;color:var(--dim)">Enabling a code intelligence plugin from <span style="font-family:var(--mo)">/plugin</span> is what hands Claude the LSP tool.</div>
+</div>
+</div>
+
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:10px;border-top:1px solid var(--ink);padding-top:10px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">PATH FIRST</div><div style="font-size:var(--t-small);margin-top:8px;line-height:1.3">not on PATH? the plugin warns you</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">FIRST QUESTION IS SLOW</div><div style="font-size:var(--t-small);margin-top:8px;line-height:1.3">loads once, then answers from memory</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">IT ALSO MARKS THE WORK</div><div style="font-size:var(--t-small);margin-top:8px;line-height:1.3">diagnostics before <span style="font-family:var(--mo)">dotnet build</span></div></div>
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+<section data-label="Plan mode" data-screen-label="07" data-speaker-notes="Plan mode is a permission mode, not a different model. Claude reads files and runs read-only commands to explore, and does not edit your source; you cycle into it with Shift+Tab, or start every session there with defaultMode plan. Two design details are worth knowing. First, plan mode does not swap out the tool definitions — the obvious implementation would remove Edit and Write, and that would change the system prompt and rebuild your cache on every toggle. Instead the instructions are appended as conversation messages, so entering and leaving plan mode is free. The exception is the opusplan setting, which resolves to Opus while planning and Sonnet while executing: that is a model switch in disguise, and each toggle starts a fresh cache. Second, the research can happen elsewhere: the built-in Plan agent does the digging in its own window and the Explore agent is read-only search, so the twenty files it reads to understand the area do not have to sit in yours. What you get back is a plan you approve before anything is written — which is the cheapest possible moment to notice that Claude misunderstood the task." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="06e04872">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>Plan mode</span><span>MECHANICS · 07</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Read First, Write Later</h2>
+<div style="display:flex;align-items:center;gap:14px;margin-top:34px;flex-wrap:wrap;font-family:var(--mo);font-size:var(--t-mono)">
+<div style="border:1px solid var(--line);padding:18px 24px;color:var(--dim)">explore, read-only</div>
+<span style="color:var(--muted)">→</span>
+<div style="border:1px solid var(--ink);padding:18px 24px">a plan, in the conversation</div>
+<span style="color:var(--muted)">→</span>
+<div style="border:1px solid var(--steel);background:var(--steel);color:#f2f2f3;padding:18px 24px">you approve it</div>
+<span style="color:var(--muted)">→</span>
+<div style="border:1px solid var(--line);padding:18px 24px;color:var(--dim)">edits begin</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:44px;flex:1">
+<div style="display:flex;flex-direction:column;gap:22px">
+<p style="font-size:var(--t-body);margin:0;line-height:1.4">A permission mode, not a different model. <span style="font-family:var(--mo);font-size:30px">Shift+Tab</span> cycles into it; <span style="font-family:var(--mo);font-size:30px">defaultMode: "plan"</span> starts every session there.</p>
+<div style="border-top:1px solid var(--line);padding-top:22px;font-size:var(--t-small);color:var(--dim);line-height:1.45">The obvious implementation would remove <span style="font-family:var(--mo)">Edit</span> and <span style="font-family:var(--mo)">Write</span> from the tool list — and rebuild your cache on every toggle. Instead the instructions are appended to the conversation, so toggling is free.</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:18px">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">THE READING CAN HAPPEN ELSEWHERE</div>
+<div style="display:flex;flex-direction:column;gap:2px;background:var(--line)">
+<div style="background:var(--paper);padding:18px 0;display:flex;gap:24px;align-items:baseline"><span style="font-family:var(--mo);font-size:26px;color:var(--mid);min-width:150px">Plan</span><span style="font-size:var(--t-small);line-height:1.3">researches in its own window during plan mode</span></div>
+<div style="background:var(--paper);padding:18px 0;display:flex;gap:24px;align-items:baseline"><span style="font-family:var(--mo);font-size:26px;color:var(--mid);min-width:150px">Explore</span><span style="font-size:var(--t-small);line-height:1.3">read-only search, fast, returns a summary</span></div>
+</div>
+<div style="border-top:1px solid var(--line);padding-top:20px;font-size:var(--t-small);color:var(--dim);line-height:1.4">The twenty files it reads to understand the area do not have to end up in yours.</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:16px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">THE CHEAPEST CORRECTION</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">a misunderstanding caught in the plan costs a sentence; caught in the diff it costs the diff</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">OPUSPLAN IS A SWITCH</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">it resolves to Opus while planning and Sonnet while executing, so each toggle starts a fresh cache</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">READ-ONLY, NOT INERT</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">it still runs read-only commands to check its assumptions, and still asks before anything else</div></div>
+</div>
+</section>
+
+<section data-label="The plan on disk" data-screen-label="08" data-speaker-notes="The habit that makes plan mode worth more than a pause. A plan that lives only in the conversation dies at the next /clear and competes for window until then. Ask for it as a file — plan.md, acceptance criteria included — and three things follow. You review the artifact instead of skimming a message: sequence, blast radius, what is out of scope. You can clear the window and implement against the file, so the implementation session starts at almost nothing instead of carrying the whole exploration. And the criteria you wrote become the thing you check against at the end — the same sentence can go straight into a /goal condition two slides from now. A plan is also the right unit to review with someone else, which a transcript never is." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="4806297a">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>Plan mode</span><span style="color:var(--mid)"></span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Ask for the Plan as a File</h2>
+<p style="font-size:var(--t-body);margin:24px 0 0;max-width:1450px;color:var(--dim)">A plan in the conversation dies at the next <span style="font-family:var(--mo);font-size:32px">/clear</span> and competes for window until then. A plan on disk survives, and can be reviewed by someone who was not in the session.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:70px;margin-top:38px;flex:1">
+<div style="border:1px solid var(--ink);padding:28px 32px;font-family:var(--mo);font-size:25px;line-height:1.6;align-self:flex-start;color:var(--dim)">
+<div style="color:var(--muted)">plan.md</div>
+<div style="height:18px"></div>
+<div style="color:var(--ink)">## Scope</div>
+<div>replace the retry wrapper in</div>
+<div>billing/ — nothing outside it</div>
+<div style="height:14px"></div>
+<div style="color:var(--ink)">## Steps</div>
+<div>1. extract the backoff policy</div>
+<div>2. move the 4 call sites</div>
+<div>3. delete the old wrapper</div>
+<div style="height:14px"></div>
+<div style="color:var(--ink)">## Done when</div>
+<div>npm test exits 0 and no file</div>
+<div>outside billing/ is modified</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:26px;justify-content:center">
+<div>
+<div style="font-family:var(--hd);font-size:46px;line-height:1.05">Review the artifact</div>
+<div style="font-size:var(--t-small);color:var(--dim);margin-top:12px;line-height:1.4">Sequence, blast radius and what is deliberately out of scope, in a form you can read properly instead of skim.</div>
+</div>
+<div>
+<div style="font-family:var(--hd);font-size:46px;line-height:1.05">Then clear the window</div>
+<div style="font-size:var(--t-small);color:var(--dim);margin-top:12px;line-height:1.4">Implement against the file. The implementation session starts near zero instead of carrying the whole exploration.</div>
+</div>
+<div>
+<div style="font-family:var(--hd);font-size:46px;line-height:1.05">Keep the "done when"</div>
+<div style="font-size:var(--t-small);color:var(--dim);margin-top:12px;line-height:1.4">It is what you check at the end, and what you hand back to Claude to verify.</div>
+</div>
+</div>
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section data-label="Cache: the prefix" data-screen-label="09" data-speaker-notes="Prompt caching is why part one's re-send everything every turn is affordable. The API matches the start of each request — the prefix — against what it recently processed, and reuses it. The match is exact and positional: there is no per-file or per-segment cache, so a change anywhere invalidates everything after it. That single rule explains every behaviour on the next slide. Claude Code therefore orders each request so the stable things come first. System prompt and tool definitions at the top, changing only when the set of loaded tools changes. Project context next — CLAUDE.md, memory, unscoped rules — which is fixed until /clear, /compact or a restart, and is exactly why editing CLAUDE.md mid-session does not apply. Then the conversation, which changes every turn. A normal turn appends at the bottom, so the whole prefix is a cache read at roughly a tenth of the input price. Two consequences worth remembering: the cache is effectively scoped to one machine and one directory, because the working directory and platform are in the prompt, so worktrees of the same repo do not share it; and a sub-agent builds its own prefix from scratch, while a fork inherits yours and reads your cache." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="63f3ec0c">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>Prompt cache</span><span>MECHANICS · 09</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">One Prefix, Three Layers</h2>
+<p style="font-size:var(--t-body);margin:24px 0 0;max-width:1500px;color:var(--dim)">The API matches the start of each request against what it just processed and reuses it. The match is exact: there is no per-file cache, so a change anywhere invalidates everything after it.</p>
+<div style="display:grid;grid-template-columns:250px 1fr 1fr;gap:2px;background:var(--line);margin-top:36px">
+<div style="background:var(--paper)"></div>
+<div style="background:var(--paper);padding:0 20px 14px;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--muted)">WHAT IS IN IT</div>
+<div style="background:var(--paper);padding:0 20px 14px;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--muted)">CHANGES WHEN</div>
+<div style="background:var(--paper);padding:18px 16px 18px 0;font-family:var(--hd);font-size:32px;line-height:1.1">System prompt</div>
+<div style="background:var(--paper);padding:18px 20px;font-size:var(--t-small);line-height:1.3">core instructions, tool definitions</div>
+<div style="background:var(--paper);padding:18px 20px;font-size:var(--t-small);line-height:1.3">the set of loaded tool definitions changes</div>
+<div style="background:var(--paper);padding:18px 16px 18px 0;font-family:var(--hd);font-size:32px;line-height:1.1">Project context</div>
+<div style="background:var(--paper);padding:18px 20px;font-size:var(--t-small);line-height:1.3"><span style="font-family:var(--mo)">CLAUDE.md</span>, auto memory, unscoped rules</div>
+<div style="background:var(--paper);padding:18px 20px;font-size:var(--t-small);line-height:1.3">the session starts, or after <span style="font-family:var(--mo)">/clear</span> or <span style="font-family:var(--mo)">/compact</span></div>
+<div style="background:var(--paper);padding:18px 16px 18px 0;font-family:var(--hd);font-size:32px;line-height:1.1">Conversation</div>
+<div style="background:var(--paper);padding:18px 20px;font-size:var(--t-small);line-height:1.3">your messages, replies, tool results</div>
+<div style="background:var(--paper);padding:18px 20px;font-size:var(--t-small);line-height:1.3">every turn — and it appends at the bottom</div>
+</div>
+<p style="font-size:var(--t-body);margin:32px 0 0;max-width:1500px;line-height:1.4">A change in the conversation layer leaves the two above it cached, read at roughly a tenth of the input price. A change in the system prompt reprocesses the lot.</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:16px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">WHY CLAUDE.MD WAITS</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">it is read once at startup and held; a mid-session edit neither breaks the cache nor applies until <span style="font-family:var(--mo)">/clear</span></div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">ONE MACHINE, ONE DIRECTORY</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">the working directory and platform are in the prompt, so worktrees of one repo do not share a cache</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">FORK READS, SUB-AGENT DOESN'T</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">a fork inherits your prefix and hits your cache; a sub-agent builds its own from scratch</div></div>
+</div>
+</section>
+
+<section data-label="Cache: turn by turn" data-screen-label="10" data-speaker-notes="The same rule drawn out over four turns. Turn one has no cache: the whole request is processed and written. Turn two resends everything, and the entire turn one request is now an exact prefix match, so it is a cache read; only the new reply and your new message are processed and written. Turn three does the same, one layer deeper. Turn four is the failure case: the system prompt changed, so the prefix no longer matches from the very first token, and every block after it — all of it unchanged content — is computed and written again. Nothing was deleted; it just stopped being reusable." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="17af66de">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>Prompt cache</span><span>TURN BY TURN · 10</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:32px 0 0">Every Turn Resends Everything</h2>
+<p style="font-size:var(--t-body);margin:20px 0 0;max-width:1600px;color:var(--dim)">The full context goes up each time; the unchanged prefix is read from cache rather than processed again.</p>
+
+<div style="display:flex;flex-direction:column;gap:22px;margin-top:34px">
+
+<div>
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Turn 1</div>
+<div style="display:grid;grid-template-columns:repeat(9,1fr);gap:8px;margin-top:10px">
+<div style="grid-column:span 1;border:1px solid var(--steel);background:var(--sky-3);color:var(--deep);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">System prompt</div>
+<div style="grid-column:span 1;border:1px solid var(--steel);background:var(--sky-3);color:var(--deep);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Project context</div>
+<div style="grid-column:span 1;border:1px solid var(--steel);background:var(--sky-3);color:var(--deep);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Message 1</div>
+<div style="grid-column:1 / span 6;font-size:23px;color:var(--mid);line-height:1.2">First turn: no cache yet, the whole request is processed and written</div>
+</div>
+</div>
+
+<div>
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Turn 2</div>
+<div style="display:grid;grid-template-columns:repeat(9,1fr);gap:8px;margin-top:10px">
+<div style="border:1px solid var(--line);color:var(--muted);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">System prompt</div>
+<div style="border:1px solid var(--line);color:var(--muted);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Project context</div>
+<div style="border:1px solid var(--line);color:var(--muted);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Message 1</div>
+<div style="border:1px solid var(--steel);background:var(--sky-3);color:var(--deep);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Reply 1</div>
+<div style="border:1px solid var(--steel);background:var(--sky-3);color:var(--deep);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Message 2</div>
+<div style="grid-column:1 / span 3;font-size:23px;color:var(--muted);line-height:1.2">Read from cache (entire turn 1 request)</div>
+<div style="grid-column:4 / span 4;font-size:23px;color:var(--mid);line-height:1.2">New: written to cache</div>
+</div>
+</div>
+
+<div>
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Turn 3</div>
+<div style="display:grid;grid-template-columns:repeat(9,1fr);gap:8px;margin-top:10px">
+<div style="border:1px solid var(--line);color:var(--muted);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">System prompt</div>
+<div style="border:1px solid var(--line);color:var(--muted);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Project context</div>
+<div style="border:1px solid var(--line);color:var(--muted);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Message 1</div>
+<div style="border:1px solid var(--line);color:var(--muted);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Reply 1</div>
+<div style="border:1px solid var(--line);color:var(--muted);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Message 2</div>
+<div style="border:1px solid var(--steel);background:var(--sky-3);color:var(--deep);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Reply 2</div>
+<div style="border:1px solid var(--steel);background:var(--sky-3);color:var(--deep);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Message 3</div>
+<div style="grid-column:1 / span 5;font-size:23px;color:var(--muted);line-height:1.2">Read from cache (entire turn 2 request)</div>
+<div style="grid-column:6 / span 4;font-size:23px;color:var(--mid);line-height:1.2">New</div>
+</div>
+</div>
+
+<div>
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Turn 4: the system prompt changed</div>
+<div style="display:grid;grid-template-columns:repeat(9,1fr);gap:8px;margin-top:10px">
+<div style="border:2px solid var(--deep);background:var(--sky-2);color:var(--deep);padding:12px 5px;text-align:center;font-size:24px;line-height:1.1">System prompt</div>
+<div style="border:1px solid var(--steel);background:var(--sky-3);color:var(--deep);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Project context</div>
+<div style="border:1px solid var(--steel);background:var(--sky-3);color:var(--deep);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Message 1</div>
+<div style="border:1px solid var(--steel);background:var(--sky-3);color:var(--deep);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Reply 1</div>
+<div style="border:1px solid var(--steel);background:var(--sky-3);color:var(--deep);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Message 2</div>
+<div style="border:1px solid var(--steel);background:var(--sky-3);color:var(--deep);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Reply 2</div>
+<div style="border:1px solid var(--steel);background:var(--sky-3);color:var(--deep);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Message 3</div>
+<div style="border:1px solid var(--steel);background:var(--sky-3);color:var(--deep);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Reply 3</div>
+<div style="border:1px solid var(--steel);background:var(--sky-3);color:var(--deep);padding:13px 6px;text-align:center;font-size:24px;line-height:1.1">Message 4</div>
+<div style="grid-column:1 / span 1;font-size:23px;color:var(--deep);line-height:1.2">Changed</div>
+<div style="grid-column:2 / span 8;font-size:23px;color:var(--mid);line-height:1.2">Reprocessed: the prefix no longer matches, so even unchanged content is computed and written again</div>
+</div>
+</div>
+
+</div>
+
+<div style="display:flex;gap:70px;align-items:center;margin-top:auto;border-top:1px solid var(--ink);padding-top:18px;font-size:var(--t-small)">
+<div style="display:flex;align-items:center;gap:14px"><span style="width:46px;height:26px;border:1px solid var(--line);display:inline-block"></span><span>Cached: read from a previous request</span></div>
+<div style="display:flex;align-items:center;gap:14px"><span style="width:46px;height:26px;border:1px solid var(--steel);background:var(--sky-3);display:inline-block"></span><span>New or recomputed: processed and written to cache</span></div>
+</div>
+</section>
+
+<section data-label="Cache: what breaks it" data-screen-label="11" data-speaker-notes="The practical version. On the left, things that make the next turn slow and expensive while the prefix rebuilds: switching model with /model, changing effort, turning on fast mode, connecting or disconnecting an MCP server whose tools sit in the prefix, enabling or disabling a plugin that brings MCP servers, denying a whole tool with a bare Bash or WebFetch deny, compacting, accumulating enough images that old ones get dropped, and upgrading Claude Code. On the right, things people avoid needlessly: editing files in the repo, editing CLAUDE.md, changing permission mode, changing output style, invoking a skill or command, /recap, /rewind, and spawning a sub-agent. All of those either append at the bottom or do not touch the request. Three habits come out of this. Pick your model and effort at the top of the session, because mid-task switching is where the cost is. Compact at task boundaries instead of letting auto-compaction fire mid-task — and if you have gone down a path you want to abandon, /rewind instead, which truncates back to a prefix that is already warm rather than building a new one. And measure: /usage shows a prompt cache line with your hit ratio, misses and whether the cache is warm right now, and it will often name the likely cause of the last miss." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="af4c2095">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>Prompt cache</span><span style="color:var(--mid)"></span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">What Breaks It, What Doesn't</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);margin-top:30px;flex:1">
+<div style="background:var(--paper);padding:28px 44px 28px 0">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">REBUILDS THE PREFIX</div>
+<div style="display:flex;flex-direction:column;gap:14px;margin-top:22px;font-size:var(--t-small);line-height:1.35">
+<span><span style="font-family:var(--mo)">/model</span> — each model has its own cache, identical content or not</span>
+<span><span style="font-family:var(--mo)">/effort</span> — on most models, its own cache too</span>
+<span>turning on fast mode — once per conversation</span>
+<span>an MCP server connecting or dropping, when its tools sit in the prefix</span>
+<span>a plugin that brings MCP servers, enabled or disabled</span>
+<span>denying a whole tool: a bare <span style="font-family:var(--mo)">Bash</span> or <span style="font-family:var(--mo)">WebFetch</span> deny</span>
+<span><span style="font-family:var(--mo)">/compact</span> — by design; the history it replaces was the prefix</span>
+<span>upgrading Claude Code — new prompt, new tools</span>
+</div>
+</div>
+<div style="background:var(--paper);padding:28px 0 28px 44px">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--mid)">KEEPS IT — STOP AVOIDING THESE</div>
+<div style="display:flex;flex-direction:column;gap:14px;margin-top:22px;font-size:var(--t-small);line-height:1.35">
+<span>editing files in the repo — reads append, they do not rewrite history</span>
+<span>editing <span style="font-family:var(--mo)">CLAUDE.md</span> — and it will not apply until <span style="font-family:var(--mo)">/clear</span></span>
+<span>changing permission mode or output style, plan mode included</span>
+<span>invoking a skill or a command — it arrives as a message</span>
+<span><span style="font-family:var(--mo)">/recap</span> — it appends a summary instead of replacing history</span>
+<span><span style="font-family:var(--mo)">/rewind</span> — it truncates back to a prefix that is already warm</span>
+<span>spawning a sub-agent — its window is separate, yours is untouched</span>
+<span>scoped deny rules, and every allow and ask rule</span>
+</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:16px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">DECIDE AT THE TOP</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">pick model and effort when the session starts; mid-task switching is where the cost lands</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">COMPACT ON PURPOSE</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">at a task boundary, not mid-task; abandoning a path is <span style="font-family:var(--mo)">/rewind</span>, not <span style="font-family:var(--mo)">/compact</span></div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">READ THE RATIO</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35"><span style="font-family:var(--mo)">/usage</span> reports hit ratio, misses, whether the cache is warm — often the cause of the last miss</div></div>
+</div>
+</section><section data-label="Plugins: installing" data-screen-label="12" data-speaker-notes="A plugin is the answer to a question part one left open: how do you hand someone the way you have Claude Code set up? It is a directory that bundles any combination of skills, agents, commands, hooks, MCP servers and LSP configuration into one versioned unit, with a manifest describing it. You browse and install from the /plugin menu — Discover, Installed, Marketplaces, Errors — or install by name at a marketplace, by repository URL, or from a local path. Installed plugins are cached under your home directory so they are not re-fetched every session. For a team the two settings keys are the interesting part: extraKnownMarketplaces points at your own repository, enabledPlugins says which ones this project turns on, and both can be committed. One caution worth stating: a plugin's skills join the always-loaded index, so an oversized plugin is a standing context cost for everyone who installs it. And on cost of a different kind: skills, commands, agents and hooks from a plugin are appended, so they keep your cache; a plugin that brings MCP servers can invalidate it." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="17a5a6a5">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>Plugins</span><span>MECHANICS · 12</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Installing Someone Else's Setup</h2>
+<p style="font-size:var(--t-body);margin:24px 0 0;max-width:1450px;color:var(--dim)">One versioned directory that bundles the pieces we covered in part one, installed and updated as a unit instead of copied between machines.</p>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:40px">
+<div style="border:1px solid var(--ink);padding:26px 22px"><div style="font-family:var(--mo);font-size:26px">skills</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:10px;line-height:1.3">join the always-on index</div></div>
+<div style="border:1px solid var(--ink);padding:26px 22px"><div style="font-family:var(--mo);font-size:26px">agents</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:10px;line-height:1.3">with their own tools</div></div>
+<div style="border:1px solid var(--ink);padding:26px 22px"><div style="font-family:var(--mo);font-size:26px">commands</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:10px;line-height:1.3">appear in the menu</div></div>
+<div style="border:1px solid var(--ink);padding:26px 22px"><div style="font-family:var(--mo);font-size:26px">hooks</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:10px;line-height:1.3">register on install</div></div>
+<div style="border:1px solid var(--ink);padding:26px 22px"><div style="font-family:var(--mo);font-size:26px">MCP · LSP</div><div style="font-size:var(--t-small);color:var(--dim);margin-top:10px;line-height:1.3">servers, configured</div></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:70px;margin-top:40px;flex:1">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">FROM THE SESSION</div>
+<div style="font-family:var(--mo);font-size:26px;line-height:1.75;color:var(--dim)"><span style="color:var(--mid)">/plugin</span> &nbsp;&nbsp;browse, install, inspect errors<br><span style="color:var(--mid)">/plugin install</span> name@marketplace<br><span style="color:var(--mid)">/reload-plugins</span> &nbsp;apply without restarting</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">FROM THE REPO, FOR EVERYONE</div>
+<div style="border:1px solid var(--ink);padding:22px 26px;font-family:var(--mo);font-size:24px;line-height:1.5;white-space:pre">"extraKnownMarketplaces": {
+  "eleks": { "source": {
+    "source": "github",
+    "repo": "eleks/claude-setup" } }
+},
+"enabledPlugins": ["review@eleks"]</div>
+</div>
+</div>
+</section>
+
+
+
+<section data-label="Setup repo: what it is" data-screen-label="13" data-speaker-notes="The question that came up: keep the skills, agents and commands in one place and reference them from every other project instead of copying them. The shape that works is a plugin marketplace you own. One ordinary git repository, cloned once on your machine — call it claude-setup. At its root a .claude-plugin/marketplace.json names the marketplace and lists the plugins it publishes, each one a directory in the same repo. Each of those directories carries its own .claude-plugin/plugin.json with a name, a version and a description, and next to it the pieces you already know: skills, agents, commands, hooks, and an .lsp.json if you declare a language server. Nothing here is special to a project — it is the setup itself, versioned like code and reviewed like code. Two things to resist. Do not symlink or submodule a .claude directory into every project: it works on day one and drifts by week three, because there is no version anyone can point at. And do not park everything in your user directory instead — that copy is yours alone, it is not reviewed, and a personal skill shadows a project skill of the same name, so it can silently override the team's." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="9d662563">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>Settings · one setup repo</span><span style="color:var(--mid)">SETUP REPO · 13</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:30px 0 0">One Repo, Defined Once</h2>
+<p style="font-size:var(--t-body);margin:18px 0 0;max-width:1700px;color:var(--dim)">One ordinary git repo, cloned once on your machine, that publishes your setup as a plugin marketplace you own.</p>
+<div style="display:grid;grid-template-columns:1fr 1.1fr;gap:70px;margin-top:26px;flex:1">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">~/SRC/CLAUDE-SETUP</div>
+<div style="font-family:var(--mo);font-size:25px;line-height:1.5;color:var(--dim)">
+<div style="color:var(--ink)">claude-setup/</div>
+<div>├── .claude-plugin/marketplace.json</div>
+<div>└── review/</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;├── .claude-plugin/plugin.json</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;├── skills/</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;├── agents/</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;├── commands/</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;└── .lsp.json</div>
+</div>
+<div style="border-top:1px solid var(--line);padding-top:16px;font-size:var(--t-small);color:var(--dim);line-height:1.35">One repo can publish several plugins — one per directory listed in the manifest.</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">THE TWO MANIFESTS</div>
+<div style="border:1px solid var(--ink);padding:18px 24px;font-family:var(--mo);font-size:24px;line-height:1.45;white-space:pre">marketplace.json
+{ "name": "eleks",
+  "plugins": [
+    { "name": "review", "source": "./review" }
+  ] }</div>
+<div style="border:1px solid var(--ink);padding:18px 24px;font-family:var(--mo);font-size:24px;line-height:1.45;white-space:pre">review/.claude-plugin/plugin.json
+{ "name": "review", "version": "1.2.0" }</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:18px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">VERSIONED, NOT COPIED</div><div style="font-size:var(--t-small);margin-top:8px;line-height:1.3">a number anyone can point at — a symlinked <span style="font-family:var(--mo)">.claude</span> has none</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">NOT YOUR USER DIRECTORY</div><div style="font-size:var(--t-small);margin-top:8px;line-height:1.3">a personal skill shadows the team's skill of the same name</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">REVIEWED LIKE CODE</div><div style="font-size:var(--t-small);margin-top:8px;line-height:1.3">the setup lands by pull request, same as the product</div></div>
+</div>
+</section>
+
+<section data-label="Setup repo: wiring a project" data-screen-label="14" data-speaker-notes="Using it from another project is three steps, and only the third is shared. First, register the marketplace once per machine: slash plugin marketplace add, then the path to your local clone — a filesystem path works, so no network and no publishing step is needed while the repo lives on your disk. For teammates the same key takes a git or GitHub source instead, and that is the form you commit. Second, enable the plugin in the project you are working in: slash plugin install review at eleks. Third, and this is the part that makes it stick, commit the two keys into the project's .claude/settings.json — extraKnownMarketplaces naming the marketplace and where it comes from, and enabledPlugins listing what this project turns on. Now cloning the project is the whole onboarding: Claude Code sees a marketplace it does not know, offers to install, and the next person gets your skills, your agents and your commands without being told they exist. Remember the trust rule from the permissions slide: project settings only take effect after you accept the workspace trust dialog. And enabledPlugins is per project, so a repo enables the plugins it actually needs rather than everything the marketplace publishes." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="0fb83d0e">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>Settings · one setup repo</span><span style="color:var(--mid)">SETUP REPO · 14</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:30px 0 0">Pointing Every Project At It</h2>
+<div style="display:grid;grid-template-columns:1fr 1.15fr;gap:70px;margin-top:26px;flex:1">
+<div style="display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;gap:22px;align-items:flex-start">
+<span style="font-family:var(--hd);font-size:52px;line-height:0.9;color:var(--tint)">1</span>
+<div><div style="font-family:var(--hd);font-size:40px;line-height:1.05">Register the marketplace</div>
+<div style="font-family:var(--mo);font-size:24px;line-height:1.5;margin-top:8px;color:var(--dim)">/plugin marketplace add<br>&nbsp;&nbsp;~/src/claude-setup</div>
+<div style="font-size:var(--t-small);color:var(--dim);line-height:1.3;margin-top:8px">A local path works — no network, no publish step.</div></div>
+</div>
+<div style="display:flex;gap:22px;align-items:flex-start">
+<span style="font-family:var(--hd);font-size:52px;line-height:0.9;color:var(--tint)">2</span>
+<div><div style="font-family:var(--hd);font-size:40px;line-height:1.05">Enable it here</div>
+<div style="font-family:var(--mo);font-size:24px;line-height:1.5;margin-top:8px;color:var(--dim)">/plugin install review@eleks</div></div>
+</div>
+<div style="display:flex;gap:22px;align-items:flex-start">
+<span style="font-family:var(--hd);font-size:52px;line-height:0.9;color:var(--tint)">3</span>
+<div><div style="font-family:var(--hd);font-size:40px;line-height:1.05">Commit the two keys</div>
+<div style="font-size:var(--t-small);color:var(--dim);line-height:1.3;margin-top:8px">Cloning the project becomes the whole onboarding.</div></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">EVERY CONSUMING PROJECT · .CLAUDE/SETTINGS.JSON</div>
+<div style="border:1px solid var(--ink);padding:18px 24px;font-family:var(--mo);font-size:24px;line-height:1.45;white-space:pre">{ "extraKnownMarketplaces": {
+    "eleks": { "source": {
+      "source": "github",
+      "repo": "eleks/claude-setup" } } },
+  "enabledPlugins": ["review@eleks"] }</div>
+<div style="font-size:var(--t-small);color:var(--dim);line-height:1.35">Claude Code offers to install a marketplace it does not know yet. <span style="font-family:var(--mo)">enabledPlugins</span> is per project, so each repo turns on only what it needs.</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:18px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">ONE LINE PER MACHINE</div><div style="font-size:var(--t-small);margin-top:8px;line-height:1.3">the marketplace is registered once; projects only name it</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">TRUST GATE STILL APPLIES</div><div style="font-size:var(--t-small);margin-top:8px;line-height:1.3">project settings wait for the workspace trust dialog</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">NO COPY IN THE PROJECT</div><div style="font-size:var(--t-small);margin-top:8px;line-height:1.3">the project holds a reference, never the skills themselves</div></div>
+</div>
+</section>
+
+<section data-label="Setup repo: iterate and update" data-screen-label="15" data-speaker-notes="Day to day you are editing the setup repo, not the project, and there is a flag for exactly that. Start Claude with --add-dir pointed at the clone and its skills, commands and agents load with live reload: edit a skill, use it in the next message, no reinstall. Of that directory's settings only the two plugin keys are read, so the flag adds capability without importing someone's permissions. Use it for iteration, not for distribution. When it is good, ship a version: bump the number in plugin.json, commit, tag, and everyone else runs slash plugin update review at eleks, or pins the version if they are mid-release. Three habits keep this healthy. Keep the plugin small, because every skill it installs joins the always-loaded index for every person who installs it, and that index sits in the cached prefix on every turn. Namespace skill names — eleks-review, not review — so a personal skill cannot quietly shadow the team's. And after any change to settings or plugins run slash doctor: it prints what actually resolved, which is the only way to catch a manifest that did not parse. Author in the setup repo, add-dir while you iterate, install a version everywhere else." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="909076e2">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span>Settings · one setup repo</span><span style="color:var(--mid)"></span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:30px 0 0">Iterate Locally, Ship a Version</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:70px;margin-top:26px;flex:1">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">WHILE YOU ITERATE</div>
+<div style="border:1px solid var(--ink);padding:18px 24px;font-family:var(--mo);font-size:24px;line-height:1.5;white-space:pre">claude --add-dir ~/src/claude-setup</div>
+<div style="display:flex;flex-direction:column;gap:12px;font-size:var(--t-small);line-height:1.3">
+<span>skills, commands and agents load with live reload — edit, then use it in the next message</span>
+<span>of that directory's settings only the two plugin keys are read</span>
+<span>a flag, not a distribution channel: nothing is versioned yet</span>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">WHEN IT IS GOOD</div>
+<div style="display:flex;flex-direction:column;gap:2px;background:var(--line)">
+<div style="background:var(--paper);padding:12px 0;display:flex;gap:24px;align-items:baseline"><span style="font-family:var(--mo);font-size:24px;color:var(--mid);min-width:300px">plugin.json</span><span style="font-size:var(--t-small);line-height:1.3">bump the version, commit, tag</span></div>
+<div style="background:var(--paper);padding:12px 0;display:flex;gap:24px;align-items:baseline"><span style="font-family:var(--mo);font-size:24px;color:var(--mid);min-width:300px">/plugin update</span><span style="font-size:var(--t-small);line-height:1.3">everyone else moves when they choose</span></div>
+<div style="background:var(--paper);padding:12px 0;display:flex;gap:24px;align-items:baseline"><span style="font-family:var(--mo);font-size:24px;color:var(--mid);min-width:300px">/doctor</span><span style="font-size:var(--t-small);line-height:1.3">prints what actually resolved</span></div>
+</div>
+<div style="border-top:1px solid var(--line);padding-top:16px;font-size:var(--t-small);color:var(--dim);line-height:1.35">Author in the setup repo, <span style="font-family:var(--mo)">--add-dir</span> while you iterate, install a version everywhere else.</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:18px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">KEEP IT SMALL</div><div style="font-size:var(--t-small);margin-top:8px;line-height:1.3">every installed skill joins the always-loaded index, in the cached prefix</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">NAMESPACE THE NAMES</div><div style="font-size:var(--t-small);margin-top:8px;line-height:1.3"><span style="font-family:var(--mo)">eleks-review</span>, so a personal skill cannot shadow it</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">CHECK AFTER EVERY CHANGE</div><div style="font-size:var(--t-small);margin-top:8px;line-height:1.3">a manifest that did not parse fails silently</div></div>
+</div>
+</section><section data-label="/doctor" data-screen-label="16" data-speaker-notes="Almost everything in these two decks is configuration, and configuration fails quietly. A rule with a typo in the tool name does nothing. A permission rule written against Write instead of Edit is accepted and never consulted. A skill whose frontmatter does not parse simply never triggers, and you conclude the model ignored you. /doctor is where those turn back into visible problems: it checks your installation and reports the configuration it actually resolved, including the rules it rejected and why. Two habits. Run it after you edit settings, add a plugin, or write a skill — not the next time something feels off, when you will be debugging the wrong layer. And run it when a rule you are sure you wrote is not being applied, before you argue with the model about it. The useful mental model: /context tells you what is in the window, /doctor tells you what Claude Code believes your configuration says. They fail in different ways, and this one fails silently." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="bc938826">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span style="font-family:var(--mo)">/doctor</span><span style="color:var(--mid)">PRACTICE · 16</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">Configuration Fails Quietly</h2>
+<p style="font-size:var(--t-body);margin:24px 0 0;max-width:1500px;color:var(--dim)">Nothing in this deck throws an exception when you get it wrong. It just stops happening, and you conclude the model ignored you.</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);margin-top:44px">
+<div style="background:var(--paper);padding:34px 34px 34px 0"><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">A RULE WITH A TYPO</div><div style="font-size:var(--t-small);margin-top:14px;line-height:1.4">a tool name that matches nothing — the rule loads and guards nothing</div></div>
+<div style="background:var(--paper);padding:34px"><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">A RULE ON THE WRONG TOOL</div><div style="font-size:var(--t-small);margin-top:14px;line-height:1.4">a path rule on <span style="font-family:var(--mo)">Write</span> or <span style="font-family:var(--mo)">Glob</span> is accepted and never consulted</div></div>
+<div style="background:var(--paper);padding:34px 0 34px 34px"><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">FRONTMATTER THAT WON'T PARSE</div><div style="font-size:var(--t-small);margin-top:14px;line-height:1.4">the skill is simply never offered, and nothing tells you so</div></div>
+</div>
+<div style="display:flex;align-items:baseline;gap:32px;margin-top:44px">
+<span style="font-family:var(--hd);font-size:60px;line-height:1;color:var(--mid)">/doctor makes it visible.</span>
+<span style="font-size:var(--t-body);color:var(--dim)">It checks the install and reports the configuration it actually resolved — including what it rejected.</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:auto;border-top:1px solid var(--ink);padding-top:26px">
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">AFTER YOU CHANGE THINGS</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">run it when you edit settings, add a plugin or write a skill — not the next time something feels off</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">BEFORE YOU BLAME THE MODEL</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35">when a rule you are sure you wrote is not being applied, check that it parsed</div></div>
+<div><div style="font-family:var(--mo);font-size:var(--t-mono);color:var(--steel)">THE PAIR TO REMEMBER</div><div style="font-size:var(--t-small);margin-top:12px;line-height:1.35"><span style="font-family:var(--mo)">/context</span> shows what is in the window; <span style="font-family:var(--mo)">/doctor</span> shows what your configuration resolved to</div></div>
+</div>
+</section><section data-label="/insights" data-screen-label="17" data-speaker-notes="The one command in the deck pointed at you rather than at the model. /insights generates a report over your recent sessions: which areas of the project you work in, how you interact, and where the friction is. Read it as a list of things to build. A prompt you typed fifteen times is a slash command you have not written. A correction you keep repeating is a line in CLAUDE.md or a rule. A procedure you walk through from memory every release is a skill. A failure that recurs is a hook. That mapping is the whole value: you already know the deck's levers, and this tells you which one your own month is asking for. Practical notes: monthly is about right, because running it weekly surfaces the same patterns and the reading stops being informative; and treat it as evidence, not a scoreboard. The uncomfortable version is the useful one — most people find at least one thing they have been doing by hand all along." style="background:var(--paper);color:var(--ink);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="9b0694b8">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)"><span style="font-family:var(--mo)">/insights</span><span style="color:var(--mid)">PRACTICE · 17</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">A Report on How You Work</h2>
+<p style="font-size:var(--t-body);margin:24px 0 0;max-width:1500px;color:var(--dim)">It analyses your recent sessions — the areas you work in, how you interact, where the friction is. Everything else in these two decks is aimed at the model. This one is aimed at you.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:40px;flex:1">
+<div style="display:flex;flex-direction:column;gap:18px">
+<div style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.1em;color:var(--steel)">WHAT IT FINDS → WHAT TO BUILD</div>
+<div style="display:flex;flex-direction:column;gap:2px;background:var(--line)">
+<div style="background:var(--paper);padding:20px 0;display:flex;gap:22px;align-items:baseline"><span style="font-size:var(--t-small);line-height:1.3;flex:1">the same prompt, fifteen times</span><span style="font-family:var(--mo);font-size:25px;color:var(--mid);min-width:230px">a slash command</span></div>
+<div style="background:var(--paper);padding:20px 0;display:flex;gap:22px;align-items:baseline"><span style="font-size:var(--t-small);line-height:1.3;flex:1">the same correction, every session</span><span style="font-family:var(--mo);font-size:25px;color:var(--mid);min-width:230px">a line in CLAUDE.md</span></div>
+<div style="background:var(--paper);padding:20px 0;display:flex;gap:22px;align-items:baseline"><span style="font-size:var(--t-small);line-height:1.3;flex:1">a procedure you walk from memory</span><span style="font-family:var(--mo);font-size:25px;color:var(--mid);min-width:230px">a skill</span></div>
+<div style="background:var(--paper);padding:20px 0;display:flex;gap:22px;align-items:baseline"><span style="font-size:var(--t-small);line-height:1.3;flex:1">a failure that keeps coming back</span><span style="font-family:var(--mo);font-size:25px;color:var(--mid);min-width:230px">a hook</span></div>
+<div style="background:var(--paper);padding:20px 0;display:flex;gap:22px;align-items:baseline"><span style="font-size:var(--t-small);line-height:1.3;flex:1">wide reading you never reference</span><span style="font-family:var(--mo);font-size:25px;color:var(--mid);min-width:230px">a sub-agent</span></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;justify-content:center;gap:26px">
+<div style="font-family:var(--hd);font-size:56px;line-height:1.05;color:var(--mid)">You already know the levers. This tells you which one your month is asking for.</div>
+<div style="border-top:1px solid var(--line);padding-top:24px;display:flex;flex-direction:column;gap:16px;font-size:var(--t-small);line-height:1.4;color:var(--dim)">
+<span><span style="font-family:var(--mo);color:var(--steel)">MONTHLY</span> &nbsp;weekly surfaces the same patterns and stops being informative</span>
+<span><span style="font-family:var(--mo);color:var(--steel)">EVIDENCE, NOT A SCORE</span> &nbsp;the uncomfortable reading is the useful one</span>
+</div>
+</div>
+</div>
+</section>
+
+<section data-label="Take away" data-screen-label="18" data-speaker-notes="Pulling part two together. Three groups. What Claude can see: a language server answers structurally so Claude stops reading files on a guess, and the prompt cache means the window you re-send every turn costs a tenth of its size as long as you leave the prefix alone. What Claude may do: permissions are the only layer enforced rather than requested, deny beats ask beats allow with no exceptions, plan mode gets the misunderstanding caught before the diff exists. What you can ship: a plugin turns your setup into a versioned unit the team installs instead of copies, advanced skill frontmatter keeps the work off your window, a read-only reviewer gives findings rather than surprises, and /doctor and /insights are the two commands that tell you the truth about your configuration and your habits. Homework: pick the one thing from your own /insights report that you do most by hand, and build the lever for it. Then package it so the next person does not have to. Questions." style="background:var(--deep);color:var(--paper);font-family:var(--bd);display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)" data-om-slide-id="677d7df8">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--sky)"><span>Part two</span><span>SUMMARY · 18</span></div>
+<h2 style="font-family:var(--hd);font-weight:600;font-size:var(--t-title);line-height:1;margin:var(--gap-title) 0 0">What to Take Away</h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:70px;margin-top:44px;flex:1">
+<div style="display:flex;flex-direction:column"><div style="display:flex;gap:18px;align-items:baseline"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">01</span><span style="font-family:var(--hd);font-size:40px;line-height:1.05">What Claude can see</span></div><div style="display:flex;flex-direction:column;gap:16px;margin-top:24px;font-size:var(--t-small);line-height:1.35;color:var(--paper)"><span>A language server answers structurally, so Claude stops opening files on a guess.</span><span>The cache is one exact prefix in three layers: leave it alone and the window costs a tenth of its size.</span><span>Editing <span style="font-family:var(--mo)">CLAUDE.md</span> mid-session neither breaks the cache nor applies.</span></div></div>
+<div style="display:flex;flex-direction:column"><div style="display:flex;gap:18px;align-items:baseline"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">02</span><span style="font-family:var(--hd);font-size:40px;line-height:1.05">What Claude may do</span></div><div style="display:flex;flex-direction:column;gap:16px;margin-top:24px;font-size:var(--t-small);line-height:1.35;color:var(--paper)"><span>Permissions are enforced, not requested: deny, then ask, then allow, and deny carries no exceptions.</span><span>Plan mode moves the correction to before the diff exists.</span></div></div>
+<div style="display:flex;flex-direction:column"><div style="display:flex;gap:18px;align-items:baseline"><span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--tint)">03</span><span style="font-family:var(--hd);font-size:40px;line-height:1.05">What you can ship</span></div><div style="display:flex;flex-direction:column;gap:16px;margin-top:24px;font-size:var(--t-small);line-height:1.35;color:var(--paper)"><span>A plugin makes your setup a versioned unit the team installs instead of copies.</span><span>Scripts, forks and <span style="font-family:var(--mo)">allowed-tools</span> keep the working out of your window.</span><span><span style="font-family:var(--mo)">/doctor</span> tells you what your configuration resolved to; <span style="font-family:var(--mo)">/insights</span> tells you what you keep doing by hand.</span></div></div>
+</div>
+<div style="display:flex;gap:36px;align-items:flex-start;margin-top:32px;border-top:1px solid var(--mid);padding-top:26px">
+<span style="font-family:var(--mo);font-size:var(--t-mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--tint);white-space:nowrap;padding-top:6px">Home work</span>
+<div style="display:flex;flex-direction:column;gap:12px">
+<span style="font-size:var(--t-small);line-height:1.35;color:var(--paper)">Run <span style="font-family:var(--mo)">/insights</span>, take the one thing you do most by hand, build the lever for it — then package it so the next person does not have to.</span>
+<div style="display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mo);font-size:var(--t-mono);color:var(--sky)">
+
+
+
+
+
+</div>
+</div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:28px;border-top:1px solid var(--mid);padding-top:24px">
+<span style="font-family:var(--hd);font-size:60px;color:var(--sky)">Questions</span>
+<span style="font-family:var(--mo);font-size:var(--t-mono);color:var(--sky)">ELEKS</span>
+</div>
+</section>
+
+</x-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1600, &quot;height&quot;: 900}}"></script>
+</body>
+</html>
